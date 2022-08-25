@@ -1,8 +1,9 @@
-# `<name of application here>`
+# `Meetup Clone`
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+![image](https://user-images.githubusercontent.com/105324675/186757043-acf5ee23-d4db-4dc6-a819-75c7ef65d1cf.png)
+
 
 ## API Documentation
 
