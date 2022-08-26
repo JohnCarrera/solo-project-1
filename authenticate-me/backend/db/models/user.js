@@ -1,9 +1,41 @@
 'use strict';
+
+const bcrypt = require('bcryptjs');
+
+
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+
+    static async login({ credential, password }) {
+      const { Op } = require('sequelize');
+      const user = await User.scope('loginUser').findOne({
+        where: {
+          [Op.or]: {
+            username: credential,
+            email: credential
+          }
+        }
+      });
+      if (user && user.validatePassword(password)) {
+        return await User.scope('currentUser').findByPk(user.id);
+      }
+    }
+
+    static getCurrentUserById(id) {
+      return User.scope("currentUser").findByPk(id);
+    }
+
+    toSafeObject() {
+      const { id, username, email } = this; // context will be the User instance
+      return { id, username, email };
+    }
+
+    validatePassword(password) {
+      return bcrypt.compareSync(password, this.hashedPassword.toString());
+    }
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
