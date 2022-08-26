@@ -588,8 +588,8 @@ Returns all venues for a group specified by its id
 * Require Authentication: Current User must be the organizer of the group or a member of
   the group with a status of "co-host"
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /api/groups/:groupId/venues
   * Headers:
     * Content-Type: application/json
   * Body: none
