@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sequelize": "sequelize",
-    "sequelize-cli": "sequelize-cli",
-    "start": "per-env",
-    "start:development": "nodemon ./bin/www",
-    "start:production": "node ./bin/www"
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend"
   },
   "keywords": [],
   "author": "",
