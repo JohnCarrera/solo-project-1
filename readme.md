@@ -2,9 +2,7 @@
 
 ## Database Schema Design
 
-![image](https://user-images.githubusercontent.com/105324675/186757043-acf5ee23-d4db-4dc6-a819-75c7ef65d1cf.png)
-
-[meetup-dbdiagram]: ../assets/meetup_dbdiagram.png
+<img width="840" alt="meetup_dbdiagram" src="https://user-images.githubusercontent.com/105324675/187312999-567a7454-7b34-47eb-a256-ef025093eac2.png">
 
 ## API Documentation
 
