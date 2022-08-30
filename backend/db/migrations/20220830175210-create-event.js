@@ -11,14 +11,14 @@ module.exports = {
       venueId: {
         type: Sequelize.INTEGER,
         references: {
-          model: Venues,
+          model: 'Venues',
           key: 'id'
         }
       },
       groupId: {
         type: Sequelize.INTEGER,
         references: {
-          model: Groups,
+          model: 'Groups',
           key: 'id'
         }
       },
@@ -45,11 +45,13 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

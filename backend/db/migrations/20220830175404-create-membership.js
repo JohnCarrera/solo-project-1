@@ -11,14 +11,14 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         references: {
-          model: Users,
+          model: 'Users',
           key: 'id'
         }
       },
       groupId: {
         type: Sequelize.INTEGER,
         references: {
-          model: Groups,
+          model: 'Groups',
           key: 'id'
         }
       },
@@ -27,11 +27,13 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

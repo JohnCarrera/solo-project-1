@@ -1,22 +1,31 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Venues', {
+    await queryInterface.createTable('Groups', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      groupId: {
-        type: Sequelize.STRING,
+      organizerId: {
+        type: Sequelize.INTEGER,
         references: {
-          model: Groups,
+          model: 'Users',
           key: 'id'
         }
       },
-      address: {
+      name: {
         type: Sequelize.STRING
+      },
+      about: {
+        type: Sequelize.STRING
+      },
+      type: {
+        type: Sequelize.STRING
+      },
+      private: {
+        type: Sequelize.BOOLEAN
       },
       city: {
         type: Sequelize.STRING
@@ -24,23 +33,19 @@ module.exports = {
       state: {
         type: Sequelize.STRING
       },
-      lat: {
-        type: Sequelize.DECIMAL
-      },
-      lng: {
-        type: Sequelize.DECIMAL
-      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Venues');
+    await queryInterface.dropTable('Groups');
   }
 };
