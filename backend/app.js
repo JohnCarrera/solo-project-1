@@ -80,10 +80,10 @@ app.use((err, _req, res, _next) => {
   console.error(err);
   res.json({
     //title: err.title || 'Server Error',
-    statusCode: res.status,  //TODO: FIX STATUS CODE
     message: err.message,
+    statusCode: err.status,  //TODO: FIX STATUS CODE
     errors: err.errors,
-    stack: isProduction ? null : err.stack
+    //stack: isProduction ? null : err.stack
   });
 });
 

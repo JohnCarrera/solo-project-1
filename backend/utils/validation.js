@@ -6,14 +6,20 @@ const handleValidationErrors = (req, _res, next) => {
   const validationErrors = validationResult(req);
 
   if (!validationErrors.isEmpty()) {
+    console.log('validation errors: ', validationErrors)
     const errors = validationErrors
       .array()
-      .map((error) => `${error.msg}`);
+      .reduce((acc, error) =>  {
 
-    const err = Error('Bad request.');
+      acc[error.param] = error.msg
+      return acc;
+    }, {});
+
+
+    const err = Error('Validation error');
     err.errors = errors;
     err.status = 400;
-    err.title = 'Bad request.';
+    err.title = 'Validation error';
     next(err);
   }
   next();
