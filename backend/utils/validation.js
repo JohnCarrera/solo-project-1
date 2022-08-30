@@ -10,11 +10,9 @@ const handleValidationErrors = (req, _res, next) => {
     const errors = validationErrors
       .array()
       .reduce((acc, error) =>  {
-
       acc[error.param] = error.msg
       return acc;
     }, {});
-
 
     const err = Error('Validation error');
     err.errors = errors;
