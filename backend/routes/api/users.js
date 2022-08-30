@@ -35,8 +35,8 @@ router.post('/', validateSignup, async (req, res) => {
 
     userRes = user.toSafeObject();
     console.log('user', user);
-    console.log('res:', res);
-    userRes.token = res.cookies.token;
+    // console.log('res:', res);
+    // userRes.token = res.cookies.token;
     return res.json(userRes);
   }
 );
