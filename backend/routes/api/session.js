@@ -26,10 +26,10 @@ router.delete('/', (_req, res) => {
 
 router.get('/', restoreUser, (req, res) => {
     const { user } = req;
+    console.log(user);
     if (user) {
-      return res.json({
-        user: user.toSafeObject()
-      });
+      currentUser = user.toSafeObject();
+      return res.json(currentUser);
     } else return res.json({});
   }
 );
