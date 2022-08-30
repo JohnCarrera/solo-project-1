@@ -10,7 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Event.belongsTo(models.Venue, {
+        foreignKey: 'venueId',
+        allowNull: false
+      });
+
+      Event.belongsTo(models.Group, {
+        foreignKey: 'groupId'
+      });
+
+      Event.hasMany(models.EventImage);
+
+      Event.belongsToMany(models.User, {
+        through: models.Attendance
+      });
     }
   }
   Event.init({
