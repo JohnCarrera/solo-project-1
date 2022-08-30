@@ -1,3 +1,4 @@
+const { environment } = require('./config');
 const express = require('express');
 require('express-async-errors');
 const morgan = require('morgan');
@@ -8,7 +9,6 @@ const cookieParser = require('cookie-parser');
 
 const routes = require('./routes');
 
-const { environment } = require('./config');
 const isProduction = environment === 'production';
 
 const { ValidationError } = require('sequelize');
