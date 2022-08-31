@@ -51,7 +51,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.belongsToMany(models.Group, {
+          through: models.Membership
+        });
+
+      User.belongsToMany(models.Event, {
+          through: models.Attendance
+        });
+
+      //User.hasMany(models.Group);
     }
   }
   User.init({
