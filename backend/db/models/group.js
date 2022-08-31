@@ -9,13 +9,13 @@ module.exports = (sequelize, DataTypes) => {
           through: models.Membership
         });
 
-      Group.belongsTo(models.User, {
+      Group.belongsTo(models.User, { //fk refers to fk in this table ==> difference is belongs vs has
           foreignKey: 'organizerId',
           allowNull: false,
           as: 'Organizer'
         });
 
-      Group.hasMany(models.Venue, {
+      Group.hasMany(models.Venue, { //fk refers to foreign key in venue table
         foreignKey: 'groupId'
       });
 

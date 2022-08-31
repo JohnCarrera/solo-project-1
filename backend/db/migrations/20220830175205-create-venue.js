@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       groupId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references: {
-          model: 'Groups',
-          key: 'id'
+          model: 'Groups'//,
+          //key: 'id'
         }
       },
       address: {
