@@ -124,6 +124,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       loginUser: {
         attributes: {}
+      },
+      organizer: {
+        attributes: ['id', 'firstName', 'lastName']
       }
     }
   }

@@ -29,6 +29,17 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Venue',
+    defaultScope: {
+      attributes: [
+        'id',
+        'groupId',
+        'address',
+        'city',
+        'state',
+        'lat',
+        'lng'
+      ]
+    }
   });
   return Venue;
 };
