@@ -10,6 +10,7 @@ module.exports = {
       },
       venueId: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'Venues',
           key: 'id'
