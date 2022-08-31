@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class GroupImage extends Model {
     /**
@@ -19,9 +18,17 @@ module.exports = (sequelize, DataTypes) => {
     groupId: DataTypes.INTEGER,
     url: DataTypes.STRING,
     preview: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'GroupImage',
-  });
+  },
+    {
+      sequelize,
+      modelName: 'GroupImage',
+      defaultScope: {
+        attributes: [
+          'id',
+          'url',
+          'preview'
+        ]
+      }
+    });
   return GroupImage;
-};
+}

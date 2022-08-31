@@ -61,6 +61,7 @@ app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
   if (err instanceof ValidationError) {
 
+    console.log('processing sequelize errors');
     //err.errors = err.errors.map((e) => err.errors[e] = e.message);
     let errorObj = {};
     if (err.errors.length) {
@@ -78,13 +79,25 @@ app.use((err, _req, _res, next) => {
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
   console.error(err);
-  res.json({
-    //title: err.title || 'Server Error',
-    message: err.title,
-    statusCode: err.status,
-    errors: err.errors,
-    //stack: isProduction ? null : err.stack
-  });
+
+  let resErr = {};
+
+
+  //if there are multiple errors, use the title, and error list
+  // with key names of the error with the message for the value
+  // if not display only the message and the status code per spec
+  if (!err.errors){
+    console.log('err.errors empty');
+    resErr.message = err.message;
+  } else {
+    console.log('err.errors', err.errors)
+    resErr.message = err.title
+    resErr.errors = err.errors;
+  }
+
+  resErr.status = err.status;
+
+  res.json(resErr);
 });
 
 
