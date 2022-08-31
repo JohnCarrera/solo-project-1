@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
           through: models.Attendance
         });
 
-      User.hasMany(models.Group);
+      //User.hasMany(models.Group);
     }
   }
   User.init({

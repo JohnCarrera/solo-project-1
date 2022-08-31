@@ -13,22 +13,16 @@ module.exports = (sequelize, DataTypes) => {
           through: models.Membership
         });
 
-      Group.belongsTo(models.User,{
+      Group.hasOne(models.User, {
           foreignKey: 'organizerId',
           allowNull: false
         });
 
-      Group.hasMany(models.Venue, {
-          //foreignKey: 'groupId'
-        });
+      Group.hasMany(models.Venue);
 
-      Group.hasMany(models.GroupImage, {
-        //foreignKey: 'groupId'
-      });
+      Group.hasMany(models.GroupImage);
 
-      Group.hasMany(models.Event, {
-        //foreignKey: 'groupId'
-      })
+      Group.hasMany(models.Event);
     }
   }
   Group.init({
