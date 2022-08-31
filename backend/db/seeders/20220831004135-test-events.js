@@ -4,6 +4,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Events', [
       {
+        id: 1,
         name: 'Pickers Meet',
         description: 'First pick of the season!',
         type: 'In Person',
