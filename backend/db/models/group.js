@@ -19,9 +19,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'groupId'
       });
 
-      Group.hasMany(models.GroupImage);
+      Group.hasMany(models.GroupImage, {
+        foreignKey: 'groupId'
+      });
 
-      Group.hasMany(models.Event);
+      Group.hasMany(models.Event, {
+        foreignKey: 'groupId'
+      });
     }
   }
   Group.init({
