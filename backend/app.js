@@ -83,9 +83,12 @@ app.use((err, _req, res, _next) => {
   let resErr = {};
 
 
-  //if there are multiple errors, use the title, and error list
+  // if there are multiple errors, use the title, and error list
   // with key names of the error with the message for the value
   // if not display only the message and the status code per spec
+  // this allows just the provided error-handling middleware to
+  // meet handle all errors in prog and still meet spec.
+
   if (!err.errors){
     console.log('err.errors empty');
     resErr.message = err.message;
