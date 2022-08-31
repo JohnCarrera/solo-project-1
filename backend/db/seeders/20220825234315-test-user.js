@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         id: 3,
-        email: 'lorenzo@rocketGame.com',
+        email: 'lorenzo@rocketgame.com',
         username: 'bubishka',
         firstName: 'Lorenzo',
         lastName: 'Carrera',
