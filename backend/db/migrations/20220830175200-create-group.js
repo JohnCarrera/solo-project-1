@@ -22,7 +22,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       type: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        isIn:{
+
+        }
       },
       private: {
         type: Sequelize.BOOLEAN

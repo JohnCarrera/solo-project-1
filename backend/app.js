@@ -63,14 +63,30 @@ app.use((err, _req, _res, next) => {
 
     console.log('processing sequelize errors');
     //err.errors = err.errors.map((e) => err.errors[e] = e.message);
+
+    console.log(err)
     let errorObj = {};
     if (err.errors.length) {
       err.errors.forEach(e => {
-        errorObj[e.path] = e.message;
+
+        // set case value on model validator with custom validation msg
+        // catch here and format with proper message and title
+        switch (e.message) {
+
+          case 'userVal':
+            err.title = 'User already exists';
+            errorObj[e.path] = 'User with that email already exists';
+            err.status = 403;
+            break;
+
+        }
       });
+
       err.errors = errorObj;
     }
-    err.title = 'Validation error';
+
+
+    //err.title = 'Validation error';
   }
   next(err);
 });
@@ -92,13 +108,13 @@ app.use((err, _req, res, _next) => {
   if (!err.errors){
     console.log('err.errors empty');
     resErr.message = err.message;
+    resErr.status = err.status;
   } else {
-    console.log('err.errors', err.errors)
+    console.log(err);
     resErr.message = err.title
+    resErr.status = err.status;
     resErr.errors = err.errors;
   }
-
-  resErr.status = err.status;
 
   res.json(resErr);
 });
