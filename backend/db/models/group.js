@@ -6,8 +6,14 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       Group.belongsToMany(models.User, {
-          through: models.Membership
+          through: models.Membership,
+          foreignKey: 'groupId'
         });
+
+      Group.hasMany(models.Membership, {
+        foreignKey: 'groupId',
+        as: 'groupMemberIds'
+      });
 
       Group.belongsTo(models.User, { //fk refers to fk in this table ==> difference is belongs vs has
           foreignKey: 'organizerId',

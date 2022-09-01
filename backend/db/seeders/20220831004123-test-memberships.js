@@ -83,7 +83,7 @@ module.exports = {
       },
       {
         id: 14,
-        userId: 6,
+        userId: 4,
         groupId: 5,
         status: 'current'
       },
@@ -121,6 +121,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
+    const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Groups', {
       id: { [Op.between]: [0,20]}
     }, {});

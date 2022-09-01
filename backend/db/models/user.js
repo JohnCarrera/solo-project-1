@@ -52,14 +52,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.belongsToMany(models.Group, {
-          through: models.Membership
+          through: models.Membership,
+          foreignkey: 'userId'
         });
 
       User.belongsToMany(models.Event, {
-          through: models.Attendance
+          through: models.Attendance,
+          foreignkey: 'userId'
         });
 
-      //User.hasMany(models.Group);
+      User.hasMany(models.Group,{
+        foreignKey: 'organizerId'
+      });
     }
   }
   User.init({
@@ -79,8 +83,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
-        name: 'Validation error',
-        msg:'User with that email already exists'
+        msg:'userVal'
             },
       validate: {
         len: [3, 256],

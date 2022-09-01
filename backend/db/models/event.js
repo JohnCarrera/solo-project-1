@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'groupId'
       });
 
-      Event.hasMany(models.EventImage);
+      Event.hasMany(models.EventImage, {
+        foreignKey: 'eventId'
+      });
 
       Event.belongsToMany(models.User, {
         through: models.Attendance
