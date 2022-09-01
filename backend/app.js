@@ -85,6 +85,12 @@ app.use((err, _req, _res, next) => {
             err.status = 403;
             break;
 
+          case 'username must be unique':
+            err.title = 'User already exists';
+            errorObj[e.path] = 'User with that email already exists';
+            err.status = 403;
+            break;
+
         }
       });
 
