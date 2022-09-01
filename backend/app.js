@@ -62,7 +62,7 @@ app.use((err, _req, _res, next) => {
   if (err instanceof ValidationError) {
 
     console.log('processing sequelize errors');
-    //err.errors = err.errors.map((e) => err.errors[e] = e.message);
+    console.log(err)    //err.errors = err.errors.map((e) => err.errors[e] = e.message);
 
     console.log(err)
     let errorObj = {};
@@ -76,6 +76,12 @@ app.use((err, _req, _res, next) => {
           case 'userVal':
             err.title = 'User already exists';
             errorObj[e.path] = 'User with that email already exists';
+            err.status = 403;
+            break;
+
+          case 'emailVal':
+            err.title = 'Cannot be email';
+            errorObj[e.path] = 'Username cannot be an email address';
             err.status = 403;
             break;
 

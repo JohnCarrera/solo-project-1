@@ -69,12 +69,13 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     username: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
       validate: {
         len: [4, 30],
         isNotEmail(value) {
           if (Validator.isEmail(value)) {
-            throw new Error("Cannot be an Email.");
+            throw new Error("emailVal");
           }
         }
       }
@@ -83,7 +84,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
-        msg:'userVal'
+        msg:'userEmailVal'
             },
       validate: {
         len: [3, 256],
