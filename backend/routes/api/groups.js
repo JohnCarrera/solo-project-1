@@ -47,9 +47,31 @@ router.get('/current', requireAuth, async (req, res, next) => {  //auth required
     }
   });
 
-  res.json({Groups:userOwnedGroups.concat(userMemberGroups)});
+  const allGroups = userOwnedGroups.concat(userMemberGroups)
 
-})
+  //lazy load members
+  for(let x = 0; x < allGroups.length; x++){
+    let numMembers = await Membership.count({
+      where:{
+        groupId: allGroups[x].dataValues.id
+      }
+    });
+
+  //lazy load preview image
+   let previewImage = await GroupImage.findAll({
+    where:{
+      groupId: allGroups[x].dataValues.id,
+      preview: true
+    }
+   });
+
+   //append kvps to result for member count and image url
+    allGroups[x].dataValues.numMembers = numMembers;
+    allGroups[x].dataValues.previewImage = previewImage[0].url;
+  }
+  res.json({Groups: allGroups});
+
+});
 
 //get group by id
 router.get('/:groupId', async (req, res, next) => {  //auth required: false
