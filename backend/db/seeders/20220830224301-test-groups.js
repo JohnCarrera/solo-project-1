@@ -45,7 +45,7 @@ module.exports = {
       },
       {
         id: 5,
-        organizerId: 3,
+        organizerId: 6,
         name: "Woodworker's Guild",
         about: 'Come talk shop and work on projects with woodworkers of all skill levels' ,
         type: 'In Person',

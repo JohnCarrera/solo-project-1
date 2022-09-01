@@ -1,10 +1,10 @@
 const express = require('express')
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { Group } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { GroupImage, User, Venue } = require('../../db/models');
+const { Group, GroupImage, User, Venue } = require('../../db/models');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -22,6 +22,46 @@ const validateBody = [
   handleValidationErrors
 ];
 
+router.get('/current', restoreUser, async (req, res, next) => {  //auth required: true
+
+  const { user } = req;
+  // check if there is a logged in user, if not throw auth error to error
+  // handling middleware per spec
+   if(!user){
+    const err = new Error('Authentication required')
+    err.status = 401;
+    err.title = ('Authentication required')
+    return next(err);
+   }
+
+   console.log('logged in user: ', user.id, user)
+
+   let userGroups = await Group.findAll({
+    where: {
+
+      organizerId: user.id
+      // [Op.or]: [
+      //   {
+      //     organizerId: user.id
+      //   },
+      //   {
+      //     userId: user.id
+      //   }
+      // ]
+    },
+    // include: [
+    //   {
+    //     model: Group,
+    //     where:{
+    //       'organizerId': user.id
+    //     }
+    //   }
+    // ]
+   });
+
+   res.json(userGroups);
+
+})
 
 router.get('/:groupId', async (req, res, next) => {  //auth required: false
 
