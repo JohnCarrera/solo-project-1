@@ -3,7 +3,7 @@ const express = require('express')
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Group, GroupImage, User, Venue, sequelize } = require('../../db/models');
+const { Group, GroupImage, User, Venue, Membership } = require('../../db/models');
 const { Op } = require('sequelize');
 
 const router = express.Router();
@@ -97,21 +97,37 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
     where: {
       id: Number(req.params.groupId)
     },
-    include: [
-      {
-        model: GroupImage
-      },
-      {
-        model: User.scope('organizer'),
-        as: 'Organizer',
-      },
-      {
-        model: Venue
-      }
-    ],
-    raw:true
+    // include: [
+    //   { model: GroupImage },
+    //   {
+    //     model: User.scope('organizer'),
+    //     as: 'Organizer',
+    //   },
+    //   { model: Venue }
+    // ]//,
+    //raw:true
   });
 
+  for(let x = 0; x < groupById.length; x++){
+    let numMembers = await Membership.count({
+      where:{
+        groupId: groupById[x].dataValues.id
+      }
+    });
+
+   let previewImage = await GroupImage.findAll({
+    where:{
+      groupId: groupById[x].dataValues.id,
+      preview: true
+    }
+   });
+
+    groupById[x].dataValues.numMembers = numMembers;
+    groupById[x].dataValues.previewImage = previewImage[0].url;
+    console.log(numMembers);
+  }
+
+  console.log(groupById);
   if (!groupById.length) {
     const err = new Error("Group couldn't be found");
     err.status = 404;
@@ -127,7 +143,6 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
 router.get('/', async (req, res) => {   //auth required: false
   let allGroups = await Group.findAll();
 
-  console.log(allGroups)
   res.json({ Groups: allGroups });
 });
 
