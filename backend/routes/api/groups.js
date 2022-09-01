@@ -34,12 +34,33 @@ router.get('/current', restoreUser, async (req, res, next) => {  //auth required
     return next(err);
    }
 
-   console.log('logged in user: ', user.id, user)
+  //  let userGroups = await Group.findAll({
+  //   where: {
 
-   let userGroups = await Group.findAll({
+  //     organizerId: user.id
+  //     // [Op.or]: [
+  //     //   {
+  //     //     organizerId: user.id
+  //     //   },
+  //     //   {
+  //     //     userId: user.id
+  //     //   }
+  //     // ]
+  //   },
+  //   include: [
+  //     {
+  //       model: User,
+  //       // where:{
+  //       //   'id': user.id
+  //       // }
+  //     }
+  //   ]
+  //  });
+
+  let userGroups = await User.findAll({
     where: {
 
-      organizerId: user.id
+      id: user.id
       // [Op.or]: [
       //   {
       //     organizerId: user.id
@@ -49,14 +70,18 @@ router.get('/current', restoreUser, async (req, res, next) => {  //auth required
       //   }
       // ]
     },
-    // include: [
-    //   {
-    //     model: Group,
-    //     where:{
-    //       'organizerId': user.id
-    //     }
-    //   }
-    // ]
+    include: [
+      {
+        model: Group,
+        include: [
+          {
+          model:GroupImage
+          }
+        ]// where:{
+        //   'id': user.id
+        // }
+      }
+    ]
    });
 
    res.json(userGroups);
