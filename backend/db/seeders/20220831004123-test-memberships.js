@@ -83,7 +83,7 @@ module.exports = {
       },
       {
         id: 14,
-        userId: 6,
+        userId: 4,
         groupId: 5,
         status: 'current'
       },

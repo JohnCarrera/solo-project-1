@@ -52,14 +52,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.belongsToMany(models.Group, {
-          through: models.Membership
+          through: models.Membership,
+          foreignkey: 'userId'
         });
 
       User.belongsToMany(models.Event, {
-          through: models.Attendance
+          through: models.Attendance,
+          foreignkey: 'userId'
         });
 
-      //User.hasMany(models.Group);
+      User.hasMany(models.Group,{
+        foreignKey: 'organizerId'
+      });
     }
   }
   User.init({

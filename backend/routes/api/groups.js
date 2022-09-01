@@ -22,36 +22,32 @@ const validateBody = [
   handleValidationErrors
 ];
 
+// this route works, and is made easier by excluding all the columns from the
+// join table with the blank attributes array, but in the resulting join table there
+// is still a rogue 'UserId' column that is coming from somewhere. I am not able to find it.
 
 router.get('/current', requireAuth, async (req, res, next) => {  //auth required: true
 
-  // const { user } = req;
-  // // check if there is a logged in user, if not throw auth error to error
-  // // handling middleware per spec
-  // if (!user) {
-  //   const err = new Error('Authentication required')
-  //   err.status = 401;
-  //   err.title = ('Authentication required')
-  //   return next(err);
-  // }
-
-  let userGroups = await User.findAll({
+  let userOwnedGroups = await Group.findAll({
     where: {
-      id: req.user.id
-    },
-    include: [
-      {
-        model: Group,
-        include: [
-          {
-            model: GroupImage
-          }
-        ]
-      }
-    ]
+      organizerId: req.user.id
+    }
   });
 
-  res.json(userGroups);
+  let userMemberGroups = await Group.findAll({
+    where: {
+    },
+    include: {
+      attributes:[],
+      model: Membership,
+      as: 'groupMemberIds',
+      where: {
+        userId: req.user.id
+      }
+    }
+  });
+
+  res.json({Groups:userOwnedGroups.concat(userMemberGroups)});
 
 })
 
