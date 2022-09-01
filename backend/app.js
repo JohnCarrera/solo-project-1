@@ -105,7 +105,7 @@ app.use((err, _req, res, _next) => {
   // this allows just the provided error-handling middleware to
   // meet handle all errors in prog and still meet spec.
 
-  if (!err.errors){
+  if (!err.errors || !Object.keys(err.errors).length){
     console.log('err.errors empty');
     resErr.message = err.message;
     resErr.status = err.status;
