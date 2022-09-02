@@ -37,9 +37,44 @@ const validateBody = [
   handleValidationErrors
 ];
 
+
+
+router.post('/:groupId/images', requireAuth, (req, res, next) => {
+
+  const { url, preview } = req.body;
+
+  let groupById = await Group.findAll({
+    where: {
+      id: Number(req.params.groupId)
+    }
+  });
+
+  console.log(groupById);
+  if (!groupById.length) {
+    const err = new Error("Group couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  let newGroupImage = GroupImage.create({
+    groupId: req.params.groupId
+    , url
+    , preview
+  });
+
+  req.json({
+    id: newGroupImage.dataValues.id
+    , url: newGroupImage.dataValues.url
+    , preview: newGroupImage.dataValues.preview
+  })
+
+});
+
 // this route works, and is made easier by excluding all the columns from the
 // join table with the blank attributes array, but in the resulting join table there
 // is still a rogue 'UserId' column that is coming from somewhere. I am not able to find it.
+
 
 router.get('/current', requireAuth, async (req, res, next) => {  //auth required: true
 
