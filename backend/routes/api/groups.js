@@ -20,7 +20,7 @@ const validateBody = [
     .withMessage('About must be 50 characters or more'),
   check('type')
     .exists({ checkFalsy: true })
-    .isIn(['In Person', 'Online'] )
+    .isIn(['In person', 'Online'] )
     .withMessage("Type must be 'Online' or 'In Person'"),
   check('private')
     .exists({ checkFalsy: true })
