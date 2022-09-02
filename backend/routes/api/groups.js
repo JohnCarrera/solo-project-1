@@ -9,16 +9,31 @@ const { Op } = require('sequelize');
 const router = express.Router();
 
 const validateBody = [
-  check('credential')
+  check('name')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage('Please provide a valid email or username.'),
-  check('credential')
+    .isLength({min:0, max: 60})
+    .withMessage('Name must be 60 characters or less'),
+  check('about')
     .exists({ checkFalsy: true })
-    .withMessage('Email is required'),
-  check('password')
+    .isLength({min: 60, max: 500})
+    .withMessage('About must be 50 characters or more'),
+  check('type')
     .exists({ checkFalsy: true })
-    .withMessage('Password is required'),
+    .isIn(['In Person', 'Online'] )
+    .withMessage("Type must be 'Online' or 'In Person'"),
+  check('private')
+    .exists({ checkFalsy: true })
+    .isBoolean()
+    .withMessage('Private must be a boolean'),
+  check('city')
+    .notEmpty()
+    .exists({ checkFalsy: true })
+    .withMessage('City is required'),
+  check('state')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('State is required'),
   handleValidationErrors
 ];
 
@@ -146,8 +161,8 @@ router.post('/', requireAuth, validateBody, async (req, res, next) => {
   const { name, about, type, private, city, state } = req.body;
 
   let newGroup = await Group.create({
-    name
-    , organizerId: req.user.id
+    organizerId: req.user.id
+    , name
     , about
     , type
     , private
