@@ -141,6 +141,23 @@ router.get('/', async (req, res) => {   //auth required: false
 });
 
 
+router.post('/', requireAuth, validateBody, async (req, res, next) => {
+
+  const { name, about, type, private, city, state } = req.body;
+
+  let newGroup = await Group.create({
+    name
+    , organizerId: req.user.id
+    , about
+    , type
+    , private
+    , city
+    , state
+  });
+
+  res.json(newGroup);
+});
+
 
 
 
