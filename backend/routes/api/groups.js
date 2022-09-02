@@ -39,7 +39,7 @@ const validateBody = [
 
 
 
-router.post('/:groupId/images', requireAuth, (req, res, next) => {
+router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 
   const { url, preview } = req.body;
 
@@ -49,7 +49,6 @@ router.post('/:groupId/images', requireAuth, (req, res, next) => {
     }
   });
 
-  console.log(groupById);
   if (!groupById.length) {
     const err = new Error("Group couldn't be found");
     err.status = 404;
@@ -57,13 +56,19 @@ router.post('/:groupId/images', requireAuth, (req, res, next) => {
     return next(err);
   }
 
-  let newGroupImage = GroupImage.create({
+  let newGroupImage = await GroupImage.create({
     groupId: req.params.groupId
     , url
     , preview
   });
 
-  req.json({
+  console.log(newGroupImage);
+
+  // actual newGroupImage obj contains groupId from the groupImages table
+  // for whatever reason that has been excluded from the readme example res
+  // so I removed it by creating a new object and transferring over just the
+  // needed values
+  res.json({
     id: newGroupImage.dataValues.id
     , url: newGroupImage.dataValues.url
     , preview: newGroupImage.dataValues.preview
@@ -140,7 +145,6 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
     ],
   });
 
-  console.log(groupById);
   if (!groupById.length) {
     const err = new Error("Group couldn't be found");
     err.status = 404;
