@@ -37,8 +37,6 @@ const validateBody = [
   handleValidationErrors
 ];
 
-
-
 router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 
   const { url, preview } = req.body;
@@ -68,6 +66,7 @@ router.post('/:groupId/images', requireAuth, async (req, res, next) => {
   // for whatever reason that has been excluded from the readme example res
   // so I removed it by creating a new object and transferring over just the
   // needed values
+
   res.json({
     id: newGroupImage.dataValues.id
     , url: newGroupImage.dataValues.url
@@ -80,7 +79,7 @@ router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 // join table with the blank attributes array, but in the resulting join table there
 // is still a rogue 'UserId' column that is coming from somewhere. I am not able to find it.
 
-
+//get groups owned or joined by current user
 router.get('/current', requireAuth, async (req, res, next) => {  //auth required: true
 
   let userOwnedGroups = await Group.findAll({
@@ -125,7 +124,6 @@ router.get('/current', requireAuth, async (req, res, next) => {  //auth required
     allGroups[x].dataValues.previewImage = previewImage[0].url;
   }
   res.json({Groups: allGroups});
-
 });
 
 //get group by id
@@ -168,7 +166,7 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
 
 //edit a group
 router.put('/:groupId', requireAuth, validateBody, async (req, res, next) => {
- console.log('router.put/:groupId');
+
   const { name, about, type, private, city, state } = req.body;
 
   let groupById = await Group.findByPk(req.params.groupId);
@@ -192,8 +190,31 @@ router.put('/:groupId', requireAuth, validateBody, async (req, res, next) => {
  res.json(editedGroup);
 });
 
+
+router.delete('/:groupId', requireAuth, async (req, res, next) => {
+
+  let groupById = await Group.findByPk(req.params.groupId);
+
+  if (!groupById) {
+    const err = new Error("Group couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  await groupById.destroy();
+
+  res.json({
+    "message": "Successfully deleted",
+    "statusCode": 200
+  });
+});
+
+
 //get all groups
 router.get('/', async (req, res) => {   //auth required: false
+
+  console.log('get all groups: -------');
   let allGroups = await Group.findAll();
 
   //lazy load members
@@ -214,12 +235,17 @@ router.get('/', async (req, res) => {   //auth required: false
 
    //append kvps to result for member count and image url
     allGroups[x].dataValues.numMembers = numMembers;
+
+    if(previewImage.length){
     allGroups[x].dataValues.previewImage = previewImage[0].url;
+    } else {
+      allGroups[x].dataValues.previewImage = null;
+    }
   }
   res.json(allGroups);
 });
 
-
+// create a group
 router.post('/', requireAuth, validateBody, async (req, res, next) => {
 
   const { name, about, type, private, city, state } = req.body;
@@ -236,8 +262,5 @@ router.post('/', requireAuth, validateBody, async (req, res, next) => {
 
   res.json(newGroup);
 });
-
-
-
 
 module.exports = router;
