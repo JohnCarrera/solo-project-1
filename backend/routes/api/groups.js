@@ -80,7 +80,7 @@ router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 // join table with the blank attributes array, but in the resulting join table there
 // is still a rogue 'UserId' column that is coming from somewhere. I am not able to find it.
 
-
+//get groups owned or joined by current user
 router.get('/current', requireAuth, async (req, res, next) => {  //auth required: true
 
   let userOwnedGroups = await Group.findAll({
@@ -168,7 +168,7 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
 
 //edit a group
 router.put('/:groupId', requireAuth, validateBody, async (req, res, next) => {
- console.log('router.put/:groupId');
+
   const { name, about, type, private, city, state } = req.body;
 
   let groupById = await Group.findByPk(req.params.groupId);
@@ -219,7 +219,28 @@ router.get('/', async (req, res) => {   //auth required: false
   res.json(allGroups);
 });
 
+router.delete('/', requireAuth, async (req, res, next) => {
 
+  let groupById = await Group.findByPk(req.params.groupId);
+
+  if (!groupById) {
+    const err = new Error("Group couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  await groupById.destroy();
+
+  res.json({
+    "message": "Successfully deleted",
+    "statusCode": 200
+  })
+
+
+})
+
+// create a group
 router.post('/', requireAuth, validateBody, async (req, res, next) => {
 
   const { name, about, type, private, city, state } = req.body;
