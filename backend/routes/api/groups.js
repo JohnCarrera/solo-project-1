@@ -8,7 +8,7 @@ const { Op } = require('sequelize');
 
 const router = express.Router();
 
-const validateBody = [
+const validateGroupBody = [
   check('name')
     .exists({ checkFalsy: true })
     .notEmpty()
@@ -36,6 +36,66 @@ const validateBody = [
     .withMessage('State is required'),
   handleValidationErrors
 ];
+
+const validateVenueBody = [
+  check('address')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('Street address is required'),
+    check('city')
+    .notEmpty()
+    .exists({ checkFalsy: true })
+    .withMessage('City is required'),
+  check('state')
+    .notEmpty()
+    .exists({ checkFalsy: true })
+    .withMessage('State is required'),
+  check('lat')
+    .exists({ checkFalsy: true })
+    .withMessage('Latitude is not valid'),
+  check('lng')
+    .notEmpty()
+    .withMessage('Longitude is not valid'),
+  handleValidationErrors
+];
+
+
+router.get('/:groupId/venues', requireAuth, async (req, res) => {   //auth required: true
+
+  let allVenues = await Venue.findAll({
+    where: {
+      groupId: req.params.groupId
+    }
+  });
+
+  res.json({Venues: allVenues });
+});
+
+router.post('/', requireAuth, validateVenueBody, async (req, res) => {   //auth required: true
+
+  const { address, city, state, lat, lng } = req.body;
+
+  let groupById = await Group.findByPk(req.params.groupId);
+
+  if (!groupById) {
+    const err = new Error("Group couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  let newVenue = await Venue.create({
+    groupId: req.params.groupId
+    , address
+    , city
+    , state
+    , lat
+    , lng
+  });
+
+  res.json({Venues: allVenues });
+});
+
 
 router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 
@@ -165,7 +225,7 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
 });
 
 //edit a group
-router.put('/:groupId', requireAuth, validateBody, async (req, res, next) => {
+router.put('/:groupId', requireAuth, validateGroupBody, async (req, res, next) => {
 
   const { name, about, type, private, city, state } = req.body;
 
@@ -246,7 +306,7 @@ router.get('/', async (req, res) => {   //auth required: false
 });
 
 // create a group
-router.post('/', requireAuth, validateBody, async (req, res, next) => {
+router.post('/', requireAuth, validateGroupBody, async (req, res, next) => {
 
   const { name, about, type, private, city, state } = req.body;
 
