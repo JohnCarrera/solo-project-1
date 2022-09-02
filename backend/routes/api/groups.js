@@ -166,6 +166,31 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
   res.json(groupById);
 });
 
+//edit a group
+router.put('/:groupId', requireAuth, validateBody, async (req, res, next) => {
+ console.log('router.put/:groupId');
+  const { name, about, type, private, city, state } = req.body;
+
+  let groupById = await Group.findByPk(req.params.groupId);
+
+  if (!groupById) {
+    const err = new Error("Group couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  let editedGroup = await groupById.update({
+    name
+    , about
+    , type
+    , private
+    , city
+    , state
+ });
+
+ res.json(editedGroup);
+});
 
 //get all groups
 router.get('/', async (req, res) => {   //auth required: false
