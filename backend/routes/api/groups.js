@@ -3,7 +3,18 @@ const express = require('express')
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Group, GroupImage, User, Venue, Membership } = require('../../db/models');
+
+const {
+  Group
+  , GroupImage
+  , User
+  , Venue
+  , Membership
+  , Event
+  , Attendance
+  , EventImage
+} = require('../../db/models');
+
 const { Op } = require('sequelize');
 
 const router = express.Router();
@@ -114,7 +125,7 @@ router.get('/:goupId/events', async (req, res, next) => {
     }
   }
 
-  res.json();
+  res.json({Events: allEvents});
 });
 
 router.post('/:groupId/venues', requireAuth, validateVenueBody, async (req, res, next) => {   //auth required: true
