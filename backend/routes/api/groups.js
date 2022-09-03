@@ -38,6 +38,7 @@ const validateGroupBody = [
   handleValidationErrors
 ];
 
+//TODO: FIX VALIDATORS FOR THIS ROUTE => NOT PART OF SPEC
 const validateVenueBody = [
   check('address')
     .exists({ checkFalsy: true })
@@ -107,6 +108,7 @@ router.post('/:groupId/venues', requireAuth, validateVenueBody, async (req, res,
 
   res.json(venueRes);
 });
+
 
 
 router.post('/:groupId/images', requireAuth, async (req, res, next) => {
