@@ -36,3 +36,40 @@ const validateBody = [
     .withMessage('State is required'),
   handleValidationErrors
 ];
+
+
+router.put('/venues/:venueId', requireAuth, validateVenueBody, async (req, res, next) => {   //auth required: true
+
+  const { address, city, state, lat, lng } = req.body;
+
+  let venueById = await Venue.findByPk(req.params.venueId);
+
+  if (!venueById) {
+    const err = new Error("Venue couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  let newVenue = await Venue.update({
+    groupId: venueById.dataValues.groupId
+    , address
+    , city
+    , state
+    , lat
+    , lng
+  });
+
+  let venueRes = {};
+
+  venueRes.id = newVenue.dataValues.id;
+  venueRes.groupId = newVenue.dataValues.id;
+  venueRes.address = newVenue.dataValues.address;
+  venueRes.city = newVenue.dataValues.city;
+  venueRes.state = newVenue.dataValues.state;
+  venueRes.lat = newVenue.dataValues.lat;
+  venueRes.lng = newVenue.dataValues.lng;
+
+
+  res.json(venueRes);
+});
