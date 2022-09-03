@@ -3,9 +3,19 @@ const express = require('express')
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Group, GroupImage, User, Venue, Membership } = require('../../db/models');
+
+const {
+  Group
+  , GroupImage
+  , User
+  , Venue
+  , Membership
+  , Event
+  , Attendance
+  , EventImage
+} = require('../../db/models');
+
 const { Op } = require('sequelize');
-const venue = require('../../db/models/venue');
 
 const router = express.Router();
 
@@ -71,6 +81,60 @@ router.get('/:groupId/venues', requireAuth, async (req, res) => {   //auth requi
   });
 
   res.json({Venues: allVenues });
+});
+
+router.get('/:groupId/events', async (req, res, next) => {
+
+  let groupById = await Group.findByPk(Number(req.params.groupId));
+
+  if (!groupById) {
+    const err = new Error("Group couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  let allEvents = await Event.findAll({
+    where: {
+      groupId: Number(req.params.groupId)
+    },
+    include:[
+      {
+        model: Group.scope('eventRoute')
+      },
+      {
+        model: Venue.scope('eventRoute')
+      }
+    ]
+  });
+
+  //lazy load attendees
+  for(let x = 0; x < allEvents.length; x++){
+    let numAttending = await Attendance.count({
+      where:{
+        eventId: allEvents[x].dataValues.id
+      }
+    });
+
+   //lazy load preview image
+   let previewImage = await EventImage.findAll({
+    where:{
+      eventId: allEvents[x].dataValues.id,
+      preview: true
+    }
+   });
+
+   //append kvps to result for member count and image url
+    allEvents[x].dataValues.numAttending = numAttending;
+
+    if(previewImage.length){
+    allEvents[x].dataValues.previewImage = previewImage[0].url;
+    } else {
+      allEvents[x].dataValues.previewImage = null;
+    }
+  }
+
+  res.json({Events: allEvents});
 });
 
 router.post('/:groupId/venues', requireAuth, validateVenueBody, async (req, res, next) => {   //auth required: true
@@ -288,7 +352,6 @@ router.delete('/:groupId', requireAuth, async (req, res, next) => {
 //get all groups
 router.get('/', async (req, res) => {   //auth required: false
 
-  console.log('get all groups: -------');
   let allGroups = await Group.findAll();
 
   //lazy load members

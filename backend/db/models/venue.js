@@ -30,16 +30,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Venue',
-    defaultScope: {
-      attributes: [
-        'id',
-        'groupId',
-        'address',
-        'city',
-        'state',
-        'lat',
-        'lng'
-      ]
+    scopes:{
+      eventRoute: {
+        attributes: ['id', 'city', 'state']
+      }
     }
   });
   return Venue;
