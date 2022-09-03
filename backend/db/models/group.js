@@ -48,6 +48,9 @@ module.exports = (sequelize, DataTypes) => {
     scopes: {
       eventRoute: {
         attributes: ['id', 'name', 'city', 'state']
+      },
+      eventIdRoute: {
+        attributes: ['id', 'name', 'private', 'city', 'state']
       }
     }
   });

@@ -32,10 +32,23 @@ const validateEventBody = [
 ];
 
 
-router.get('/:groupId/events', async (req, res, next) => {
+router.get('/:eventId', async (req, res, next) => {
 
-  let { eventIdParam } = req.params;
-  let eventById = await Event.findByPk(Number(eventIdParam));
+  let { eventId } = req.params;
+  let eventById = await Event.findByPk(Number(eventId), {
+    include:[
+      {
+        model: Group.scope('eventIdRoute')
+      },
+      {
+        model: Venue.scope('eventIdRoute')
+      },
+      {
+        model: EventImage.scope('eventRoute')
+      }
+
+    ]
+  });
 
   if (!eventById) {
     const err = new Error("Event couldn't be found");
@@ -48,14 +61,14 @@ router.get('/:groupId/events', async (req, res, next) => {
 
     let numAttending = await Attendance.count({
       where:{
-        eventId: eventIdParam
+        eventId: eventId
       }
     });
 
    //lazy load preview image
    let previewImage = await EventImage.findAll({
     where:{
-      eventId: eventIdParam,
+      eventId: eventId,
       preview: true
     }
    });
@@ -70,7 +83,7 @@ router.get('/:groupId/events', async (req, res, next) => {
     }
 
 
-  res.json({Events: allEvents});
+  res.json(eventById);
 });
 
 router.get('/', async (req, res, next) => {
