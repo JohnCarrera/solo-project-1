@@ -5,10 +5,11 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Group, GroupImage, User, Venue, Membership } = require('../../db/models');
 const { Op } = require('sequelize');
+const venue = require('../../db/models/venue');
 
 const router = express.Router();
 
-const validateBody = [
+const validateGroupBody = [
   check('name')
     .exists({ checkFalsy: true })
     .notEmpty()
@@ -36,6 +37,77 @@ const validateBody = [
     .withMessage('State is required'),
   handleValidationErrors
 ];
+
+const validateVenueBody = [
+  check('address')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('Street address is required'),
+    check('city')
+    .notEmpty()
+    .exists({ checkFalsy: true })
+    .withMessage('City is required'),
+  check('state')
+    .notEmpty()
+    .exists({ checkFalsy: true })
+    .withMessage('State is required'),
+  check('lat')
+    .exists({ checkFalsy: true })
+    .withMessage('Latitude is not valid'),
+  check('lng')
+    .notEmpty()
+    .withMessage('Longitude is not valid'),
+  handleValidationErrors
+];
+
+
+router.get('/:groupId/venues', requireAuth, async (req, res) => {   //auth required: true
+
+  let allVenues = await Venue.findAll({
+    where: {
+      groupId: req.params.groupId
+    }
+  });
+
+  res.json({Venues: allVenues });
+});
+
+router.post('/:groupId/venues', requireAuth, validateVenueBody, async (req, res, next) => {   //auth required: true
+
+  const { address, city, state, lat, lng } = req.body;
+
+  let groupById = await Group.findByPk(req.params.groupId);
+
+  if (!groupById) {
+    const err = new Error("Group couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  let newVenue = await Venue.create({
+    groupId: Number(req.params.groupId)
+    , address
+    , city
+    , state
+    , lat
+    , lng
+  });
+
+  let venueRes = {};
+
+  venueRes.id = newVenue.dataValues.id;
+  venueRes.groupId = newVenue.dataValues.id;
+  venueRes.address = newVenue.dataValues.address;
+  venueRes.city = newVenue.dataValues.city;
+  venueRes.state = newVenue.dataValues.state;
+  venueRes.lat = newVenue.dataValues.lat;
+  venueRes.lng = newVenue.dataValues.lng;
+
+
+  res.json(venueRes);
+});
+
 
 router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 
@@ -165,7 +237,7 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
 });
 
 //edit a group
-router.put('/:groupId', requireAuth, validateBody, async (req, res, next) => {
+router.put('/:groupId', requireAuth, validateGroupBody, async (req, res, next) => {
 
   const { name, about, type, private, city, state } = req.body;
 
@@ -246,7 +318,7 @@ router.get('/', async (req, res) => {   //auth required: false
 });
 
 // create a group
-router.post('/', requireAuth, validateBody, async (req, res, next) => {
+router.post('/', requireAuth, validateGroupBody, async (req, res, next) => {
 
   const { name, about, type, private, city, state } = req.body;
 
