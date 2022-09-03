@@ -45,6 +45,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Group',
+    scopes: {
+      eventRoute: {
+        attributes: ['id', 'name', 'city', 'state']
+      }
+    }
   });
   return Group;
 };

@@ -54,18 +54,7 @@ router.put('/:venueId', requireAuth, validateVenueBody, async (req, res, next) =
     , lng
   });
 
-  let venueRes = {};
-
-  venueRes.id = newVenue.dataValues.id;
-  venueRes.groupId = newVenue.dataValues.id;
-  venueRes.address = newVenue.dataValues.address;
-  venueRes.city = newVenue.dataValues.city;
-  venueRes.state = newVenue.dataValues.state;
-  venueRes.lat = newVenue.dataValues.lat;
-  venueRes.lng = newVenue.dataValues.lng;
-
-
-  res.json(venueRes);
+  res.json(newVenue);
 });
 
 
