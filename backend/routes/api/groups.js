@@ -83,11 +83,20 @@ router.get('/:groupId/venues', requireAuth, async (req, res) => {   //auth requi
   res.json({Venues: allVenues });
 });
 
-router.get('/:goupId/events', async (req, res, next) => {
+router.get('/:groupId/events', async (req, res, next) => {
+
+  let groupById = await Group.findByPk(Number(req.params.groupId));
+
+  if (!groupById) {
+    const err = new Error("Group couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
 
   let allEvents = await Event.findAll({
     where: {
-      groupId: Number(req.params.goupId)
+      groupId: Number(req.params.groupId)
     },
     include:[
       {
