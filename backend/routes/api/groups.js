@@ -184,7 +184,9 @@ router.post(
         , endDate
     } = req.body;
 
-    const { groupId } = req.params;
+    let { groupId } = req.params;
+    groupId = Number(groupId);
+
 
     let groupById = await Group.findByPk(groupId);
 

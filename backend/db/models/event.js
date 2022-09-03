@@ -31,15 +31,16 @@ module.exports = (sequelize, DataTypes) => {
   Event.init({
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     venueId: DataTypes.INTEGER,
     groupId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     type: DataTypes.STRING,
-    capacity: DataTypes.DECIMAL,
-    price: DataTypes.INTEGER,
+    capacity: DataTypes.INTEGER,
+    price: DataTypes.DECIMAL,
     startDate: DataTypes.DATE,
     endDate: DataTypes.DATE
   }, {
