@@ -32,6 +32,60 @@ const validateEventBody = [
 ];
 
 
+router.get('/:eventId', async (req, res, next) => {
+
+  let { eventId } = req.params;
+  let eventById = await Event.findByPk(Number(eventId), {
+    include:[
+      {
+        model: Group.scope('eventIdRoute')
+      },
+      {
+        model: Venue.scope('eventIdRoute')
+      },
+      {
+        model: EventImage.scope('eventRoute')
+      }
+
+    ]
+  });
+
+  if (!eventById) {
+    const err = new Error("Event couldn't be found");
+    err.status = 404;
+    err.title = 'Not found'
+    return next(err);
+  }
+
+  //lazy load attendees
+
+    let numAttending = await Attendance.count({
+      where:{
+        eventId: eventId
+      }
+    });
+
+   //lazy load preview image
+   let previewImage = await EventImage.findAll({
+    where:{
+      eventId: eventId,
+      preview: true
+    }
+   });
+
+   //append kvps to result for member count and image url
+    eventById.dataValues.numAttending = numAttending;
+
+    if(previewImage.length){
+    eventById.dataValues.previewImage = previewImage[0].url;
+    } else {
+      eventById.dataValues.previewImage = null;
+    }
+
+
+  res.json(eventById);
+});
+
 router.get('/', async (req, res, next) => {
 
   let allEvents = await Event.findAll({

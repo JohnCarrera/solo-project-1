@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'EventImage',
+    scopes:{
+      eventRoute: {
+        attributes: ['id', 'url', 'preview']
+      }
+    }
   });
   return EventImage;
 };
