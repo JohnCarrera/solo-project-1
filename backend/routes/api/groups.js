@@ -5,6 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Group, GroupImage, User, Venue, Membership } = require('../../db/models');
 const { Op } = require('sequelize');
+const venue = require('../../db/models/venue');
 
 const router = express.Router();
 
@@ -71,7 +72,7 @@ router.get('/:groupId/venues', requireAuth, async (req, res) => {   //auth requi
   res.json({Venues: allVenues });
 });
 
-router.post('/', requireAuth, validateVenueBody, async (req, res) => {   //auth required: true
+router.post('/:groupId/venues', requireAuth, validateVenueBody, async (req, res, next) => {   //auth required: true
 
   const { address, city, state, lat, lng } = req.body;
 
@@ -85,7 +86,7 @@ router.post('/', requireAuth, validateVenueBody, async (req, res) => {   //auth 
   }
 
   let newVenue = await Venue.create({
-    groupId: req.params.groupId
+    groupId: Number(req.params.groupId)
     , address
     , city
     , state
@@ -93,7 +94,18 @@ router.post('/', requireAuth, validateVenueBody, async (req, res) => {   //auth 
     , lng
   });
 
-  res.json({Venues: allVenues });
+  let venueRes = {};
+
+  venueRes.id = newVenue.dataValues.id;
+  venueRes.groupId = newVenue.dataValues.id;
+  venueRes.address = newVenue.dataValues.address;
+  venueRes.city = newVenue.dataValues.city;
+  venueRes.state = newVenue.dataValues.state;
+  venueRes.lat = newVenue.dataValues.lat;
+  venueRes.lng = newVenue.dataValues.lng;
+
+
+  res.json(venueRes);
 });
 
 
