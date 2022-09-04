@@ -4,7 +4,9 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Events', [
       {
-        id: 1,
+        id: 101,
+        venueId: 101,
+        groupId: 101,
         name: 'Pickers Meet',
         description: 'First pick of the season!',
         type: 'In Person',
@@ -14,9 +16,9 @@ module.exports = {
         endDate: '2022-09-13 15:00:00'
       },
       {
-        id: 2,
-        venueId: 1,
-        groupId: 1,
+        id: 102,
+        venueId: 101,
+        groupId: 101,
         name: 'Autumn Apples',
         description: 'Come out to the orchard!',
         type: 'In Person',
@@ -26,9 +28,9 @@ module.exports = {
         endDate: '2022-10-17 17:00:00'
       },
       {
-        id: 3,
+        id: 103,
         venueId: null,
-        groupId: 2,
+        groupId: 102,
         name: 'Anti-Crime Squad Meet 1',
         description: 'First meet of september',
         type: 'Online',
@@ -38,9 +40,9 @@ module.exports = {
         endDate: '2022-09-01 18:30:00'
       },
       {
-        id: 4,
-        venueId: 4,
-        groupId: 3,
+        id: 104,
+        venueId: 104,
+        groupId: 103,
         name: 'Play-date for the bebes',
         description: 'Play date at Tree Tops park!',
         type: 'In Person',
@@ -50,9 +52,9 @@ module.exports = {
         endDate: '2022-10-01 15:30:00'
       },
       {
-        id: 5,
-        venueId: 4,
-        groupId: 3,
+        id: 105,
+        venueId: 104,
+        groupId: 103,
         name: 'Play-date for the bebes v2',
         description: 'Play date at riverbend park',
         type: 'In Person',
@@ -62,9 +64,9 @@ module.exports = {
         endDate: '2022-10-01 15:30:00'
       },
       {
-        id: 6,
+        id: 106,
         venueId: null,
-        groupId: 2,
+        groupId: 102,
         name: 'Anti-Crime Squad Meet 1',
         description: 'First meet of October',
         type: 'Online',
@@ -74,9 +76,9 @@ module.exports = {
         endDate: '2022-10-01 18:30:00'
       },
       {
-        id: 7,
+        id: 107,
         venueId: null,
-        groupId: 4,
+        groupId: 104,
         name: 'Dr K\'s Mom-meet 1',
         description: 'First meet for the moms!',
         type: 'Online',
@@ -86,9 +88,9 @@ module.exports = {
         endDate: '2022-10-03 19:30:00'
       },
       {
-        id: 8,
+        id: 108,
         venueId: null,
-        groupId: 4,
+        groupId: 104,
         name: 'Dr K\'s Mom-meet 2',
         description: 'Second meet for the moms!',
         type: 'Online',
@@ -98,9 +100,9 @@ module.exports = {
         endDate: '2022-10-13 19:30:00'
       },
       {
-        id: 9,
-        venueId: 5,
-        groupId: 5,
+        id: 109,
+        venueId: 105,
+        groupId: 105,
         name: 'Woodworker\'s Guild - Penmaking Workshop',
         description: 'Come learn to make custom pens! All materials and tools included in fee.',
         type: 'In Person',
@@ -110,9 +112,9 @@ module.exports = {
         endDate: '2022-10-10 14:30:00'
       },
       {
-        id: 10,
-        venueId: 5,
-        groupId: 5,
+        id: 110,
+        venueId: 105,
+        groupId: 105,
         name: 'Woodworker\'s Guild - Cutting Board 2-Day Workshop',
         description: 'Come learn to make custom cutting boards! All materials and tools included in fee.',
         type: 'In Person',
@@ -122,9 +124,9 @@ module.exports = {
         endDate: '2022-10-25 14:30:00'
       },
       {
-        id: 11,
-        venueId: 5,
-        groupId: 5,
+        id: 111,
+        venueId: 105,
+        groupId: 105,
         name: 'Woodworker\'s Guild - Box Maker\'s 2-Day Workshop',
         description: 'Come learn to make custom cutting boards! All materials and tools included in fee.',
         type: 'In Person',

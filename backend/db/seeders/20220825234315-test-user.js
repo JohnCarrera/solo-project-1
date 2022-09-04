@@ -5,7 +5,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Users', [
       {
-        id: 1,
+        id: 101,
         email: 'mike@mikedf.com',
         username: 'warriorAngel',
         firstName: 'Mike',
@@ -13,7 +13,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password1'),
       },
       {
-        id: 2,
+        id: 102,
         email: 'antonio@freewowgolds.com',
         username: 'arrowdei',
         firstName: 'Antonio',
@@ -21,7 +21,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password2')
       },
       {
-        id: 3,
+        id: 103,
         email: 'lorenzo@rocketgame.com',
         username: 'bubishka',
         firstName: 'Lorenzo',
@@ -29,7 +29,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password3')
       },
       {
-        id: 4,
+        id: 104,
         email: 'angel@bornepd.gov',
         username: 'angelMcMangel',
         firstName: 'Angel',
@@ -37,7 +37,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password4')
       },
       {
-        id: 5,
+        id: 105,
         email: 'beanmcmean@curd.com',
         username: 'beanMcMean',
         firstName: 'Bean',
@@ -45,7 +45,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password5')
       },
       {
-        id: 6,
+        id: 106,
         email: 'john@carreradesign.com',
         username: 'badreg',
         firstName: 'John',
@@ -53,7 +53,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password6'),
       },
       {
-        id: 7,
+        id: 107,
         email: 'drkatrinapsyd@lotusmhg.com',
         username: 'drkatrinac',
         firstName: 'Katrina',
@@ -61,7 +61,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password7')
       },
       {
-        id: 8,
+        id: 108,
         email: 'cheno@moarwetfoodz.com',
         username: 'chenchen',
         firstName: 'Cheno',
@@ -69,7 +69,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password8')
       },
       {
-        id: 9,
+        id: 109,
         email: 'lunabean@blackcats.org',
         username: 'chicharron',
         firstName: 'Luna',
@@ -77,7 +77,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password9')
       },
       {
-        id: 10,
+        id: 110,
         email: 'ivykbaby@kfinancial.com',
         username: 'ivybaby',
         firstName: 'Ivy',

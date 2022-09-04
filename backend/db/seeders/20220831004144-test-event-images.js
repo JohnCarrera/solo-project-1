@@ -4,62 +4,62 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('EventImages', [
       {
-        id: 1,
-        eventId: 1,
+        id: 101,
+        eventId: 101,
         url: 'https://imagehost.com/eventimage1',
         preview: true
       },
       {
-        id: 2,
-        eventId: 2,
+        id: 102,
+        eventId: 102,
         url: 'https://imagehost.com/eventimage2',
         preview: true
       },
       {
-        id: 3,
-        eventId: 3,
+        id: 103,
+        eventId: 103,
         url: 'https://imagehost.com/eventimage3',
         preview: true
       },
       {
-        id: 4,
-        eventId: 4,
+        id: 104,
+        eventId: 104,
         url: 'https://imagehost.com/eventimage4',
         preview: true
       },
       {
-        id: 5,
-        eventId: 5,
+        id: 105,
+        eventId: 105,
         url: 'https://imagehost.com/eventimage5',
         preview: true
       },
       {
-        id: 6,
-        eventId: 1,
+        id: 106,
+        eventId: 101,
         url: 'https://imagehost.com/eventimage11',
         preview: true
       },
       {
-        id: 7,
-        eventId: 2,
+        id: 107,
+        eventId: 102,
         url: 'https://imagehost.com/eventimage22',
         preview: true
       },
       {
-        id: 8,
-        eventId: 3,
+        id: 108,
+        eventId: 103,
         url: 'https://imagehost.com/eventimage33',
         preview: true
       },
       {
-        id: 9,
-        eventId: 4,
+        id: 109,
+        eventId: 104,
         url: 'https://imagehost.com/eventimage44',
         preview: true
       },
       {
-        id: 10,
-        eventId: 5,
+        id: 110,
+        eventId: 105,
         url: 'https://imagehost.com/eventimage55',
         preview: true
       }
