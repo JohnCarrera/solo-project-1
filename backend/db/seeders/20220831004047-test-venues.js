@@ -4,8 +4,8 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Venues', [
       {
-        id: 1,
-        groupId: 1,
+        id: 101,
+        groupId: 101,
         address: '2115 SE PSL BLVD',
         city: 'Port St. Lucie',
         state: 'FL',
@@ -13,8 +13,8 @@ module.exports = {
         lng: 26.45657
       },
       {
-        id: 2,
-        groupId: 2,
+        id: 102,
+        groupId: 102,
         address: "500 US HWY 52",
         city: 'Bourne' ,
         state: 'MA',
@@ -22,8 +22,8 @@ module.exports = {
         lng: 46.654
       },
       {
-        id: 3,
-        groupId: 3,
+        id: 103,
+        groupId: 103,
         address: '2500 US HWY 1',
         city: 'Stuart' ,
         state: 'FL',
@@ -31,8 +31,8 @@ module.exports = {
         lng: 25.456987
       },
       {
-        id: 4,
-        groupId: 3,
+        id: 104,
+        groupId: 103,
         address: "1502 S Indiantown RD",
         city: 'Jupiter' ,
         state: 'FL',
@@ -40,8 +40,8 @@ module.exports = {
         lng: 78.66542
       },
       {
-        id: 5,
-        groupId: 5,
+        id: 105,
+        groupId: 105,
         address: "18255 Cedar St.",
         city: 'Steamboat Springs' ,
         state: 'CO',

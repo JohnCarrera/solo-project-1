@@ -4,8 +4,8 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Groups', [
       {
-        id: 1,
-        organizerId: 1,
+        id: 101,
+        organizerId: 101,
         name: "Mike's Mangos",
         about: 'Just a group of dudes picking fruit.',
         type: 'In Person',
@@ -14,8 +14,8 @@ module.exports = {
         state: 'FL',
       },
       {
-        id: 2,
-        organizerId: 4,
+        id: 102,
+        organizerId: 104,
         name: "Angel's Angels",
         about: 'Officer Angel\'s anti-crime squad.' ,
         type: 'Online',
@@ -24,8 +24,8 @@ module.exports = {
         state: 'MA',
       },
       {
-        id: 3,
-        organizerId: 3,
+        id: 103,
+        organizerId: 103,
         name: "Bubanje Crew",
         about: 'Playdates for babies 0-2 years.' ,
         type: 'In Person',
@@ -34,8 +34,8 @@ module.exports = {
         state: 'FL',
       },
       {
-        id: 4,
-        organizerId: 5,
+        id: 104,
+        organizerId: 105,
         name: "Dr. K's weekly support group",
         about: 'Support group for new moms' ,
         type: 'Online',
@@ -44,8 +44,8 @@ module.exports = {
         state: 'FL',
       },
       {
-        id: 5,
-        organizerId: 6,
+        id: 105,
+        organizerId: 106,
         name: "Woodworker's Guild",
         about: 'Come talk shop and work on projects with woodworkers of all skill levels' ,
         type: 'In Person',

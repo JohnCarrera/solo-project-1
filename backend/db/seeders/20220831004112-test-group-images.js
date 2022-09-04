@@ -4,62 +4,62 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('GroupImages', [
       {
-        id: 1,
-        groupId: 1,
+        id: 101,
+        groupId: 101,
         url: 'https://imagehost.com/groupimage1',
         preview: true
       },
       {
-        id: 2,
-        groupId: 2,
+        id: 102,
+        groupId: 102,
         url: 'https://imagehost.com/groupimage2',
         preview: true
       },
       {
-        id: 3,
-        groupId: 3,
+        id: 103,
+        groupId: 103,
         url: 'https://imagehost.com/groupimage3',
         preview: true
       },
       {
-        id: 4,
-        groupId: 4,
+        id: 104,
+        groupId: 104,
         url: 'https://imagehost.com/groupimage4',
         preview: true
       },
       {
-        id: 5,
-        groupId: 5,
+        id: 105,
+        groupId: 105,
         url: 'https://imagehost.com/groupimage5',
         preview: true
       },
       {
-        id: 6,
-        groupId: 1,
+        id: 106,
+        groupId: 101,
         url: 'https://imagehost.com/groupimage11',
         preview: true
       },
       {
-        id: 7,
-        groupId: 2,
+        id: 107,
+        groupId: 102,
         url: 'https://imagehost.com/groupimage22',
         preview: true
       },
       {
-        id: 8,
-        groupId: 3,
+        id: 108,
+        groupId: 103,
         url: 'https://imagehost.com/groupimage33',
         preview: true
       },
       {
-        id: 9,
-        groupId: 4,
+        id: 109,
+        groupId: 104,
         url: 'https://imagehost.com/groupimage44',
         preview: true
       },
       {
-        id: 10,
-        groupId: 5,
+        id: 110,
+        groupId: 105,
         url: 'https://imagehost.com/groupimage55',
         preview: true
       }

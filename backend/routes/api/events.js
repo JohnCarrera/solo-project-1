@@ -171,6 +171,24 @@ router.put('/:eventId', async (req, res, next) => {
     res.json(newEvent);
 });
 
+router.delete('/:eventId', async (req, res, next) => {
+
+    let { eventId } = req.params;
+    eventId = Number(eventId);
+
+    let eventById = await Event.findByPk(eventId);
+    console.log('event:', eventById );
+    if (!eventById) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    eventById.destroy();
+
+    res.json({ message: 'Successfully deleted'});
+})
 
 router.get('/', async (req, res, next) => {
 
