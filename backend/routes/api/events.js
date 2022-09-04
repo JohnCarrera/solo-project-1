@@ -71,7 +71,9 @@ router.post('/:eventId/images', requireAuth, async (req, res, next) => {
 router.get('/:eventId', async (req, res, next) => {
 
     let { eventId } = req.params;
-    let eventById = await Event.findByPk(Number(eventId), {
+    eventId = Number(eventId);
+
+    let eventById = await Event.findByPk(eventId, {
         include: [
             {
                 model: Group.scope('eventIdRoute')
@@ -118,9 +120,57 @@ router.get('/:eventId', async (req, res, next) => {
         eventById.dataValues.previewImage = null;
     }
 
-
     res.json(eventById);
 });
+
+router.put('/:eventId', async (req, res, next) => {
+
+    let { eventId } = req.params;
+    eventId = Number(eventId);
+
+    let {
+        venueId
+        , name
+        , type
+        , capacity
+        , price
+        , description
+        , startDate
+        , endDate
+     } = req.body;
+
+    let eventById = await Event.findByPk(eventId);
+    let venueById = await Venue.findByPk(venueId);
+
+
+    if (!eventById) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    if (!venueById) {
+        const err = new Error("Venue couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let newEvent = await eventById.update({
+        venueId
+        , name
+        , type
+        , capacity
+        , price
+        , description
+        , startDate
+        , endDate
+    });
+
+    res.json(newEvent);
+});
+
 
 router.get('/', async (req, res, next) => {
 
