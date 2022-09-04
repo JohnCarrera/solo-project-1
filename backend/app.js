@@ -6,13 +6,9 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-
 const routes = require('./routes');
-
 const isProduction = environment === 'production';
-
 const { ValidationError } = require('sequelize');
-
 const app = express();
 
 app.use(morgan('dev'));
@@ -62,7 +58,7 @@ app.use((err, _req, _res, next) => {
   if (err instanceof ValidationError) {
 
     console.log('processing sequelize errors');
-    console.log(err)    //err.errors = err.errors.map((e) => err.errors[e] = e.message);
+    //err.errors = err.errors.map((e) => err.errors[e] = e.message);
 
     console.log(err)
     let errorObj = {};
@@ -110,7 +106,6 @@ app.use((err, _req, res, _next) => {
 
   let resErr = {};
 
-
   // if there are multiple errors, use the title, and error list
   // with key names of the error with the message for the value
   // if not display only the message and the status code per spec
@@ -127,7 +122,6 @@ app.use((err, _req, res, _next) => {
     resErr.status = err.status;
     resErr.errors = err.errors;
   }
-
   res.json(resErr);
 });
 

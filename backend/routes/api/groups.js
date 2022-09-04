@@ -102,6 +102,59 @@ const validateEventBody = [
     handleValidationErrors
 ];
 
+
+router.get('/:groupId/members', requireAuth, async (req, res, next) => {
+
+    let { groupId } = req.params;
+    groupId = Number(groupId);
+
+    let groupById = await Group.findByPk(groupId);
+
+    if (!groupById) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let groupMembers = await User.scope('userMembership').findAll({
+        include:[
+            {
+                model: Membership.scope('userMembership'),
+                as: 'Membership',
+                where: {
+                    groupId: groupId
+                }
+            }
+        ],
+        raw: true,
+    });
+
+    console.log(groupMembers);
+
+    let { organizerId } = groupById.dataValues;
+    let { user } = req;
+
+    if (!(organizerId === user.id)){
+        const err = new Error("Forbidden")
+        err.status = 403;
+        err.title = 'Forbidden';
+        return next(err);
+    } else if (false){}
+
+
+    // format response by moving the status kvp from the array in membership to the
+    // top level of 'membership' as a kvp within the membership object per spec
+
+    for( let x = 0; x < groupMembers.length; x++){
+        groupMembers[x].Membership =  { status: groupMembers[x]['Membership.status'] };
+        groupMembers[x]['Membership.status'] = undefined;
+    }
+
+
+    res.json({ Members: groupMembers });
+});
+
 router.get('/:groupId/venues', requireAuth, async (req, res) => {   //auth required: true
 
     let allVenues = await Venue.findAll({

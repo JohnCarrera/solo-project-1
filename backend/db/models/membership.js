@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       // Membership.hasOne(models.User, {
       //   foreignKey: 'id'
       // });
+
+      Membership.belongsTo(models.User,{
+        foreignKey: 'userId',
+        as: 'Membership'
+      });
     }
   }
   Membership.init({
@@ -28,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Membership',
+    scopes: {
+        userMembership: {
+          attributes:  ["status"]
+        }
+      }
   });
   return Membership;
 };
