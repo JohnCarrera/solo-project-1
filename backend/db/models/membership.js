@@ -36,6 +36,13 @@ module.exports = (sequelize, DataTypes) => {
     scopes: {
         userMembership: {
           attributes:  ["status"]
+        },
+        newMember: {
+            attributes: [
+                'groupId',
+                ['userId', 'memberId'],
+                'status'
+            ]
         }
       }
   });

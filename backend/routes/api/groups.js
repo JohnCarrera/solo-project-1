@@ -103,6 +103,65 @@ const validateEventBody = [
 ];
 
 
+router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
+
+    let { groupId } = req.params;
+    groupId = Number(groupId);
+
+    let groupById = await Group.findByPk(groupId);
+
+    if (!groupById) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    const memberCheck = await Membership.findAll({
+        where:{
+            userId: req.user.id,
+            groupId: groupId
+        }
+    });
+
+    if (memberCheck.length){
+
+        const memberStatus = memberCheck[0].dataValues.status;
+
+        if ( memberStatus === 'pending'){
+            const err = new Error("Membership has already been requested");
+            err.status = 404;
+            err.title = 'Already requested'
+            return next(err);
+        }
+
+        if (memberStatus === 'member'){
+            const err = new Error("User is already a member of the group");
+            err.status = 404;
+            err.title = 'Already a Member'
+            return next(err);
+        }
+    }
+
+    const newMember = await Membership.scope('newMember').create({
+        groupId
+        , userId: req.user.id
+        , status: 'pending'
+    });
+
+    // scopes to not apply to create function in sequelize so
+    // manual manipulation is needed here
+
+    let resObj = {};
+
+    resObj.groupId = newMember.dataValues.groupId;
+    resObj.memberId = newMember.dataValues.userId;
+    resObj.status = newMember.dataValues.status;
+
+    res.json(resObj);
+});
+
+
 router.get('/:groupId/members', requireAuth, async (req, res, next) => {
 
     let { groupId } = req.params;
