@@ -108,7 +108,7 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
     let { groupId } = req.params;
     groupId = Number(groupId);
 
-    let { memberId, status } = req.body;
+    let { memberId } = req.body;
 
     let groupById = await Group.findByPk(groupId);
 
@@ -119,9 +119,7 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
         return next(err);
     }
 
-    let  currentUserId  = req.user.id;
-
-    let userById = await User.findByPk(currentUserId);
+    let userById = await User.findByPk(memberId);
 
     if (!userById) {
         const err = new Error("User couldn't be found");
@@ -606,7 +604,7 @@ router.get('/:groupId', async (req, res, next) => {  //auth required: false
         //append kvps to result for member count and image url
         groupById[x].dataValues.numMembers = numMembers;
     }
-    res.json(groupById);
+    res.json(groupById[0]);
 });
 
 //edit a group
