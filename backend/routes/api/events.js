@@ -32,6 +32,44 @@ const validateEventBody = [
 ];
 
 
+
+router.get('/:eventId/attendees', async (req, res, next) => {
+
+    let eventId = Number(req.params.eventId);
+
+    let eventById = await Event.findAll({
+        where: {
+            id: eventId
+        }
+    });
+
+    if (!eventById.length) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let eventAttendees = await User.scope('userAttendance').findAll({
+        include:[
+            {
+                model: Event,
+                where: {
+                  id: eventId
+                },
+                attributes: []
+            },
+            {
+                model: Attendance.scope('eventAttendees'),
+                as: 'userAttendance'
+            }
+        ],
+        raw: true
+    });
+
+    res.json(eventAttendees);
+});
+
 router.post('/:eventId/images', requireAuth, async (req, res, next) => {
 
     const { url, preview } = req.body;
