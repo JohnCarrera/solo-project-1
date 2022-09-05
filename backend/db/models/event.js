@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Event.belongsToMany(models.User, {
-        through: models.Attendance
+        through: models.Attendance,
+        foreignKey: 'eventId'
       });
     }
   }

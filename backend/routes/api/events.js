@@ -31,7 +31,64 @@ const validateEventBody = [
     handleValidationErrors
 ];
 
+router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
+    let eventId = Number(req.params.eventId);
+
+    let eventById = await Event.findAll({
+        where: {
+            id: eventId
+        }
+    });
+
+    if (!eventById.length) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    const attendeeCheck = await Attendance.findAll({
+        where:{
+            userId: req.user.id,
+            eventId: eventId
+        }
+    });
+
+    if (attendeeCheck.length){
+
+        const attendeeStatus = attendeeCheck[0].dataValues.status;
+
+        if ( attendeeStatus === 'pending'){
+            const err = new Error("Attendance has already been requested");
+            err.status = 404;
+            err.title = 'Already requested'
+            return next(err);
+        }
+
+        if (attendeeStatus === 'member'){
+            const err = new Error("User is already an attendee of the event");
+            err.status = 404;
+            err.title = 'Already an Attendee'
+            return next(err);
+        }
+    }
+
+    let newAtten = await Attendance.create({
+        eventId: eventId,
+        userId: req.user.id,
+        status: 'pending'
+    });
+
+    console.log(newAtten);
+
+
+    res.json({
+        eventId: newAtten.eventId,
+        userId: newAtten.userId,
+        status: newAtten.status
+    });
+});
 
 router.get('/:eventId/attendees', async (req, res, next) => {
 
