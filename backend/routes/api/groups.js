@@ -129,26 +129,34 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
         return next(err);
     }
 
-    let foundMembership = Membership.findAll({
+    let foundMembership = await Membership.findAll({
         where: {
             groupId: groupId,
             userId: memberId
         }
     });
 
-    if (!membership.length) {
+    if (!foundMembership.length) {
         const err = new Error("Membership between the user and the group does not exist");
         err.status = 404;
         err.title = 'Not found'
         return next(err);
     }
 
-    let updatedMember = foundMembership.update({
+    let updatedMember = await foundMembership[0].update({
         groupId: groupId,
-        userId: userId,
+        userId: memberId,
         status: status
     });
 
+
+    let resObj = {};
+
+    resObj.groupId = updatedMember.dataValues.groupId;
+    resObj.memberId = updatedMember.dataValues.userId;
+    resObj.status = updatedMember.dataValues.status;
+
+    res.json(resObj);
 });
 
 router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
