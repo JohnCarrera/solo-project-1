@@ -61,13 +61,32 @@ router.get('/:eventId/attendees', async (req, res, next) => {
             },
             {
                 model: Attendance.scope('eventAttendees'),
-                as: 'userAttendance'
+                as: 'Attendance'
             }
         ],
         raw: true
     });
 
-    res.json(eventAttendees);
+    // // format response by moving the status kvp from the array in membership to the
+    // // top level of 'membership' as a kvp within the membership object per spec
+
+    console.log(eventAttendees);
+
+    let resObj = [];
+
+    for(let x = 0; x < eventAttendees.length; x++) {
+
+        let arrayObj = {};
+        arrayObj.id = eventAttendees[x].id;
+        arrayObj.firstName = eventAttendees[x].firstName;
+        arrayObj.lastName = eventAttendees[x].lastName;
+        arrayObj.Attendance = { status: eventAttendees[x]['Attendance.status']}
+
+        resObj.push(arrayObj);
+    }
+
+
+    res.json({Attendees: resObj});
 });
 
 router.post('/:eventId/images', requireAuth, async (req, res, next) => {

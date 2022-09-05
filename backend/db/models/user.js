@@ -72,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
 
             User.hasMany(models.Attendance, {
                 foreignKey: 'userId',
-                as: 'userAttendance'
+                as: 'Attendance'
             });
         }
     }
