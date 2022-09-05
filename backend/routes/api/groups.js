@@ -553,7 +553,10 @@ router.get('/current', requireAuth, async (req, res, next) => {  //auth required
 
         //append kvps to result for member count and image url
         allGroups[x].dataValues.numMembers = numMembers;
-        allGroups[x].dataValues.previewImage = previewImage[0].url;
+
+        if(allGroups[x].dataValues.previewImage){
+           allGroups[x].dataValues.previewImage = previewImage[0].url;
+        }
     }
     res.json({ Groups: allGroups });
 });
