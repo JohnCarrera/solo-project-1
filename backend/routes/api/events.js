@@ -266,7 +266,7 @@ router.post('/:eventId/images', requireAuth, async (req, res, next) => {
     }
 
     let newEventImage = await EventImage.create({
-        groupId: Number(req.params.eventId)
+        eventId: Number(req.params.eventId)
         , url
         , preview
     });
@@ -355,6 +355,8 @@ router.put('/:eventId', async (req, res, next) => {
         , endDate
      } = req.body;
 
+     price = parseFloat(price);
+
     let eventById = await Event.findByPk(eventId);
     let venueById = await Venue.findByPk(venueId);
 
@@ -428,18 +430,22 @@ router.get('/', async (req, res, next) => {
         });
 
         //lazy load preview image
-        let previewImage = await EventImage.findAll({
+        let previewImage = await EventImage.findOne({
             where: {
                 eventId: allEvents[x].dataValues.id,
                 preview: true
             }
         });
 
+
+        console.log('allEvents:', allEvents);
+        console.log('image test:', previewImage);
+
         //append kvps to result for member count and image url
         allEvents[x].dataValues.numAttending = numAttending;
 
-        if (previewImage.length) {
-            allEvents[x].dataValues.previewImage = previewImage[0].url;
+        if (previewImage) {
+            allEvents[x].dataValues.previewImage = previewImage.url;
         } else {
             allEvents[x].dataValues.previewImage = null;
         }

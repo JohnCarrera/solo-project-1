@@ -69,7 +69,7 @@ app.use((err, _req, _res, next) => {
         // catch here and format with proper message and title
         switch (e.message) {
 
-          case 'userVal':
+          case 'userEmailVal':
             err.title = 'User already exists';
             errorObj[e.path] = 'User with that email already exists';
             err.status = 403;

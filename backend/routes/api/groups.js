@@ -211,8 +211,11 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
 
 router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
 
-    let { groupId, memberId } = req.params;
+    let { groupId } = req.params;
     groupId = Number(groupId);
+
+    //let memberId = req.body.memberId;
+    let userId = req.user.id;
 
     let groupById = await Group.findByPk(groupId);
 
@@ -251,7 +254,7 @@ router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
 
     const newMember = await Membership.scope('newMember').create({
         groupId
-        , userId: memberId
+        , userId: userId
         , status: 'pending'
     });
 
