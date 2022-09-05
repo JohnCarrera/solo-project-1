@@ -31,6 +31,47 @@ const validateEventBody = [
     handleValidationErrors
 ];
 
+router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
+
+    let { eventId } = req.params;
+    eventId = Number(eventId);
+
+    let userId  = req.body.memberId;
+
+    let eventById = await Event.findAll({
+        where: {
+            id: eventId
+        }
+    });
+
+    if (!eventById.length) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let foundAttendance = await Attendance.findAll({
+        where: {
+            eventId: eventId,
+            userId: userId
+        },
+        attributes:['id', 'eventId', 'userId', 'status']
+    });
+
+    if (!foundAttendance.length) {
+        const err = new Error("Attendance does not exist for this User");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+
+    foundAttendance[0].destroy();
+
+    res.json({message: 'Successfully deleted attendance from event'});
+
+});
 
 router.put('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
