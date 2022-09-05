@@ -102,6 +102,56 @@ const validateEventBody = [
     handleValidationErrors
 ];
 
+
+router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
+
+    let { groupId } = req.params;
+    groupId = Number(groupId);
+
+    let { memberId, status } = req.body;
+
+    let groupById = await Group.findByPk(groupId);
+
+    if (!groupById) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let  currentUserId  = req.user.id;
+
+    let userById = await User.findByPk(currentUserId);
+
+    if (!userById) {
+        const err = new Error("User couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let foundMembership = await Membership.findAll({
+        where: {
+            groupId: groupId,
+            userId: memberId
+        }
+    });
+
+    if (!foundMembership.length) {
+        const err = new Error("Membership between the user and the group does not exist");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let delMembership = foundMembership[0];
+
+    delMembership.destroy();
+
+    res.json({ message: "Successfully deleted membership from group"});
+
+});
+
 router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
 
     let { groupId } = req.params;
