@@ -107,7 +107,7 @@ const checkGroup = (req, res, next) => {
     let { groupId } = req.params;
     groupId = Number(groupId);
 
-    let groupById = await Group.findByPk(groupId);
+    let groupById = await Group.findByPk(groupId)
 
     if (!groupById) {
         const err = new Error("Group couldn't be found");
@@ -163,25 +163,15 @@ router.delete(
 
 });
 
-router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
-
-    let { groupId } = req.params;
-    groupId = Number(groupId);
+router.put(
+    '/:groupId/membership'
+    , requireAuth
+    , checkGroup
+    , async (req, res, next) => {
 
     let { memberId, status } = req.body;
 
-    let groupById = await Group.findByPk(groupId);
-
-    if (!groupById) {
-        const err = new Error("Group couldn't be found");
-        err.status = 404;
-        err.title = 'Not found'
-        return next(err);
-    }
-
-    let  currentUserId  = req.user.id;
-
-    let userById = await User.findByPk(currentUserId);
+    let userById = await User.findByPk(memberId);
 
     if (!userById) {
         const err = new Error("User couldn't be found");
