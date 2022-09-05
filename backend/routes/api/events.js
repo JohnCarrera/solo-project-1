@@ -31,6 +31,67 @@ const validateEventBody = [
     handleValidationErrors
 ];
 
+
+router.put('/:eventId/attendance', requireAuth, async (req, res, next) => {
+
+    let { eventId } = req.params;
+    eventId = Number(eventId);
+
+    let { userId, status } = req.body;
+
+
+    let eventById = await Event.findAll({
+        where: {
+            id: eventId
+        }
+    });
+
+    if (!eventById.length) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    if (status === 'pending'){
+        const err = new Error("Cannot change an attendance status to pending");
+        err.status = 400;
+        err.title = 'Denied'
+        return next(err);
+    }
+
+    let foundAttendance = await Attendance.findAll({
+        where: {
+            eventId: eventId,
+            userId: userId
+        },
+        attributes:['id', 'eventId', 'userId', 'status']
+    });
+
+    if (!foundAttendance.length) {
+        const err = new Error("Attendance between the user and the event does not exist");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let updatedAtten = await foundAttendance[0].update({
+        eventId: eventId,
+        userId: userId,
+        status: status
+    });
+
+
+    let resObj = {};
+
+    resObj.id = foundAttendance[0].id;
+    resObj.eventId = updatedAtten.dataValues.eventId;
+    resObj.userId = updatedAtten.dataValues.userId;
+    resObj.status = updatedAtten.dataValues.status;
+
+    res.json(resObj);
+});
+
 router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
     let eventId = Number(req.params.eventId);
