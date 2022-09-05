@@ -32,6 +32,63 @@ const validateEventBody = [
 ];
 
 
+
+router.get('/:eventId/attendees', async (req, res, next) => {
+
+    let eventId = Number(req.params.eventId);
+
+    let eventById = await Event.findAll({
+        where: {
+            id: eventId
+        }
+    });
+
+    if (!eventById.length) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let eventAttendees = await User.scope('userAttendance').findAll({
+        include:[
+            {
+                model: Event,
+                where: {
+                  id: eventId
+                },
+                attributes: []
+            },
+            {
+                model: Attendance.scope('eventAttendees'),
+                as: 'Attendance'
+            }
+        ],
+        raw: true
+    });
+
+    // // format response by moving the status kvp from the array in membership to the
+    // // top level of 'membership' as a kvp within the membership object per spec
+
+    console.log(eventAttendees);
+
+    let resObj = [];
+
+    for(let x = 0; x < eventAttendees.length; x++) {
+
+        let arrayObj = {};
+        arrayObj.id = eventAttendees[x].id;
+        arrayObj.firstName = eventAttendees[x].firstName;
+        arrayObj.lastName = eventAttendees[x].lastName;
+        arrayObj.Attendance = { status: eventAttendees[x]['Attendance.status']}
+
+        resObj.push(arrayObj);
+    }
+
+
+    res.json({Attendees: resObj});
+});
+
 router.post('/:eventId/images', requireAuth, async (req, res, next) => {
 
     const { url, preview } = req.body;
