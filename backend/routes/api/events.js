@@ -320,21 +320,21 @@ router.get('/:eventId', async (req, res, next) => {
     });
 
     //lazy load preview image
-    let previewImage = await EventImage.findAll({
-        where: {
-            eventId: eventId,
-            preview: true
-        }
-    });
+    // let previewImage = await EventImage.findAll({
+    //     where: {
+    //         eventId: eventId,
+    //         preview: true
+    //     }
+    // });
 
     //append kvps to result for member count and image url
     eventById.dataValues.numAttending = numAttending;
 
-    if (previewImage.length) {
-        eventById.dataValues.previewImage = previewImage[0].url;
-    } else {
-        eventById.dataValues.previewImage = null;
-    }
+    // if (previewImage.length) {
+    //     eventById.dataValues.previewImage = previewImage[0].url;
+    // } else {
+    //     eventById.dataValues.previewImage = null;
+    // }
 
     res.json(eventById);
 });

@@ -211,7 +211,7 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
 
 router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
 
-    let { groupId } = req.params;
+    let { groupId, memberId } = req.params;
     groupId = Number(groupId);
 
     let groupById = await Group.findByPk(groupId);
@@ -251,7 +251,7 @@ router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
 
     const newMember = await Membership.scope('newMember').create({
         groupId
-        , userId: req.user.id
+        , userId: memberId
         , status: 'pending'
     });
 
@@ -346,6 +346,9 @@ router.get('/:groupId/events', async (req, res, next) => {
         where: {
             groupId: Number(req.params.groupId)
         },
+        attributes:{
+            exclude:['capacity', 'price']
+        },
         include: [
             {
                 model: Group.scope('eventRoute')
@@ -391,7 +394,7 @@ router.post(
     , validateEventBody
     , async (req, res, next) => {
 
-    const {
+    let {
         venueId
         , name
         , type
@@ -401,6 +404,8 @@ router.post(
         , startDate
         , endDate
     } = req.body;
+
+    price = parseFloat(price);
 
     let { groupId } = req.params;
     groupId = Number(groupId);
