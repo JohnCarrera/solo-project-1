@@ -102,13 +102,10 @@ const validateEventBody = [
     handleValidationErrors
 ];
 
-
-router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
+const checkGroup = (req, res, next) => {
 
     let { groupId } = req.params;
     groupId = Number(groupId);
-
-    let { memberId, status } = req.body;
 
     let groupById = await Group.findByPk(groupId);
 
@@ -119,9 +116,23 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
         return next(err);
     }
 
-    let  currentUserId  = req.user.id;
+    // save group and parsed groupId to local in req for use in
+    // main logic of routes
+    req.local.groupId = groupId;
+    req.local.group = groupById;
+    return next();
+}
 
-    let userById = await User.findByPk(currentUserId);
+
+router.delete(
+    '/:groupId/membership'
+    , requireAuth
+    , checkGroup
+    , async (req, res, next) => {
+
+    let { memberId } = req.body;
+
+    let userById = await User.findByPk(memberId);
 
     if (!userById) {
         const err = new Error("User couldn't be found");
@@ -132,7 +143,7 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
 
     let foundMembership = await Membership.findAll({
         where: {
-            groupId: groupId,
+            groupId: req.local.groupId,
             userId: memberId
         }
     });
