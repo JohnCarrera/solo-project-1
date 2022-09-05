@@ -31,7 +31,166 @@ const validateEventBody = [
     handleValidationErrors
 ];
 
+router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
+    let { eventId } = req.params;
+    eventId = Number(eventId);
+
+    let userId  = req.body.memberId;
+
+    let eventById = await Event.findAll({
+        where: {
+            id: eventId
+        }
+    });
+
+    if (!eventById.length) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let foundAttendance = await Attendance.findAll({
+        where: {
+            eventId: eventId,
+            userId: userId
+        },
+        attributes:['id', 'eventId', 'userId', 'status']
+    });
+
+    if (!foundAttendance.length) {
+        const err = new Error("Attendance does not exist for this User");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+
+    foundAttendance[0].destroy();
+
+    res.json({message: 'Successfully deleted attendance from event'});
+
+});
+
+router.put('/:eventId/attendance', requireAuth, async (req, res, next) => {
+
+    let { eventId } = req.params;
+    eventId = Number(eventId);
+
+    let { userId, status } = req.body;
+
+
+    let eventById = await Event.findAll({
+        where: {
+            id: eventId
+        }
+    });
+
+    if (!eventById.length) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    if (status === 'pending'){
+        const err = new Error("Cannot change an attendance status to pending");
+        err.status = 400;
+        err.title = 'Denied'
+        return next(err);
+    }
+
+    let foundAttendance = await Attendance.findAll({
+        where: {
+            eventId: eventId,
+            userId: userId
+        },
+        attributes:['id', 'eventId', 'userId', 'status']
+    });
+
+    if (!foundAttendance.length) {
+        const err = new Error("Attendance between the user and the event does not exist");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let updatedAtten = await foundAttendance[0].update({
+        eventId: eventId,
+        userId: userId,
+        status: status
+    });
+
+
+    let resObj = {};
+
+    resObj.id = foundAttendance[0].id;
+    resObj.eventId = updatedAtten.dataValues.eventId;
+    resObj.userId = updatedAtten.dataValues.userId;
+    resObj.status = updatedAtten.dataValues.status;
+
+    res.json(resObj);
+});
+
+router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
+
+    let eventId = Number(req.params.eventId);
+
+    let eventById = await Event.findAll({
+        where: {
+            id: eventId
+        }
+    });
+
+    if (!eventById.length) {
+        const err = new Error("Event couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    const attendeeCheck = await Attendance.findAll({
+        where:{
+            userId: req.user.id,
+            eventId: eventId
+        }
+    });
+
+    if (attendeeCheck.length){
+
+        const attendeeStatus = attendeeCheck[0].dataValues.status;
+
+        if ( attendeeStatus === 'pending'){
+            const err = new Error("Attendance has already been requested");
+            err.status = 404;
+            err.title = 'Already requested'
+            return next(err);
+        }
+
+        if (attendeeStatus === 'member'){
+            const err = new Error("User is already an attendee of the event");
+            err.status = 404;
+            err.title = 'Already an Attendee'
+            return next(err);
+        }
+    }
+
+    let newAtten = await Attendance.create({
+        eventId: eventId,
+        userId: req.user.id,
+        status: 'pending'
+    });
+
+    console.log(newAtten);
+
+
+    res.json({
+        eventId: newAtten.eventId,
+        userId: newAtten.userId,
+        status: newAtten.status
+    });
+});
 
 router.get('/:eventId/attendees', async (req, res, next) => {
 

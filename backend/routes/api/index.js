@@ -6,6 +6,8 @@ const usersRouter = require('./users.js');
 const groupsRouter = require('./groups.js');
 const venuesRouter = require('./venues.js');
 const eventsRouter = require('./events.js');
+const groupImagesRouter = require('./group-images');
+const eventImagesRouter = require('./event-images');
 
 const { setTokenCookie } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
@@ -20,5 +22,7 @@ router.use('/users', usersRouter);
 router.use('/groups', groupsRouter);
 router.use('/venues', venuesRouter);
 router.use('/events', eventsRouter);
+router.use('/group-images', groupImagesRouter);
+router.use('/event-images', eventImagesRouter);
 
 module.exports = router;
