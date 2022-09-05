@@ -102,6 +102,224 @@ const validateEventBody = [
     handleValidationErrors
 ];
 
+
+router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
+
+    let { groupId } = req.params;
+    groupId = Number(groupId);
+
+    let { memberId, status } = req.body;
+
+    let groupById = await Group.findByPk(groupId);
+
+    if (!groupById) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let  currentUserId  = req.user.id;
+
+    let userById = await User.findByPk(currentUserId);
+
+    if (!userById) {
+        const err = new Error("User couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let foundMembership = await Membership.findAll({
+        where: {
+            groupId: groupId,
+            userId: memberId
+        }
+    });
+
+    if (!foundMembership.length) {
+        const err = new Error("Membership between the user and the group does not exist");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let delMembership = foundMembership[0];
+
+    delMembership.destroy();
+
+    res.json({ message: "Successfully deleted membership from group"});
+
+});
+
+router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
+
+    let { groupId } = req.params;
+    groupId = Number(groupId);
+
+    let { memberId, status } = req.body;
+
+    let groupById = await Group.findByPk(groupId);
+
+    if (!groupById) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let  currentUserId  = req.user.id;
+
+    let userById = await User.findByPk(currentUserId);
+
+    if (!userById) {
+        const err = new Error("User couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let foundMembership = await Membership.findAll({
+        where: {
+            groupId: groupId,
+            userId: memberId
+        }
+    });
+
+    if (!foundMembership.length) {
+        const err = new Error("Membership between the user and the group does not exist");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let updatedMember = await foundMembership[0].update({
+        groupId: groupId,
+        userId: memberId,
+        status: status
+    });
+
+
+    let resObj = {};
+
+    resObj.groupId = updatedMember.dataValues.groupId;
+    resObj.memberId = updatedMember.dataValues.userId;
+    resObj.status = updatedMember.dataValues.status;
+
+    res.json(resObj);
+});
+
+router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
+
+    let { groupId } = req.params;
+    groupId = Number(groupId);
+
+    let groupById = await Group.findByPk(groupId);
+
+    if (!groupById) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    const memberCheck = await Membership.findAll({
+        where:{
+            userId: req.user.id,
+            groupId: groupId
+        }
+    });
+
+    if (memberCheck.length){
+
+        const memberStatus = memberCheck[0].dataValues.status;
+
+        if ( memberStatus === 'pending'){
+            const err = new Error("Membership has already been requested");
+            err.status = 404;
+            err.title = 'Already requested'
+            return next(err);
+        }
+
+        if (memberStatus === 'member'){
+            const err = new Error("User is already a member of the group");
+            err.status = 404;
+            err.title = 'Already a Member'
+            return next(err);
+        }
+    }
+
+    const newMember = await Membership.scope('newMember').create({
+        groupId
+        , userId: req.user.id
+        , status: 'pending'
+    });
+
+    // scopes to not apply to create function in sequelize so
+    // manual manipulation is needed here
+
+    let resObj = {};
+
+    resObj.groupId = newMember.dataValues.groupId;
+    resObj.memberId = newMember.dataValues.userId;
+    resObj.status = newMember.dataValues.status;
+
+    res.json(resObj);
+});
+
+
+router.get('/:groupId/members', requireAuth, async (req, res, next) => {
+
+    let { groupId } = req.params;
+    groupId = Number(groupId);
+
+    let groupById = await Group.findByPk(groupId);
+
+    if (!groupById) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = 'Not found'
+        return next(err);
+    }
+
+    let groupMembers = await User.scope('userMembership').findAll({
+        include:[
+            {
+                model: Membership.scope('userMembership'),
+                as: 'Membership',
+                where: {
+                    groupId: groupId
+                }
+            }
+        ],
+        raw: true,
+    });
+
+    console.log(groupMembers);
+
+    let { organizerId } = groupById.dataValues;
+    let { user } = req;
+
+    if (!(organizerId === user.id)){
+        const err = new Error("Forbidden")
+        err.status = 403;
+        err.title = 'Forbidden';
+        return next(err);
+    } else if (false){}
+
+
+    // format response by moving the status kvp from the array in membership to the
+    // top level of 'membership' as a kvp within the membership object per spec
+
+    for( let x = 0; x < groupMembers.length; x++){
+        groupMembers[x].Membership =  { status: groupMembers[x]['Membership.status'] };
+        groupMembers[x]['Membership.status'] = undefined;
+    }
+
+
+    res.json({ Members: groupMembers });
+});
+
 router.get('/:groupId/venues', requireAuth, async (req, res) => {   //auth required: true
 
     let allVenues = await Venue.findAll({

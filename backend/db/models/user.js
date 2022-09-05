@@ -53,17 +53,22 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.belongsToMany(models.Group, {
           through: models.Membership,
-          foreignkey: 'userId'
+          foreignKey: 'userId'
         });
 
       User.belongsToMany(models.Event, {
           through: models.Attendance,
-          foreignkey: 'userId'
+          foreignKey: 'userId'
         });
 
       User.hasMany(models.Group,{
         foreignKey: 'organizerId'
       });
+
+      User.hasMany(models.Membership, {
+        foreignKey: 'userId',
+        as: 'Membership'
+      })
     }
   }
   User.init({
@@ -131,9 +136,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       organizer: {
         attributes: ['id', 'firstName', 'lastName']
+      },
+      userMembership: {
+        attributes: ['id', 'firstName', 'lastName']
       }
     }
-  }
-);
+  });
 return User;
 };
