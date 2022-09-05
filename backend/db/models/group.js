@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Group.hasMany(models.Membership, {
         foreignKey: 'groupId',
-        as: 'groupMemberIds '
+        as: 'groupMemberIds'
       });
 
       Group.belongsTo(models.User, { //fk refers to fk in this table ==> difference is belongs vs has
