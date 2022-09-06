@@ -54,6 +54,9 @@ router.put('/:venueId', requireAuth, validateVenueBody, async (req, res, next) =
     , lng
   });
 
+  delete newVenue.dataValues.createdAt
+  delete newVenue.dataValues.updatedAt
+
   res.json(newVenue);
 });
 

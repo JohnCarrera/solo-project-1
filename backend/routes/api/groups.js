@@ -155,7 +155,9 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
     let { groupId } = req.params;
     groupId = Number(groupId);
 
-    let { memberId, status } = req.body;
+    //let { memberId, status } = req.body;
+    let { status } = req.body;
+
 
     let groupById = await Group.findByPk(groupId);
 
@@ -180,7 +182,8 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
     let foundMembership = await Membership.findAll({
         where: {
             groupId: groupId,
-            userId: memberId
+            //userId: memberId
+            userId: req.user.id
         }
     });
 
@@ -193,7 +196,8 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
 
     let updatedMember = await foundMembership[0].update({
         groupId: groupId,
-        userId: memberId,
+        //userId: memberId,
+        userId: req.user.id,
         status: status
     });
 
