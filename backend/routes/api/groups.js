@@ -147,7 +147,6 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
     delMembership.destroy();
 
     res.json({ message: "Successfully deleted membership from group"});
-
 });
 
 router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
