@@ -17,8 +17,10 @@ function LoginFormPage() {
 //was originally checking for truthiness of sessionUser which returns an empty
 //object if there is no session user. This is a truthy statement so it is impossible to get to
 // the signup page without instantly being redirected whether or not there is a logged in user.
+// it seems that the logout button actually sets this to null, so the logic works after phase 3
+//if (Object.keys(sessionUser).length) return <Redirect to="/" />;  this is the temp fix
 
-if (Object.keys(sessionUser).length) return <Redirect to="/" />;
+if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
