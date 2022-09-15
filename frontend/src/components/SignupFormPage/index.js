@@ -14,7 +14,12 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+
+//was originally checking for truthiness of sessionUser which returns an empty
+//object if there is no session user. This is a truthy statement so it is impossible to get to
+// the signup page without instantly being redirected whether or not there is a logged in user.
+
+  if (Object.keys(sessionUser).length) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
