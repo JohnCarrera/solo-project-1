@@ -29,7 +29,6 @@ router.delete('/', (_req, res) => {
 
 router.get('/', restoreUser, (req, res) => {
     const { user } = req;
-    console.log('/api/session/ - user:', user);
     if (user) {
       currentUser = user.toSafeObject();
       return res.json(currentUser);

@@ -299,8 +299,6 @@ router.get('/:groupId/members', requireAuth, async (req, res, next) => {
         raw: true,
     });
 
-    console.log(groupMembers);
-
     let { organizerId } = groupById.dataValues;
     let { user } = req;
 
@@ -500,8 +498,6 @@ router.post('/:groupId/images', requireAuth, async (req, res, next) => {
         , url
         , preview
     });
-
-    console.log(newGroupImage);
 
     // actual newGroupImage obj contains groupId from the groupImages table
     // for whatever reason that has been excluded from the readme example res

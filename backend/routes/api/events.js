@@ -182,9 +182,6 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
         status: 'pending'
     });
 
-    console.log(newAtten);
-
-
     res.json({
         eventId: newAtten.eventId,
         userId: newAtten.userId,
@@ -228,8 +225,6 @@ router.get('/:eventId/attendees', async (req, res, next) => {
 
     // // format response by moving the status kvp from the array in membership to the
     // // top level of 'membership' as a kvp within the membership object per spec
-
-    console.log(eventAttendees);
 
     let resObj = [];
 
@@ -395,7 +390,6 @@ router.delete('/:eventId', async (req, res, next) => {
     eventId = Number(eventId);
 
     let eventById = await Event.findByPk(eventId);
-    console.log('event:', eventById );
     if (!eventById) {
         const err = new Error("Event couldn't be found");
         err.status = 404;
@@ -436,10 +430,6 @@ router.get('/', async (req, res, next) => {
                 preview: true
             }
         });
-
-
-        console.log('allEvents:', allEvents);
-        console.log('image test:', previewImage);
 
         //append kvps to result for member count and image url
         allEvents[x].dataValues.numAttending = numAttending;

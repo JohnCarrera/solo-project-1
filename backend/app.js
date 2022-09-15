@@ -57,10 +57,8 @@ app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
   if (err instanceof ValidationError) {
 
-    console.log('processing sequelize errors');
     //err.errors = err.errors.map((e) => err.errors[e] = e.message);
 
-    console.log(err)
     let errorObj = {};
     if (err.errors.length) {
       err.errors.forEach(e => {
@@ -92,8 +90,6 @@ app.use((err, _req, _res, next) => {
 
       err.errors = errorObj;
     }
-
-
     //err.title = 'Validation error';
   }
   next(err);
@@ -113,11 +109,9 @@ app.use((err, _req, res, _next) => {
   // meet handle all errors in prog and still meet spec.
 
   if (!err.errors || !Object.keys(err.errors).length){
-    console.log('err.errors empty');
     resErr.message = err.message;
     resErr.status = err.status;
   } else {
-    console.log(err);
     resErr.message = err.title
     resErr.status = err.status;
     resErr.errors = err.errors;
