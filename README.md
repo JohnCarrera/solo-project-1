@@ -7,11 +7,10 @@ live site: l33t-up.herokuapp.com
 
 ## Wiki Links
 
-- Feature List
-- Database Schema
-- Backend Routes
-- Frontend Routes
-
+- [Features](https://github.com/JohnCarrera/solo-project-1/wiki/Features)
+- [Database Schema](https://github.com/JohnCarrera/solo-project-1/wiki/Database-Schema)
+- [Backend Routes](https://github.com/JohnCarrera/solo-project-1/blob/main/backend/readme.md)
+- [Frontend Routes](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 
 ## Tech Stack
