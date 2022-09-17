@@ -1,3 +1,20 @@
 .group-ul{
     list-style-type: none;
 }
+
+.outer-group-column{
+    margin-left: 5%;
+    margin-right: 5%;
+
+
+}
+
+.inner-group-column{
+    display: flex;
+    width: 600px;
+}
+
+.page-body{
+    display: flex;
+    justify-content: center;
+}

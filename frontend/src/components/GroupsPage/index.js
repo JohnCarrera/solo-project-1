@@ -19,16 +19,17 @@ export default function GroupsPage() {
 
 
     return (allGroups &&
-        <div className='outer-group-column'>
-            <div>
-                <div>Groups Page</div>
-                <ul className='group-ul'>
-                    {Object.values(allGroups).map(group => (
-                        <li className='group-li' key={group.id}>
-                            <SingleGroupListItem group={group} />
-                        </li>
-                    ))}
-                </ul>
+        <div className='page-body'>
+            <div className='outer-group-column'>
+                <div className='inner-group-column'>
+                    <ul className='group-ul'>
+                        {Object.values(allGroups).map(group => (
+                            <li className='group-li' key={group.id}>
+                                <SingleGroupListItem group={group} />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     )

@@ -1,7 +1,12 @@
 .group-list-item {
 
     display: flex;
-    border-top: 4px solid gray;
+    border-top: 4px solid lightgray;
+    width: 600px
+}
+
+.group-list-item:hover {
+    background-color: rgb(235, 235, 235);
 }
 
 .group-title{
@@ -13,16 +18,20 @@
     padding-right: 25px;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
     height: 150px;
     width: 150px;
+    border-radius: 10px;
 }
 
 .group-details {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    padding-right: 20px;
 }
 
 .group-members-prv {
     padding-bottom: 10px;
+    color: gray;
 }
