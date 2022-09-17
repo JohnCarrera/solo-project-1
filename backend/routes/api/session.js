@@ -32,7 +32,7 @@ router.get('/', restoreUser, (req, res) => {
     if (user) {
       currentUser = user.toSafeObject();
       return res.json(currentUser);
-    } else return res.json({});
+    } else return res.json(null);
   }
 );
 
