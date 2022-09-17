@@ -9,17 +9,17 @@ export default function SingleGroupListItem({group}) {
   return (
     <div className='group-list-item'>
         <div className='preview-image'>
-            <img className='group-image' src='https://images.pexels.com/photos/13284747/pexels-photo-13284747.jpeg'/>
+            <img className='group-image' src='https://images.pexels.com/photos/7182668/pexels-photo-7182668.jpeg'/>
         </div>
         <div className='group-details'>
             <div className='group-title'>
                 {group.name}
             </div>
-            <div>
+            <div className='group-citystate'>
                 {group.city}, {group.state}
             </div>
             <div>
-                {group.about}
+                <p className='group-about'>{group.about}</p>
             </div>
             <div className='group-members-prv'>
                 {group.numMembers} members - {group.private ? 'Private' : 'Public'}
