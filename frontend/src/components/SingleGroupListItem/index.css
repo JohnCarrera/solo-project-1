@@ -1,7 +1,28 @@
 .group-list-item {
 
+    display: flex;
+    border-top: 4px solid gray;
 }
 
 .group-title{
     font-weight: Bold;
+    padding-top: 10px;
+}
+
+.group-image {
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 150px;
+    width: 150px;
+}
+
+.group-details {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.group-members-prv {
+    padding-bottom: 10px;
 }

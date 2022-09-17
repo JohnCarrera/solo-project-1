@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllGroups } from '../../store/groups';
 import SingleGroupListItem from '../SingleGroupListItem';
+import './index.css';
 
 export default function GroupsPage() {
 
@@ -17,16 +18,18 @@ export default function GroupsPage() {
     }, [dispatch]);
 
 
-    return ( allGroups &&
-        <div>
-            <div>Groups Page</div>
-            <ul>
-            {Object.values(allGroups).map(group => (
-                <li key={group.id}>
-                    <SingleGroupListItem group={group} />
-                </li>
-            ))}
-            </ul>
+    return (allGroups &&
+        <div className='outer-group-column'>
+            <div>
+                <div>Groups Page</div>
+                <ul className='group-ul'>
+                    {Object.values(allGroups).map(group => (
+                        <li className='group-li' key={group.id}>
+                            <SingleGroupListItem group={group} />
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }
