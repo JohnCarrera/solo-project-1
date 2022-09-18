@@ -26,7 +26,6 @@ export default function GroupsPage() {
                     {Object.values(allGroups).map(group => (
                         <SingleGroupListItem group={group} />
                     ))}
-
                 </div>
             </div>
         </div>

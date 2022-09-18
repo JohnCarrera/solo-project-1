@@ -9,9 +9,15 @@
     background-color: rgb(235, 235, 235);
 }
 
+.a-tag{
+    text-decoration-color: currentColor;
+    text-decoration-line: none;
+}
+
 .group-title{
     font-weight: Bold;
     padding-top: 10px;
+    color: rgb(34, 34, 34);
 }
 
 .group-details{
@@ -40,6 +46,7 @@
 
 .group-about{
     text-align: justify;
+    color: rgb(34, 34, 34);
 }
 
 .group-details {

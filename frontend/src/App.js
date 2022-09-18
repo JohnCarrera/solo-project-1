@@ -8,6 +8,7 @@ import BrowsePage from "./components/BrowsePage";
 import EntityNav from "./components/EntityNav";
 import GroupsPage from "./components/GroupsPage";
 import { Link } from 'react-router-dom'
+import GroupDetailPage from "./components/GroupDetailPage";
 
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
                     </Route>
                     <Route path='/browse'>
                         <BrowsePage />
+                    </Route>
+                    <Route path='/groups/:groupId'>
+                        <GroupDetailPage />
                     </Route>
                     <Route path='/signup'>
                         <SignupFormPage />
