@@ -42,17 +42,17 @@ export default function GroupDetailPage() {
             </div>
             <div className='mid'>
                 <div className='group-nav'>
-                    <NavLink to={`about`}>About</NavLink>
+                    <NavLink to={`/browse/groups/${groupId}/about`}>About!</NavLink>
                     <NavLink to={`events`}>Events</NavLink>
                 </div>
                 {/* TODO: add edit button for organizer */}
             </div>
             <div className='lower'>
-                <Route path={`/${pathname}/about`}>
+                <Route path={'browse/groups/:groupId/about'}>
                     <div className='about-heading'>What we're about</div>
                     <div className='group-about'>{groupDetail.about}</div>
                 </Route>
-                <Route path={`/${pathname}/events`}>
+                <Route path={'browse/groups/:groupId/events'}>
                     <div className='event-list'>
                         {/* TODO: add events component and action/thunk
                          to lazy load events for group */}
