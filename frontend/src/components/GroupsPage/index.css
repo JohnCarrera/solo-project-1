@@ -3,14 +3,16 @@
 }
 
 .outer-group-column{
-    margin-left: 5%;
-    margin-right: 5%;
+    display: flex;
+    justify-content: center;
 
 
 }
 
 .inner-group-column{
     display: flex;
+    justify-content: center;
+    flex-direction: column;
     width: 600px;
 }
 

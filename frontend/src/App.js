@@ -7,6 +7,8 @@ import Navigation from "./components/Navigation";
 import BrowsePage from "./components/BrowsePage";
 import EntityNav from "./components/EntityNav";
 import GroupsPage from "./components/GroupsPage";
+import { Link } from 'react-router-dom'
+
 
 function App() {
     const dispatch = useDispatch();
@@ -22,12 +24,9 @@ function App() {
                 <Switch>
                     <Route exact path='/'>
                         App Home
-                    </Route>
-                    <Route path='/groups'>
-                        <GroupsPage />
+                        <Link to='/browse'>Browse</Link>
                     </Route>
                     <Route path='/browse'>
-                        <EntityNav />
                         <BrowsePage />
                     </Route>
                     <Route path='/signup'>

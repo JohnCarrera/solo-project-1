@@ -7,6 +7,7 @@ import './index.css';
 
 export default function GroupsPage() {
 
+    console.log('loading groups page')
     const allGroups = useSelector(state => {
         return state.groups.allGroups
     });
@@ -22,13 +23,10 @@ export default function GroupsPage() {
         <div className='page-body'>
             <div className='outer-group-column'>
                 <div className='inner-group-column'>
-                    <ul className='group-ul'>
-                        {Object.values(allGroups).map(group => (
-                            <li className='group-li' key={group.id}>
-                                <SingleGroupListItem group={group} />
-                            </li>
-                        ))}
-                    </ul>
+                    {Object.values(allGroups).map(group => (
+                        <SingleGroupListItem group={group} />
+                    ))}
+
                 </div>
             </div>
         </div>
