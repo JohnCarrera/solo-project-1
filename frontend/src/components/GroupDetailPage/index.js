@@ -2,9 +2,9 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleGroup } from '../../store/groups';
-import SingleGroupListItem from '../SingleGroupListItem';
 import { useParams } from 'react-router-dom';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, useLocation } from 'react-router-dom';
+import SingleGroupListItem from '../SingleGroupListItem';
 import './index.css';
 
 export default function GroupDetailPage() {
@@ -13,6 +13,11 @@ export default function GroupDetailPage() {
     const { groupId, path } = params;
     const groupDetail = useSelector(state => state.groups.singleGroup);
     const dispatch = useDispatch();
+    const loc = useLocation();
+
+    const { pathname } = loc;
+
+    console.log('location:', loc)
 
     useEffect(() => {
         dispatch(getSingleGroup(groupId));
@@ -37,17 +42,17 @@ export default function GroupDetailPage() {
             </div>
             <div className='mid'>
                 <div className='group-nav'>
-                    <NavLink to={`/${path}/about`}>About</NavLink>
-                    <NavLink to={`/${path}/events`}>Events</NavLink>
+                    <NavLink to={`about`}>About</NavLink>
+                    <NavLink to={`events`}>Events</NavLink>
                 </div>
                 {/* TODO: add edit button for organizer */}
             </div>
             <div className='lower'>
-                <Route path={`/${path}/about`}>
+                <Route path={`/${pathname}/about`}>
                     <div className='about-heading'>What we're about</div>
                     <div className='group-about'>{groupDetail.about}</div>
                 </Route>
-                <Route path={`/${path}/events`}>
+                <Route path={`/${pathname}/events`}>
                     <div className='event-list'>
                         {/* TODO: add events component and action/thunk
                          to lazy load events for group */}
