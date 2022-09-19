@@ -86,6 +86,11 @@ export default function LandingPage() {
                     </p>
                 </div>
             </div>
+            <div className='join-landing-btn-div'>
+                <button className='join-landing-btn'>
+                    Join leet-up
+                </button>
+            </div>
         </div>
     )
 }

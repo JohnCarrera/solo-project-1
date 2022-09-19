@@ -100,3 +100,21 @@
     text-align: center;
     color: black;
 }
+
+.join-landing-btn-div {
+    padding-top:60px;
+}
+
+.join-landing-btn {
+    height: 40px;
+    width: 125px;
+    color: white;
+    background-color: rgb(0, 130, 148);
+    border-radius: 8px;
+    box-shadow: none;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+
+
+}
