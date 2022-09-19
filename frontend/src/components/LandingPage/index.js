@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import online_events from '../../img/landingPage/online_events.svg';
 import './index.css';
 
 export default function LandingPage() {
