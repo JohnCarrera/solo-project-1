@@ -1,0 +1,26 @@
+.bottom-nav-main {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid rgb(236, 236, 236);
+    background-color: white;
+}
+
+.bottom-nav-info {
+    padding-left: 30px;
+}
+
+.bottom-nav-linked-in-div {
+    display: flex;
+}
+
+.bottom-nav-linked-in {
+    height: 60px;
+    width: auto;
+    padding-right: 30px;
+}

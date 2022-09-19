@@ -12,6 +12,7 @@ import GroupDetailPage from "./components/GroupDetailPage";
 import GroupDetailAbout from "./components/GroupDetailPage/about";
 import GroupDetailEvents from "./components/GroupDetailPage/events";
 import LandingPage from "./components/LandingPage";
+import BottomNav from "./components/BottomNav";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                     </>
                 //</Switch>
             )}
+            <BottomNav />
         </>
     );
 }
