@@ -15,9 +15,6 @@ export default function GroupDetailPage() {
     const dispatch = useDispatch();
     const loc = useLocation();
 
-    const { pathname } = loc;
-
-    console.log('location:', loc)
 
     useEffect(() => {
         dispatch(getSingleGroup(groupId));
@@ -27,37 +24,39 @@ export default function GroupDetailPage() {
         <div className='main-page'>
             <div className='upper'>
                 <div className='img-div'>
-                    <img className='preview-image' src=''></img>
+                    <img className='preview-image'
+                        src='https://images.pexels.com/photos/36039/baby-twins-brother-and-sister-one-hundred-days.jpg?'
+                    >
+                    </img>
                 </div>
-                <div className='title'>{groupDetail.name}</div>
-                <div className='location'>
-                    {groupDetail.city}, {groupDetail.state}
+                <div className='upper-left-info'>
+                    <div className='title'>{groupDetail.name}</div>
+                    <div className='location'>
+                        {groupDetail.city}, {groupDetail.state}
+                    </div>
+                    <div className='member-count'>
+                        {groupDetail.numMembers}
+                        {' '}members -{' '}
+                        {groupDetail.private ? 'Private' : 'Public'}
+                    </div>
+                    <div className='organizer'></div>
                 </div>
-                <div className='member-count'>
-                    {groupDetail.numMembers}
-                    members -
-                    {groupDetail.private ? 'Private' : 'Public'}
-                </div>
-                <div className='organizer'></div>
             </div>
             <div className='mid'>
                 <div className='group-nav'>
-                    <NavLink to={`/browse/groups/${groupId}/about`}>About!</NavLink>
-                    <NavLink to={`events`}>Events</NavLink>
+                    <NavLink to={`/groups/${groupId}/about`}
+                        activeClassName='group-nav-active'
+                    >
+                        About
+                    </NavLink>
+                    <NavLink to={`/groups/${groupId}/events`}>
+                        Events
+                    </NavLink>
                 </div>
                 {/* TODO: add edit button for organizer */}
             </div>
             <div className='lower'>
-                <Route path={'browse/groups/:groupId/about'}>
-                    <div className='about-heading'>What we're about</div>
-                    <div className='group-about'>{groupDetail.about}</div>
-                </Route>
-                <Route path={'browse/groups/:groupId/events'}>
-                    <div className='event-list'>
-                        {/* TODO: add events component and action/thunk
-                         to lazy load events for group */}
-                    </div>
-                </Route>
+
             </div>
         </div>
     )

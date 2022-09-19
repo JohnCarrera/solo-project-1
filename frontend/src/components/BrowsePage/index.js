@@ -7,14 +7,6 @@ export default function BrowsePage() {
     return (
         <div>
             <EntityNav />
-            {/* <Switch> */}
-                <Route path='/browse/groups'>
-                    <GroupsPage />
-                </Route>
-                <Route path='/browse/events'>
-                    {/* <EventsPage /> */}
-                </Route>
-            {/* </Switch> */}
         </div>
     )
 }

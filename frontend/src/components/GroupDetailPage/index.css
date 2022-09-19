@@ -1,0 +1,52 @@
+.main-page {
+
+}
+
+.upper {
+    display: flex;
+    flex-direction: row;
+}
+
+.img-div {
+
+}
+
+.preview-image {
+    max-width: 600px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+}
+
+.upper-left-info {
+
+}
+
+.title {
+
+}
+
+.location {
+
+}
+
+.member-count {
+
+}
+
+.organizer {
+
+}
+
+.mid {
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+}
+
+.group-nav-active {
+
+}
+
+.group-nav {
+
+}
