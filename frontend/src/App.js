@@ -11,6 +11,7 @@ import GroupsPage from "./components/GroupsPage";
 import GroupDetailPage from "./components/GroupDetailPage";
 import GroupDetailAbout from "./components/GroupDetailPage/about";
 import GroupDetailEvents from "./components/GroupDetailPage/events";
+import LandingPage from "./components/LandingPage";
 
 
 function App() {
@@ -27,8 +28,7 @@ function App() {
                 //<Switch>
                 <>
                     <Route exact path='/'>
-                        App Home
-                        <Link to='/browse'>Browse</Link>
+                        <LandingPage />
                     </Route>
                     <Route path='/browse'>
                         <BrowsePage />
