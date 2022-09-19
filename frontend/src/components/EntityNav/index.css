@@ -1,0 +1,26 @@
+.entity-nav{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    padding-bottom: 20px;
+    text-decoration: none;
+}
+
+#nav-div {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-ele{
+    display: flex;
+    justify-content: center;
+}
+
+.active-nav-ele {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    padding-bottom: 20px;
+    color:darkgreen;
+    text-decoration: underline;
+}

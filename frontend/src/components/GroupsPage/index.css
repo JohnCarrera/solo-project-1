@@ -1,0 +1,20 @@
+
+
+.outer-group-column{
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.inner-group-column{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 600px;
+}
+
+.page-body{
+    display: flex;
+    justify-content: center;
+}

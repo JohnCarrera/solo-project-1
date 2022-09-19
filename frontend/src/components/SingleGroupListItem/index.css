@@ -1,0 +1,62 @@
+.group-list-item {
+
+    display: flex;
+    border-top: 4px solid lightgray;
+    width: 600px
+}
+
+.group-list-item:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.a-tag{
+    text-decoration-color: currentColor;
+    text-decoration-line: none;
+}
+
+.group-title{
+    font-weight: Bold;
+    padding-top: 10px;
+    color: rgb(34, 34, 34);
+}
+
+.group-details{
+    padding-left: 15px;
+}
+
+.group-citystate{
+    color: rgb(33, 33, 109)
+}
+
+.group-image {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 10px;
+    height: 150px;
+    width: 150px;
+    border-radius: 10%;
+}
+
+.preview-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-about{
+    text-align: justify;
+    color: rgb(34, 34, 34);
+}
+
+.group-details {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+.group-members-prv {
+    padding-bottom: 10px;
+    color: gray;
+}
