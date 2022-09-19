@@ -1,15 +1,8 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './index.css';
 
 export default function LandingPage() {
-
-    const history = useHistory();
-
-    const handleJoinClick = () => {
-        history.push('/signup');
-    }
-
 
     return (
         <div className='main-body'>
@@ -94,11 +87,11 @@ export default function LandingPage() {
                 </div>
             </div>
             <div className='join-landing-btn-div'>
-                <button className='join-landing-btn'
-                    onClick={handleJoinClick}
-                >
+                <Link to='/signup'>
+                <button className='join-landing-btn'>
                     Join leet-up
                 </button>
+                </Link>
             </div>
         </div>
     )
