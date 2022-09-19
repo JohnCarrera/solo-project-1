@@ -9,7 +9,7 @@
     background-color: rgb(235, 235, 235);
 }
 
-.a-tag{
+.link-wrap-group-list{
     text-decoration-color: currentColor;
     text-decoration-line: none;
 }
@@ -28,7 +28,7 @@
     color: rgb(33, 33, 109)
 }
 
-.group-image {
+.group-list-image {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 20px;
@@ -38,7 +38,7 @@
     border-radius: 10%;
 }
 
-.preview-image {
+.prev-img-grp-list {
     display: flex;
     justify-content: center;
     align-items: center;
