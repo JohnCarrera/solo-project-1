@@ -11,11 +11,12 @@
     justify-content: space-around;
     flex-direction: row;
     column-gap: 30px;
-
-
 }
 
 .left-upper {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
     width: 520px;
 }
 
