@@ -1,8 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './index.css';
 
 export default function LandingPage() {
+
+    const history = useHistory();
+
+    const handleJoinClick = () => {
+        history.push('/signup');
+    }
+
+
     return (
         <div className='main-body'>
             <div className='landing-upper'>
@@ -86,7 +94,9 @@ export default function LandingPage() {
                 </div>
             </div>
             <div className='join-landing-btn-div'>
-                <button className='join-landing-btn'>
+                <button className='join-landing-btn'
+                    onClick={handleJoinClick}
+                >
                     Join leet-up
                 </button>
             </div>

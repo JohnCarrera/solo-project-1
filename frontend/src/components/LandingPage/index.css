@@ -115,6 +115,9 @@
     border: none;
     font-size: 14px;
     font-weight: bold;
+}
 
-
+.join-landing-btn:hover {
+    background-color: rgb(36, 136, 149);
+    cursor: pointer;
 }
