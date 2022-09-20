@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 
 const LOAD_GROUPS = 'groups/LOAD';
 const SINGLE_GROUP = 'groups/LOAD_ONE';
@@ -10,10 +12,15 @@ const loadGroups = groupList => ({
     groupList
 });
 
-const loadSingleGroup = singleGroup => ({
+const loadSingleGroup = group => ({
     type: SINGLE_GROUP,
-    singleGroup
-})
+    group
+});
+
+const addGroup = group => ({
+   type: ADD_GROUP,
+   group
+});
 
 
 
@@ -35,6 +42,22 @@ export const getSingleGroup = (id) => async dispatch => {
         const group = await res.json();
         console.log('single group in thunk', group);
         dispatch(loadSingleGroup(group));
+    }
+}
+
+export const createGroup = (groupDetails) => async dispatch => {
+    const res = await csrfFetch('/api/groups/',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(groupDetails)
+    });
+
+    if(res.ok){
+        const newGroup = await res.json();
+        console.log('group create response:', newGroup);
+        dispatch(addGroup(newGroup));
     }
 }
 
@@ -67,9 +90,11 @@ export const groupReducer = (state = initialState, action) => {
             }, allGroups);
             return { ...state, allGroups }
 
+        case ADD_GROUP:
         case SINGLE_GROUP:
-            const singleGroup = action.singleGroup;
+            const singleGroup = action.group;
             return {...state, singleGroup}
+
 
         default:
             return state;

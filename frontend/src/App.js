@@ -13,6 +13,7 @@ import GroupDetailAbout from "./components/GroupDetailPage/about";
 import GroupDetailEvents from "./components/GroupDetailPage/events";
 import LandingPage from "./components/LandingPage";
 import BottomNav from "./components/BottomNav";
+import CreateGroupPage from "./components/CreateGroupPage";
 
 
 function App() {
@@ -26,8 +27,7 @@ function App() {
         <>
             <Navigation isLoaded={isLoaded} />
             {isLoaded && (
-                //<Switch>
-                <>
+                <Switch>
                     <Route exact path='/'>
                         <LandingPage />
                     </Route>
@@ -39,6 +39,9 @@ function App() {
                         <Route path='/browse/events'>
                             {/* <EventsPage /> */}
                         </Route>
+                    </Route>
+                    <Route exact path='/groups/new'>
+                        <CreateGroupPage />
                     </Route>
                     <Route path='/groups/:groupId'>
                         <GroupDetailPage />
@@ -52,8 +55,7 @@ function App() {
                     <Route path='/signup'>
                         <SignupFormPage />
                     </Route>
-                    </>
-                //</Switch>
+                </Switch>
             )}
             <BottomNav />
         </>

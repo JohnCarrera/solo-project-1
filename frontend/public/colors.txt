@@ -1,0 +1,2 @@
+#3d4c53 - logo font color
+#98c000 - logo bg green
