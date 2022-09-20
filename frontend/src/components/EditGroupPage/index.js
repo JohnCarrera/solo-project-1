@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createGroup, addGroupImage } from '../../store/groups';
 import { useHistory, useParams } from 'react-router-dom';
 import { editGroup, getSingleGroup, deleteGroup } from '../../store/groups';
 
@@ -13,9 +12,14 @@ export default function EditGroupPage() {
     const history = useHistory();
     const params = useParams();
 
-    const {groupId, path } = params;
+    const { groupId, path } = params;
 
     const group = useSelector(state => state.groups.singleGroup);
+
+    useEffect(() => {
+        dispatch(getSingleGroup(groupId));
+    }, [dispatch]);
+
 
     const [groupName, setGroupName] = useState(group.name);
     const [groupAbout, setGroupAbout] = useState(group.about);
@@ -25,15 +29,9 @@ export default function EditGroupPage() {
     const [groupState, setGroupState] = useState(group.state);
     const [errors, setErrors] = useState([]);
 
-    useEffect(() => {
-        dispatch(getSingleGroup(groupId));
-    }, [dispatch]);
-
     const deleteGroupBtn = async (e) => {
         e.preventDefault();
-
         const delGrpMsg = await dispatch(deleteGroup(group.id));
-
         history.push('/');
     }
 
@@ -49,7 +47,7 @@ export default function EditGroupPage() {
             type: groupType,
         }
 
-        await dispatch(editGroup(group.id, vals))
+        const newGroup = await dispatch(editGroup(group.id, vals))
         history.push(`/groups/${newGroup.id}`);
     }
 
@@ -57,25 +55,25 @@ export default function EditGroupPage() {
 
         const errs = [];
 
-        if (!groupName.length) {
+        if (groupName && !groupName.length) {
             errs.push('Group name is required');
         }
-        if (groupName.length > 60) {
+        if (groupName && groupName.length > 60) {
             errs.push('Group name must be less than 60 Characters');
         }
-        if (!groupAbout.length) {
+        if (groupAbout && !groupAbout.length) {
             errs.push('Group Description is required');
         }
-        if (groupAbout.length < 50) {
+        if (groupAbout && groupAbout.length < 50) {
             errs.push('Group description must be at least 50 characters');
         }
-        if (!groupCity.length) {
+        if (groupCity && !groupCity.length) {
             errs.push('City is required');
         }
-        if (!groupState.length) {
+        if (groupState && !groupState.length) {
             errs.push('State is required');
         }
-        if (groupState.length > 2) {
+        if (groupState && groupState.length > 2) {
             errs.push('State must be 2 letter abbreviation');
         }
 
@@ -97,14 +95,15 @@ export default function EditGroupPage() {
                     Group Name
                     <input
                         type='text'
+                        defaultValue={group.name}
                         value={groupName}
                         onChange={(e) => setGroupName(e.target.value)}
                     />
                 </label>
                 <label className='cg-label'>
                     Group Description
-                    <input
-                        type='textarea'
+                    <textarea
+                        type='text'
                         value={groupAbout}
                         onChange={(e) => setGroupAbout(e.target.value)}
                     />

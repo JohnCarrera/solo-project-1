@@ -105,8 +105,8 @@ export default function CreateGroupPage() {
             </label>
             <label className='cg-label'>
                 Group Description
-                <input
-                    type='textarea'
+                <textarea
+                    type='text'
                     value={groupAbout}
                     onChange={(e) => setGroupAbout(e.target.value)}
                 />
