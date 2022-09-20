@@ -5,13 +5,14 @@ import { getSingleGroup } from '../../store/groups';
 import { useParams } from 'react-router-dom';
 import { NavLink, Route, useLocation, Link } from 'react-router-dom';
 import SingleGroupListItem from '../SingleGroupListItem';
-import './index.css';
+import './groupDetailPage.css';
 
 export default function GroupDetailPage() {
 
     const params = useParams();
     const { groupId, path } = params;
-    const groupDetail = useSelector(state => state.groups.singleGroup);
+    const singleGroup = useSelector(state => state.groups.singleGroup);
+    const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const loc = useLocation();
 
@@ -30,14 +31,14 @@ export default function GroupDetailPage() {
                     </img>
                 </div>
                 <div className='upper-left-info'>
-                    <div className='title'>{groupDetail.name}</div>
+                    <div className='title'>{singleGroup.name}</div>
                     <div className='location'>
-                        {groupDetail.city}, {groupDetail.state}
+                        {singleGroup.city}, {singleGroup.state}
                     </div>
                     <div className='member-count'>
-                        {groupDetail.numMembers}
+                        {singleGroup.numMembers}
                         {' '}members -{' '}
-                        {groupDetail.private ? 'Private' : 'Public'}
+                        {singleGroup.private ? 'Private' : 'Public'}
                     </div>
                     <div className='organizer'></div>
                 </div>
@@ -53,11 +54,12 @@ export default function GroupDetailPage() {
                         Events
                     </NavLink>
                 </div>
-                <div>
+                { user.id === singleGroup.organizerId &&
+                 <div className='gd-owner-buttons'>
                     <Link to={`/groups/${groupId}/edit`}>
                         Edit Group
                     </Link>
-                </div>
+                </div>}
             </div>
             <div className='lower'>
 
