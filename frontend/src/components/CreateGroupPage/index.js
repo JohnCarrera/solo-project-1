@@ -1,12 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createGroup } from '../../store/groups';
+import { createGroup, addGroupImage } from '../../store/groups';
+import { useHistory } from 'react-router-dom';
+
 
 
 export default function CreateGroupPage() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const user = useSelector(state => state.session.user);
 
@@ -19,7 +22,7 @@ export default function CreateGroupPage() {
     const [prevImgUrl, setPrevImgUrl] = useState('');
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -32,11 +35,25 @@ export default function CreateGroupPage() {
             , type: groupType
         }
 
+
         console.log('handlesubmit vals:', vals);
 
-        const newgroup = dispatch(createGroup(vals));
-        //const groupImgRes = dispatch(addGroupImage(prevImgUrl))
-        console.log('newgroup:', newgroup)
+        const newGroup = await dispatch(createGroup(vals))
+
+        const imgBody = {
+            id: newGroup.id,
+            url: prevImgUrl,
+            preview: true
+        }
+
+        if(prevImgUrl.length < 0) {
+            const groupImgRes = dispatch(addGroupImage(newGroup.id, imgBody))
+        }
+        // console.log('newgroup:', newGroup);
+        // console.log('groupImgRes', groupImgRes)
+
+        history.push(`/groups/${newGroup.id}`);
+
     }
 
     useEffect(() => {
@@ -89,7 +106,7 @@ export default function CreateGroupPage() {
             <label className='cg-label'>
                 Group Description
                 <input
-                    type='text'
+                    type='textarea'
                     value={groupAbout}
                     onChange={(e) => setGroupAbout(e.target.value)}
                 />
@@ -108,6 +125,14 @@ export default function CreateGroupPage() {
                     type='text'
                     value={groupState}
                     onChange={(e) => setGroupState(e.target.value)}
+                />
+            </label>
+            <label className='cg-label'>
+                Group Image Url
+                <input
+                    type='text'
+                    value={prevImgUrl}
+                    onChange={(e) => setPrevImgUrl(e.target.value)}
                 />
             </label>
             <label className='cg-label'>

@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_GROUPS = 'groups/LOAD';
 const SINGLE_GROUP = 'groups/LOAD_ONE';
 const ADD_GROUP = 'groups/ADD';
+const ADD_IMAGE = 'groups/ADD_IMAGE'
 const UPDATE_GROUP = 'groups/UPDATE';
 const DELETE_GROUP = 'groups/DELETE';
 
@@ -18,8 +19,13 @@ const loadSingleGroup = group => ({
 });
 
 const addGroup = group => ({
-   type: ADD_GROUP,
-   group
+    type: ADD_GROUP,
+    group
+});
+
+const addImage = image => ({
+    type: ADD_IMAGE,
+    image
 });
 
 
@@ -32,6 +38,7 @@ export const getAllGroups = () => async dispatch => {
         const groups = await res.json();
         console.log('groups in thunk:', groups);
         dispatch(loadGroups(groups));
+        return groups;
     }
 }
 
@@ -42,22 +49,36 @@ export const getSingleGroup = (id) => async dispatch => {
         const group = await res.json();
         console.log('single group in thunk', group);
         dispatch(loadSingleGroup(group));
+        return group;
     }
 }
 
 export const createGroup = (groupDetails) => async dispatch => {
-    const res = await csrfFetch('/api/groups/',{
+    const res = await csrfFetch('/api/groups/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify(groupDetails)
     });
 
-    if(res.ok){
+    if (res.ok) {
         const newGroup = await res.json();
-        console.log('group create response:', newGroup);
+        console.log('group create thunk response:', newGroup);
         dispatch(addGroup(newGroup));
+        return newGroup;
+    }
+}
+
+export const addGroupImage = (id, image) => async dispatch => {
+    console.log('image arg in thunk', image )
+    const res = await csrfFetch(`/api/groups/${id}/images`, {
+        method: 'POST',
+        body: JSON.stringify(image)
+    });
+
+    if(res.ok){
+        const imgRes = await res.json();
+        console.log('add image thunk:', imgRes);
+        dispatch(addImage(imgRes));
+        return imgRes;
     }
 }
 
@@ -93,8 +114,14 @@ export const groupReducer = (state = initialState, action) => {
         case ADD_GROUP:
         case SINGLE_GROUP:
             const singleGroup = action.group;
-            return {...state, singleGroup}
+            return { ...state, singleGroup }
 
+        case ADD_IMAGE:
+            const newState = {...state, singleGroup: {...state.singleGroup}}
+            const groupImages = [];
+            groupImages.push(action.image)
+            newState.singleGroup.groupImages = groupImages;
+            return newState;
 
         default:
             return state;
