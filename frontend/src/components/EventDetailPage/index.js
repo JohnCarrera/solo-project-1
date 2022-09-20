@@ -33,7 +33,7 @@ export default function EventDetailPage() {
     const deleteEventBtn = async (e) => {
         e.preventDefault();
         dispatch(deleteEvent(eventId));
-        history.push(`/groups/${group.id}`);
+        history.push(`/groups/${group.id}/about`);
     }
 
 
