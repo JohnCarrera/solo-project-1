@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleGroup } from '../../store/groups';
 import { useParams } from 'react-router-dom';
-import { NavLink, Route, useLocation } from 'react-router-dom';
+import { NavLink, Route, useLocation, Link } from 'react-router-dom';
 import SingleGroupListItem from '../SingleGroupListItem';
 import './index.css';
 
@@ -53,7 +53,11 @@ export default function GroupDetailPage() {
                         Events
                     </NavLink>
                 </div>
-                {/* TODO: add edit button for organizer */}
+                <div>
+                    <Link to={`/groups/${groupId}/edit`}>
+                        Edit Group
+                    </Link>
+                </div>
             </div>
             <div className='lower'>
 

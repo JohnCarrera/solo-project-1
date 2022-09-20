@@ -14,6 +14,7 @@ import GroupDetailEvents from "./components/GroupDetailPage/events";
 import LandingPage from "./components/LandingPage";
 import BottomNav from "./components/BottomNav";
 import CreateGroupPage from "./components/CreateGroupPage";
+import EditGroupPage from "./components/EditGroupPage";
 
 
 function App() {
@@ -43,10 +44,13 @@ function App() {
                     <Route exact path='/groups/new'>
                         <CreateGroupPage />
                     </Route>
+                    <Route path='/groups/:groupId/edit'>
+                        <EditGroupPage />
+                    </Route>
                     <Route path='/groups/:groupId'>
                         <GroupDetailPage />
                         <Route path={'/groups/:groupId/about'}>
-                            <GroupDetailAbout  />
+                            <GroupDetailAbout />
                         </Route>
                         <Route path={'/groups/:groupId/events'}>
                             <GroupDetailEvents />
