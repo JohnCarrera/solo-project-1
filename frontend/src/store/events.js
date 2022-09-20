@@ -27,7 +27,7 @@ const del = () => ({
 });
 
 export const getAllEvents = () => async dispatch => {
-    const res = await fetch('/api/events');
+    const res = await csrfFetch('/api/events');
 
     if(res.ok) {
         const events = await res.json();
@@ -39,7 +39,7 @@ export const getAllEvents = () => async dispatch => {
 }
 
 export const getSingleEvent = (id) => async dispatch => {
-    const res = await fetch(`/api/events/${id}`);;
+    const res = await csrfFetch(`/api/events/${id}`);;
 
     if(res.ok) {
         const event = await res.json();
@@ -51,7 +51,7 @@ export const getSingleEvent = (id) => async dispatch => {
 }
 
 export const createEvent = (event) => async dispatch => {
-    const res = await fetch('/api/events', {
+    const res = await csrfFetch('/api/events', {
         method: 'POST',
         body: JSON.stringify(event)
     });
@@ -66,7 +66,7 @@ export const createEvent = (event) => async dispatch => {
 }
 
 export const deleteEvent = (id) => async dispatch => {
-    const res = await fetch(`/api/events/${id}`,{
+    const res = await csrfFetch(`/api/events/${id}`,{
         method: 'DELETE'
     });
 
@@ -74,6 +74,7 @@ export const deleteEvent = (id) => async dispatch => {
         const delRes = await res.json();
         console.log('delEvent in Thunk: ', delRes);
         dispatch(del());
+        return delRes;
     }
     return null;
 }

@@ -32,7 +32,7 @@ export default function EventDetailPage() {
 
     const deleteEventBtn = async (e) => {
         e.preventDefault();
-        const delEventMsg = await dispatch(deleteEvent(eventId));
+        dispatch(deleteEvent(eventId));
         history.push(`/groups/${group.id}`);
     }
 
