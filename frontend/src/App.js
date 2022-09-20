@@ -12,6 +12,7 @@ import EventsPage from "./components/EventsPage";
 import GroupDetailPage from "./components/GroupDetailPage";
 import GroupDetailAbout from "./components/GroupDetailPage/about";
 import GroupDetailEvents from "./components/GroupDetailPage/events";
+import EventDetailPage from "./components/EventDetailPage";
 import LandingPage from "./components/LandingPage";
 import BottomNav from "./components/BottomNav";
 import CreateGroupPage from "./components/CreateGroupPage";
@@ -56,6 +57,9 @@ function App() {
                         <Route path={'/groups/:groupId/events'}>
                             <GroupDetailEvents />
                         </Route>
+                    </Route>
+                    <Route path={'/events/:eventId'}>
+                       <EventDetailPage />
                     </Route>
                     <Route path='/signup'>
                         <SignupFormPage />

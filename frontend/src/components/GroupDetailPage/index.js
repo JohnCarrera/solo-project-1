@@ -54,7 +54,7 @@ export default function GroupDetailPage() {
                         Events
                     </NavLink>
                 </div>
-                { user.id === singleGroup.organizerId &&
+                { user && user.id === singleGroup.organizerId &&
                  <div className='gd-owner-buttons'>
                     <Link to={`/groups/${groupId}/edit`}>
                         Edit Group

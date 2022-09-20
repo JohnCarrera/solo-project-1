@@ -66,7 +66,9 @@ export const createEvent = (event) => async dispatch => {
 }
 
 export const deleteEvent = (id) => async dispatch => {
-    const res = await fetch(`/api/events/${id}`);
+    const res = await fetch(`/api/events/${id}`,{
+        method: 'DELETE'
+    });
 
     if(res.ok) {
         const delRes = await res.json();
@@ -95,7 +97,7 @@ export const eventReducer = (state = initialState, action) => {
 
         case LOAD_ONE_EVENT:
         case ADD_EVENT:
-            const singleEvent = action.group;
+            const singleEvent = action.event;
             return { ...state, singleEvent: singleEvent }
 
         case DELETE_EVENT:
