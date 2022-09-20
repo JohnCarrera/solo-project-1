@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import { groupReducer } from './groups'
+import { eventReducer } from './events';
 
 
 let enhancer;
@@ -17,7 +18,8 @@ if (process.env.NODE_ENV === "production") {
 
 const rootReducer = combineReducers({
     session: sessionReducer,
-    groups: groupReducer
+    groups: groupReducer,
+    events: eventReducer
   });
 
 const configureStore = (preloadedState) => {

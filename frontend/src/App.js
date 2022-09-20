@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import BrowsePage from "./components/BrowsePage";
 import EntityNav from "./components/EntityNav";
 import GroupsPage from "./components/GroupsPage";
+import EventsPage from "./components/EventsPage";
 import GroupDetailPage from "./components/GroupDetailPage";
 import GroupDetailAbout from "./components/GroupDetailPage/about";
 import GroupDetailEvents from "./components/GroupDetailPage/events";
@@ -38,7 +39,7 @@ function App() {
                             <GroupsPage />
                         </Route>
                         <Route path='/browse/events'>
-                            {/* <EventsPage /> */}
+                            <EventsPage />
                         </Route>
                     </Route>
                     <Route exact path='/groups/new'>

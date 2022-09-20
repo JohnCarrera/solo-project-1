@@ -46,7 +46,7 @@ export default function CreateGroupPage() {
             preview: true
         }
 
-        if(prevImgUrl.length < 0) {
+        if(prevImgUrl.length > 0) {
             const groupImgRes = dispatch(addGroupImage(newGroup.id, imgBody))
         }
         // console.log('newgroup:', newGroup);

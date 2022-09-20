@@ -32,8 +32,8 @@ export const getAllEvents = () => async dispatch => {
     if(res.ok) {
         const events = await res.json();
         console.log('events:', events);
-        dispatch(loadAll(events));
-        return events;
+        dispatch(loadAll(events.Events));
+        return events.Events;
     }
     return null;
 }
@@ -101,5 +101,7 @@ export const eventReducer = (state = initialState, action) => {
         case DELETE_EVENT:
             const delState = {...state, singleEvent: {}};
             return delState;
+
+        default: return state;
     }
 }
