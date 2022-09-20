@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createGroup, addGroupImage } from '../../store/groups';
 import { useHistory, useParams } from 'react-router-dom';
-import { editGroup, getSingleGroup } from '../../store/groups';
+import { editGroup, getSingleGroup, deleteGroup } from '../../store/groups';
 
 
 
@@ -13,8 +13,9 @@ export default function EditGroupPage() {
     const history = useHistory();
     const params = useParams();
 
-    const group = useSelector(state => state.groups.singleGroup);
+    const {groupId, path } = params;
 
+    const group = useSelector(state => state.groups.singleGroup);
 
     const [groupName, setGroupName] = useState(group.name);
     const [groupAbout, setGroupAbout] = useState(group.about);
@@ -24,8 +25,19 @@ export default function EditGroupPage() {
     const [groupState, setGroupState] = useState(group.state);
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = async (e) => {
+    useEffect(() => {
+        dispatch(getSingleGroup(groupId));
+    }, [dispatch]);
 
+    const deleteGroupBtn = async (e) => {
+        e.preventDefault();
+
+        const delGrpMsg = await dispatch(deleteGroup(group.id));
+
+        history.push('/');
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const vals = {
@@ -37,15 +49,8 @@ export default function EditGroupPage() {
             type: groupType,
         }
 
-        console.log('handlesubmit vals:', vals);
-
-        const newGroup = await dispatch(editGroup(group.id, vals))
-
-        // console.log('newgroup:', newGroup);
-        // console.log('groupImgRes', groupImgRes)
-
+        await dispatch(editGroup(group.id, vals))
         history.push(`/groups/${newGroup.id}`);
-
     }
 
     useEffect(() => {
@@ -79,82 +84,87 @@ export default function EditGroupPage() {
     }, [groupName, groupAbout, groupCity, groupState]);
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul className='create-group-err-ul'>
-                {errors.map((err, i) => (
-                    <li key={i} className='cg-err-li'>
-                        {err}
-                    </li>
-                ))}
-            </ul>
-            <label className='cg-label'>
-                Group Name
-                <input
-                    type='text'
-                    value={groupName}
-                    onChange={(e) => setGroupName(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                Group Description
-                <input
-                    type='textarea'
-                    value={groupAbout}
-                    onChange={(e) => setGroupAbout(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                City
-                <input
-                    type='text'
-                    value={groupCity}
-                    onChange={(e) => setGroupCity(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                State
-                <input
-                    type='text'
-                    value={groupState}
-                    onChange={(e) => setGroupState(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                Private?
-                <input
-                    type='checkbox'
-                    checked={groupPrivate === true}
-                    value={true}
-                    onChange={(e) => setGroupPrivate(!groupPrivate)}
-                />
-            </label>
-            <div className='cg-radio-btn-div'>
+        <div className='grp-edit-form-div'>
+            <form onSubmit={handleSubmit}>
+                <ul className='create-group-err-ul'>
+                    {errors.map((err, i) => (
+                        <li key={i} className='cg-err-li'>
+                            {err}
+                        </li>
+                    ))}
+                </ul>
                 <label className='cg-label'>
-                    In person
+                    Group Name
                     <input
-                        type='radio'
-                        value='In person'
-                        checked={groupType === 'In person'}
-                        onChange={(e) => setGroupType(e.target.value)}
+                        type='text'
+                        value={groupName}
+                        onChange={(e) => setGroupName(e.target.value)}
                     />
                 </label>
                 <label className='cg-label'>
-                    Online
+                    Group Description
                     <input
-                        type='radio'
-                        value='Online'
-                        checked={groupType === 'Online'}
-                        onChange={(e) => setGroupType(e.target.value)}
+                        type='textarea'
+                        value={groupAbout}
+                        onChange={(e) => setGroupAbout(e.target.value)}
                     />
                 </label>
-            </div>
-            <button
-                className='cg-submit-btn'
-                type='submit'
-                disabled={errors.length}
-            >
-                 Update Group
+                <label className='cg-label'>
+                    City
+                    <input
+                        type='text'
+                        value={groupCity}
+                        onChange={(e) => setGroupCity(e.target.value)}
+                    />
+                </label>
+                <label className='cg-label'>
+                    State
+                    <input
+                        type='text'
+                        value={groupState}
+                        onChange={(e) => setGroupState(e.target.value)}
+                    />
+                </label>
+                <label className='cg-label'>
+                    Private?
+                    <input
+                        type='checkbox'
+                        checked={groupPrivate === true}
+                        value={true}
+                        onChange={(e) => setGroupPrivate(!groupPrivate)}
+                    />
+                </label>
+                <div className='cg-radio-btn-div'>
+                    <label className='cg-label'>
+                        In person
+                        <input
+                            type='radio'
+                            value='In person'
+                            checked={groupType === 'In person'}
+                            onChange={(e) => setGroupType(e.target.value)}
+                        />
+                    </label>
+                    <label className='cg-label'>
+                        Online
+                        <input
+                            type='radio'
+                            value='Online'
+                            checked={groupType === 'Online'}
+                            onChange={(e) => setGroupType(e.target.value)}
+                        />
+                    </label>
+                </div>
+                <button
+                    className='cg-submit-btn'
+                    type='submit'
+                    disabled={errors.length}
+                >
+                    Update Group
+                </button>
+            </form>
+            <button onClick={deleteGroupBtn}>
+                DELETE GROUP
             </button>
-        </form>
+        </div>
     )
 }

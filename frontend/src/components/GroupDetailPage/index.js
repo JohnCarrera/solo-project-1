@@ -19,7 +19,7 @@ export default function GroupDetailPage() {
 
     useEffect(() => {
         dispatch(getSingleGroup(groupId));
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className='main-page'>

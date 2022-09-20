@@ -8,17 +8,17 @@ const ADD_IMAGE = 'groups/ADD_IMAGE'
 const EDIT_GROUP = 'groups/EDIT';
 const DELETE_GROUP = 'groups/DELETE';
 
-const loadGroups = groupList => ({
+const loadAll = groupList => ({
     type: LOAD_GROUPS,
     groupList
 });
 
-const loadSingleGroup = group => ({
+const loadOne = group => ({
     type: SINGLE_GROUP,
     group
 });
 
-const addGroup = group => ({
+const add = group => ({
     type: ADD_GROUP,
     group
 });
@@ -33,6 +33,10 @@ const edit = group => ({
     group
 });
 
+const del = () => ({
+    type: DELETE_GROUP,
+})
+
 
 
 export const getAllGroups = () => async dispatch => {
@@ -41,7 +45,7 @@ export const getAllGroups = () => async dispatch => {
     if (res.ok) {
         const groups = await res.json();
         console.log('groups in thunk:', groups);
-        dispatch(loadGroups(groups));
+        dispatch(loadAll(groups));
         return groups;
     }
 }
@@ -52,7 +56,7 @@ export const getSingleGroup = (id) => async dispatch => {
     if (res.ok) {
         const group = await res.json();
         console.log('single group in thunk', group);
-        dispatch(loadSingleGroup(group));
+        dispatch(loadOne(group));
         return group;
     }
 }
@@ -66,11 +70,10 @@ export const createGroup = (groupDetails) => async dispatch => {
     if (res.ok) {
         const newGroup = await res.json();
         console.log('group create thunk response:', newGroup);
-        dispatch(addGroup(newGroup));
+        dispatch(add(newGroup));
         return newGroup;
     }
 }
-
 
 export const editGroup = (id, group) => async dispatch => {
     const res = await csrfFetch(`/api/groups/${id}`, {
@@ -79,7 +82,7 @@ export const editGroup = (id, group) => async dispatch => {
     })
 
     if(res.ok){
-        const group =await res.json();
+        const group = await res.json();
         console.log('group update thunk res:', group);
         dispatch(edit(group));
         return group;
@@ -98,6 +101,18 @@ export const addGroupImage = (id, image) => async dispatch => {
         console.log('add image thunk:', imgRes);
         dispatch(addImage(imgRes));
         return imgRes;
+    }
+}
+
+export const deleteGroup = (id) => async dispatch => {
+    const res = await csrfFetch(`/api/groups/${id}`, {
+        method: 'DELETE',
+    });
+
+    if(res.ok){
+        const delRes = await res.json();
+        console.log('delRes in Thunk: ', delRes);
+        dispatch(del());
     }
 }
 
@@ -139,9 +154,13 @@ export const groupReducer = (state = initialState, action) => {
         case ADD_IMAGE:
             const newState = {...state, singleGroup: {...state.singleGroup}}
             const groupImages = [];
-            groupImages.push(action.image)
+            groupImages.push(action.image);
             newState.singleGroup.groupImages = groupImages;
             return newState;
+
+        case DELETE_GROUP:
+            const delState = {...state, singleGroup: {}};
+            return delState;
 
         default:
             return state;
