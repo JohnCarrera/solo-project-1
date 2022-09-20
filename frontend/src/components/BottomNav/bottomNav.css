@@ -12,15 +12,35 @@
 }
 
 .bottom-nav-info {
-    padding-left: 30px;
+    padding-left: 40px;
 }
 
 .bottom-nav-linked-in-div {
+    padding-top: 1px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-nav-gh-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bottom-nav-linked-in {
     height: 60px;
     width: auto;
-    padding-right: 30px;
+    padding-right: 20px;
+}
+
+.bottom-nav-github {
+    height: 35px;
+    width: auto;
+    padding-right: 40px;
+}
+
+.bottom-nav-right-div {
+    display: flex;
+    flex-direction: row;
 }

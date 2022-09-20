@@ -70,27 +70,29 @@ export default function LandingPage() {
                         {' '}to yoga and hiking.
                     </p>
                 </div>
-                <div className='lower-group'>
-                    <div className='low-img-div'>
-                        <img className='lower-img'
-                            src='https://i.imgur.com/EoT7914.png'
-                        />
+                <Link className='landing-link-wrap' to='/groups/new'>
+                    <div className='lower-group'>
+                        <div className='low-img-div'>
+                            <img className='lower-img'
+                                src='https://i.imgur.com/EoT7914.png'
+                            />
+                        </div>
+                        <div className='lower-item-title'>
+                            Start a group
+                        </div>
+                        <p className='lower-item-p'>
+                            You don’t have to be an expert to
+                            {' '}gather people together and explore
+                            {' '}shared interests.
+                        </p>
                     </div>
-                    <div className='lower-item-title'>
-                        Start a group
-                    </div>
-                    <p className='lower-item-p'>
-                        You don’t have to be an expert to
-                        {' '}gather people together and explore
-                        {' '}shared interests.
-                    </p>
-                </div>
+                </Link>
             </div>
             <div className='join-landing-btn-div'>
                 <Link to='/signup'>
-                <button className='join-landing-btn'>
-                    Join leet-up
-                </button>
+                    <button className='join-landing-btn'>
+                        Join leet-up
+                    </button>
                 </Link>
             </div>
         </div>
