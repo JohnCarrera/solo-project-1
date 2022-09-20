@@ -5,7 +5,7 @@ import { getSingleGroup } from '../../store/groups';
 import { useParams } from 'react-router-dom';
 import { NavLink, Route, useLocation } from 'react-router-dom';
 import SingleGroupListItem from '../SingleGroupListItem';
-import './index.css';
+import './groupDetailPage.css';
 
 export default function GroupDetailAbout() {
     const params = useParams();
