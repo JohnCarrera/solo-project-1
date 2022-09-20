@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 
 const LOAD_GROUPS = 'groups/LOAD';
-const SINGLE_GROUP = 'groups/LOAD_ONE';
+const LOAD_ONE_GROUP = 'groups/LOAD_ONE';
 const ADD_GROUP = 'groups/ADD';
 const ADD_IMAGE = 'groups/ADD_IMAGE'
 const EDIT_GROUP = 'groups/EDIT';
@@ -14,7 +14,7 @@ const loadAll = groupList => ({
 });
 
 const loadOne = group => ({
-    type: SINGLE_GROUP,
+    type: LOAD_ONE_GROUP,
     group
 });
 
@@ -147,7 +147,7 @@ export const groupReducer = (state = initialState, action) => {
 
         case ADD_GROUP:
         case EDIT_GROUP:
-        case SINGLE_GROUP:
+        case LOAD_ONE_GROUP:
             const singleGroup = action.group;
             return { ...state, singleGroup }
 
@@ -156,6 +156,7 @@ export const groupReducer = (state = initialState, action) => {
             const groupImages = [];
             groupImages.push(action.image);
             newState.singleGroup.groupImages = groupImages;
+            //fix this call to change the image in the list of all groups as well???
             return newState;
 
         case DELETE_GROUP:
