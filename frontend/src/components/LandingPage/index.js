@@ -54,22 +54,24 @@ export default function LandingPage() {
                         </p>
                     </div>
                 </Link>
-                <div className='lower-group'>
-                    <div className='low-img-div'>
-                        <img className='lower-img'
-                            src='https://i.imgur.com/vF7VbWs.png'
-                        />
+                <Link className='landing-link-wrap' to='/browse/events'>
+                    <div className='lower-group'>
+                        <div className='low-img-div'>
+                            <img className='lower-img'
+                                src='https://i.imgur.com/vF7VbWs.png'
+                            />
+                        </div>
+                        <div className='lower-item-title'>
+                            Find an event
+                        </div>
+                        <p className='lower-item-p'>
+                            Events are happening on just about
+                            {' '}any topic you can think of,
+                            {' '}from online gaming and photography
+                            {' '}to yoga and hiking.
+                        </p>
                     </div>
-                    <div className='lower-item-title'>
-                        Find an event
-                    </div>
-                    <p className='lower-item-p'>
-                        Events are happening on just about
-                        {' '}any topic you can think of,
-                        {' '}from online gaming and photography
-                        {' '}to yoga and hiking.
-                    </p>
-                </div>
+                </Link>
                 <Link className='landing-link-wrap' to='/groups/new'>
                     <div className='lower-group'>
                         <div className='low-img-div'>
