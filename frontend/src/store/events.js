@@ -50,8 +50,8 @@ export const getSingleEvent = (id) => async dispatch => {
     return null;
 }
 
-export const createEvent = (event) => async dispatch => {
-    const res = await csrfFetch('/api/events', {
+export const createEvent = (groupId, event) => async dispatch => {
+    const res = await csrfFetch(`/api/groups/${groupId}/events`, {
         method: 'POST',
         body: JSON.stringify(event)
     });
@@ -59,7 +59,7 @@ export const createEvent = (event) => async dispatch => {
     if(res.ok) {
         const event = await res.json();
         console.log('eventcreate:', event);
-        dispatch(loadAll(event));
+        dispatch(add(event));
         return event;
     }
     return null;

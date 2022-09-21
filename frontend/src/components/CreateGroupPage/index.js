@@ -35,7 +35,6 @@ export default function CreateGroupPage() {
             , type: groupType
         }
 
-
         console.log('handlesubmit vals:', vals);
 
         const newGroup = await dispatch(createGroup(vals))

@@ -24,7 +24,7 @@ export default function EventDetailPage() {
     }, [dispatch]);
 
     useEffect(() => {
-        if(event.Group.id){
+        if(event.Group){
             dispatch(getSingleGroup(event.Group.id))
         }
     }, [event]);
@@ -46,9 +46,13 @@ export default function EventDetailPage() {
             <div>End: {event.endDate}</div>
             <div>{event.numAttending} Attending</div>
             <div>Image {event.previewImage}</div>
+
+            {event.Group &&
+            <>
             <div>Group {event.Group.name}</div>
             <div>Location {event.Group.city + ', ' + event.Group.state}</div>
-
+            </>
+            }
             {user && group && user.id === group.organizerId &&
                 <div className='ed-owner-buttons'>
                     <button onClick={deleteEventBtn}>

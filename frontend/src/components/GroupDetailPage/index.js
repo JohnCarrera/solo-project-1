@@ -56,6 +56,9 @@ export default function GroupDetailPage() {
                 </div>
                 { user && user.id === singleGroup.organizerId &&
                  <div className='gd-owner-buttons'>
+                    <Link to={`/groups/${groupId}/events/new`}>
+                        Create Event
+                    </Link>
                     <Link to={`/groups/${groupId}/edit`}>
                         Edit Group
                     </Link>
