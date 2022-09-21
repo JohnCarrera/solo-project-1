@@ -27,7 +27,7 @@ const del = () => ({
 });
 
 export const getAllEvents = () => async dispatch => {
-    const res = await fetch('/api/events');
+    const res = await csrfFetch('/api/events');
 
     if(res.ok) {
         const events = await res.json();
@@ -39,7 +39,7 @@ export const getAllEvents = () => async dispatch => {
 }
 
 export const getSingleEvent = (id) => async dispatch => {
-    const res = await fetch(`/api/events/${id}`);;
+    const res = await csrfFetch(`/api/events/${id}`);;
 
     if(res.ok) {
         const event = await res.json();
@@ -50,8 +50,8 @@ export const getSingleEvent = (id) => async dispatch => {
     return null;
 }
 
-export const createEvent = (event) => async dispatch => {
-    const res = await fetch('/api/events', {
+export const createEvent = (groupId, event) => async dispatch => {
+    const res = await csrfFetch(`/api/groups/${groupId}/events`, {
         method: 'POST',
         body: JSON.stringify(event)
     });
@@ -59,19 +59,22 @@ export const createEvent = (event) => async dispatch => {
     if(res.ok) {
         const event = await res.json();
         console.log('eventcreate:', event);
-        dispatch(loadAll(event));
+        dispatch(add(event));
         return event;
     }
     return null;
 }
 
 export const deleteEvent = (id) => async dispatch => {
-    const res = await fetch(`/api/events/${id}`);
+    const res = await csrfFetch(`/api/events/${id}`,{
+        method: 'DELETE'
+    });
 
     if(res.ok) {
         const delRes = await res.json();
         console.log('delEvent in Thunk: ', delRes);
         dispatch(del());
+        return delRes;
     }
     return null;
 }
@@ -95,7 +98,7 @@ export const eventReducer = (state = initialState, action) => {
 
         case LOAD_ONE_EVENT:
         case ADD_EVENT:
-            const singleEvent = action.group;
+            const singleEvent = action.event;
             return { ...state, singleEvent: singleEvent }
 
         case DELETE_EVENT:

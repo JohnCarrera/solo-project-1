@@ -5,6 +5,12 @@ import './index.css';
 
 export default function SingleEventListItem({ event }) {
 
+
+
+    //TODO: ADD MORE EVENT INFO AND REFORMAT LIST ITEM
+
+
+
     return (
         <Link className='link-wrap-event-list'
          to={`/events/${event.id}`}
