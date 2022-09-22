@@ -1,0 +1,46 @@
+/* frontend/src/context/Modal.css */
+#modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.lm-close-x-div {
+    width: 394px;
+    justify-content: flex-end;
+    display: flex;
+}
+.lm-close-x {
+    padding-right: 4px;
+    padding-top: 10px;
+    color: rgb(165, 165, 165);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.lm-close-x:hover {
+    color: rgb(114, 114, 114)
+}
