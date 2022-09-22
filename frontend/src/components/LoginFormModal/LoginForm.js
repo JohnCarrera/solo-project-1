@@ -98,7 +98,7 @@ function LoginForm() {
                         <div className="lm-pseudo-input">
                             <input
                                 className="lm-input-field"
-                                type="text"
+                                type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
