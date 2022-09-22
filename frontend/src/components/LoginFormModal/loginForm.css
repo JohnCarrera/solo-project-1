@@ -1,5 +1,5 @@
 .login-modal-main-div {
-    height: 460px;
+    height: 480px;
     width: 400px;
     border-radius: 30px;
     background-color: white;
@@ -28,7 +28,13 @@
     font-weight: bolder;
     font-size: 30px;
     margin-top: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+}
+
+.lm-login-err-div {
+    height: 20px;
+    margin-bottom: 10px;
+    color: red
 }
 
 .lm-div-top {
@@ -40,11 +46,14 @@
 .lm-input-div {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
 }
 
 .lm-input-inner-div {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin-bottom: 16px;
 }
@@ -68,7 +77,6 @@
 }
 
 .lm-input-label {
-    width: 100%;
     font-weight: bold;
     font-size: 16px;
 }
@@ -77,6 +85,16 @@
     width: 90%;
     border: none;
 
+}
+
+.lm-input-label-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.lm-field-error {
+    color: red
 }
 
 .lm-login-btn-div {
