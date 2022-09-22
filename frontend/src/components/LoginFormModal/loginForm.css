@@ -1,0 +1,38 @@
+.login-modal-main-div {
+    height: 600px;
+    width: 400px;
+    border-radius: 30px;
+    background-color: white;
+    border: none;
+}
+
+.login-modal-logo-main {
+    height: 60px;
+    width: auto;
+}
+
+.lm-logo-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.lm-form-main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.lm-log-in-title {
+    font-weight: bolder;
+    font-size: 30px;
+}
+.lm-div-top {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    row-gap: 30px;
+}

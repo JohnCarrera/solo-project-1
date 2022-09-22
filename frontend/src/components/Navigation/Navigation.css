@@ -13,6 +13,38 @@
 }
 
 .main-nav-profile-btn {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
     padding-right: 20px;
     height: 100%;
+}
+
+.nav-link-home-logo {
+    height: 35px;
+    width: auto;
+}
+
+.main-nav-link-text {
+    color: rgb(54, 54, 54);
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    text-decoration-color: currentColor;
+}
+
+.main-nav-login-btn {
+    color: rgb(54, 54, 54);
+    font-weight: bolder;
+    font-size: 16px;
+}
+
+.main-nav-login-btn:hover {
+    cursor: pointer;
+    color: rgb(0, 130, 148)
+}
+
+.main-nav-link-text:hover {
+    cursor: pointer;
+    color: rgb(0, 130, 148)
 }

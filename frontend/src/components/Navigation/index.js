@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
+import leetupLogoSmall from '../../img/leet-up.png';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -19,7 +20,7 @@ function Navigation({ isLoaded }) {
         sessionLinks = (
             <div className='main-nav-profile-btn'>
                 <LoginFormModal />
-                <NavLink to="/signup">Sign Up</NavLink>
+                <NavLink className='main-nav-link-text' to="/signup">Sign Up</NavLink>
             </div>
         );
     }
@@ -27,7 +28,11 @@ function Navigation({ isLoaded }) {
     return (
         <div className='main-nav-top'>
             <div className='home-link-div'>
-                <NavLink exact to="/">Home</NavLink>
+                <NavLink exact to="/">
+                    <img className='nav-link-home-logo'
+                        src={leetupLogoSmall}
+                    />
+                </NavLink>
             </div>
             <div className='sessionLinks-div'>
                 {isLoaded && sessionLinks}
