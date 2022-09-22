@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from '../../context/Modal';
+import { LoginModal } from '../../context/LoginModal';
 import LoginForm from './LoginForm';
 import leetUpLogo from '../../img/leet-up.png'
 import './loginForm.css';
@@ -16,20 +16,23 @@ function LoginFormModal() {
                 Log In
             </div>
             {showModal && (
-                <Modal className='lm' onClose={() => setShowModal(false)}>
-
+                <LoginModal onClose={() => setShowModal(false)}>
                     <div className='login-modal-main-div'>
                         <div className='lm-div-top'>
-                            <div className="lm-log-in-title">
-                                Log in
-                            </div>
+
                             <div className='lm-logo-div'>
-                                <img className='login-modal-logo-main' src={leetUpLogo} />
+                                <img
+                                    className='login-modal-logo-main'
+                                    src={leetUpLogo}
+                                />
+                            </div>
+                            <div className="lm-log-in-title">
+                                Log In
                             </div>
                         </div>
                         <LoginForm />
                     </div>
-                </Modal>
+                </LoginModal>
             )}
         </>
     );

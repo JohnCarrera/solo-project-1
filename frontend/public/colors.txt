@@ -1,2 +1,3 @@
 #3d4c53 - logo font color
 #98c000 - logo bg green
+f64060 - meetup coral pink

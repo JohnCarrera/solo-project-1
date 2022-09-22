@@ -121,3 +121,7 @@
     background-color: rgb(36, 136, 149);
     cursor: pointer;
 }
+
+.join-landing-btn:active {
+    transform: scale(0.95);
+}
