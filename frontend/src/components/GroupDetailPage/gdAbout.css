@@ -1,8 +1,13 @@
+.gd-about-bg {
+    background-color: #f3f3f3;
+    height: 500px;
+    padding-top: 30px;
+    padding-left: 80px
+}
+
 .gd-about-main {
     display: flex;
     flex-direction: column;
-    margin-left: 80px;
-    margin-top: 30px;
 }
 
 

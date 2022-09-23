@@ -15,12 +15,14 @@ export default function GroupDetailAbout() {
     console.log('about component: ', groupDetail.about)
 
     return (
-        <div className='gd-about-main'>
-            <div className='gd-about-title'>
-                What we're about
-            </div>
-            <div className='gd-about-body'>
-                {groupDetail.about}
+        <div className='gd-about-bg'>
+            <div className='gd-about-main'>
+                <div className='gd-about-title'>
+                    What we're about
+                </div>
+                <div className='gd-about-body'>
+                    {groupDetail.about}
+                </div>
             </div>
         </div>
     )
