@@ -5,7 +5,7 @@ import { getSingleGroup } from '../../store/groups';
 import { useParams } from 'react-router-dom';
 import { NavLink, Route, useLocation } from 'react-router-dom';
 import SingleGroupListItem from '../SingleGroupListItem';
-import './groupDetailPage.css';
+import './gdAbout.css';
 
 export default function GroupDetailAbout() {
     const params = useParams();
@@ -15,11 +15,11 @@ export default function GroupDetailAbout() {
     console.log('about component: ', groupDetail.about)
 
     return (
-        <div>
-            <div className='group-about-title'>
+        <div className='gd-about-main'>
+            <div className='gd-about-title'>
                 What we're about
             </div>
-            <div className='group-about-body'>
+            <div className='gd-about-body'>
                 {groupDetail.about}
             </div>
         </div>
