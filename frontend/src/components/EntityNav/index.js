@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import GroupsPage from '../GroupsPage'
-import './index.css';
+import './entityNav.css';
 
 export default function EntityNav() {
     return (
@@ -9,16 +9,17 @@ export default function EntityNav() {
         <nav className='entity-nav'>
             <div className='nav-ele'>
                 <NavLink activeClassName='active-nav-ele'
-                    className='entity-nav'
+                    className='nav-ele'
                     to='/browse/groups'
                     >
                     Groups
                 </NavLink>
             </div>
-            <div className='nav-ele'>
+
+            <div className='entity-nav'>
                 <NavLink
                     activeClassName='active-nav-ele'
-                    className='entity-nav' to='/browse/events'
+                    className='nav-ele' to='/browse/events'
                     >
                     Events
                 </NavLink>

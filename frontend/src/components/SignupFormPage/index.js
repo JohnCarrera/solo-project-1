@@ -14,7 +14,6 @@ function SignupFormPage() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState([]);
     const [renderErrors, setRenderErrors] = useState(false);
     const [backendErrors, setBackendErrors] = useState([]);
     const [errCount, setErrCount] = useState();
@@ -60,6 +59,8 @@ function SignupFormPage() {
         }
         if (!password.length) {
             setPassErr('*password required');
+        } else if (password.length && password.length < 6){
+            setPassErr('passwords must be at least 6 characters');
         } else {
             setPassErr('');
         }
@@ -104,13 +105,27 @@ function SignupFormPage() {
         setBackendErrors([]);
         setRenderErrors(true);
 
+        if (!usernameErr &&
+            !emailErr &&
+            !firstNameErr &&
+            !lastNameErr &&
+            !passErr &&
+            !confPassErr
+            )
         return dispatch(sessionActions.signup({ email, username, password, firstName, lastName }))
             .catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) setBackendErrors(data.errors);
             });
     };
 
+    const formatBackendErrors = (errorObj) => {
+        const errs = [];
+        for (let key in errorObj){
+            errs.push(errorObj[key]);
+        }
+        return errs;
+    }
 
     return (
 
@@ -118,152 +133,151 @@ function SignupFormPage() {
             <div className="sm-title-div">
                 Sign Up
             </div>
-        <form onSubmit={handleSubmit}>
+            <div className="sm-login-err-div">
+                {formatBackendErrors(backendErrors).map((error, idx) => (
+                    <div className="sm-err-msg" key={idx}>{error}</div>
+                ))}
+            </div>
+            <form onSubmit={handleSubmit}>
+                <div className="sm-form-main-div">
+                    <div className="sm-input-div">
+                        <div className="sm-input-inner-div">
+                            <div className="sm-input-label-div">
+                                <div className="sm-input-label">
+                                    Email
+                                </div>
+                                <div className="sm-field-error">
+                                    {renderErrors && emailErr.length > 0 && emailErr}
+                                </div>
+                            </div>
+                            <div className="sm-pseudo-input">
+                                <input
+                                    className="sm-input-field"
+                                    type="text"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sm-input-div">
+                        <div className="sm-input-inner-div">
+                            <div className="sm-input-label-div">
+                                <div className="sm-input-label">
+                                    Username
+                                </div>
+                                <div className="sm-field-error">
+                                    {renderErrors && usernameErr.length > 0 && usernameErr}
+                                </div>
+                            </div>
+                            <div className="sm-pseudo-input">
+                                <input
+                                    className="sm-input-field"
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sm-input-div">
+                        <div className="sm-input-inner-div">
+                            <div className="sm-input-label-div">
+                                <div className="sm-input-label">
+                                    First Name
+                                </div>
+                                <div className="sm-field-error">
+                                    {renderErrors && firstNameErr.length > 0 && firstNameErr}
+                                </div>
+                            </div>
+                            <div className="sm-pseudo-input">
+                                <input
+                                    className="sm-input-field"
+                                    type="text"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sm-input-div">
+                        <div className="sm-input-inner-div">
+                            <div className="sm-input-label-div">
+                                <div className="sm-input-label">
+                                    Last Name
+                                </div>
+                                <div className="sm-field-error">
+                                    {renderErrors && lastNameErr.length > 0 && lastNameErr}
+                                </div>
+                            </div>
+                            <div className="sm-pseudo-input">
+                                <input
+                                    className="sm-input-field"
+                                    type="text"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sm-input-div">
+                        <div className="sm-input-inner-div">
+                            <div className="sm-input-label-div">
+                                <div className="sm-input-label">
+                                    Password
+                                </div>
+                                <div className="sm-field-error">
+                                    {renderErrors && passErr.length > 0 && passErr}
+                                </div>
+                            </div>
+                            <div className="sm-pseudo-input">
+                                <input
+                                    className="sm-input-field"
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sm-input-div">
+                        <div className="sm-input-inner-div">
+                            <div className="sm-input-label-div">
+                                <div className="sm-input-label">
+                                    Confirm Password
+                                </div>
+                                <div className="sm-field-error">
+                                    {renderErrors && confPassErr.length > 0 && confPassErr}
+                                </div>
+                            </div>
+                            <div className="sm-pseudo-input">
+                                <input
+                                    className="sm-input-field"
+                                    type="password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sm-login-btn-div">
+                        <button
+                            className="sm-login-btn"
+                            type="submit"
+                        >
+                            Sign Up
+                        </button>
 
-            <div className="sm-form-main-div">
-                <div className="sm-login-err-div">
-                    {backendErrors.map((error, idx) => (
-                        <div className="invalid-login-msg" key={idx}>{error}</div>
-                    ))}
-                </div>
-                <div className="sm-input-div">
-                    <div className="sm-input-inner-div">
-                        <div className="sm-input-label-div">
-                            <div className="sm-input-label">
-                                Email
-                            </div>
-                            <div className="sm-field-error">
-                                {renderErrors && emailErr.length > 0 && emailErr}
-                            </div>
-                        </div>
-                        <div className="sm-pseudo-input">
-                            <input
-                                className="sm-input-field"
-                                type="text"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="sm-input-div">
-                    <div className="sm-input-inner-div">
-                        <div className="sm-input-label-div">
-                            <div className="sm-input-label">
-                                Username
-                            </div>
-                            <div className="sm-field-error">
-                                {renderErrors && usernameErr.length > 0 && usernameErr}
-                            </div>
-                        </div>
-                        <div className="sm-pseudo-input">
-                            <input
-                                className="sm-input-field"
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="sm-input-div">
-                    <div className="sm-input-inner-div">
-                        <div className="sm-input-label-div">
-                            <div className="sm-input-label">
-                                First Name
-                            </div>
-                            <div className="sm-field-error">
-                                {renderErrors && firstNameErr.length > 0 && firstNameErr}
-                            </div>
-                        </div>
-                        <div className="sm-pseudo-input">
-                            <input
-                                className="sm-input-field"
-                                type="text"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="sm-input-div">
-                    <div className="sm-input-inner-div">
-                        <div className="sm-input-label-div">
-                            <div className="sm-input-label">
-                                Last Name
-                            </div>
-                            <div className="sm-field-error">
-                                {renderErrors && lastNameErr.length > 0 && lastNameErr}
-                            </div>
-                        </div>
-                        <div className="sm-pseudo-input">
-                            <input
-                                className="sm-input-field"
-                                type="text"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="sm-input-div">
-                    <div className="sm-input-inner-div">
-                        <div className="sm-input-label-div">
-                            <div className="sm-input-label">
-                                Password
-                            </div>
-                            <div className="sm-field-error">
-                                {renderErrors && passErr.length > 0 && passErr}
-                            </div>
-                        </div>
-                        <div className="sm-pseudo-input">
-                            <input
-                                className="sm-input-field"
-                                type="text"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="sm-input-div">
-                    <div className="sm-input-inner-div">
-                        <div className="sm-input-label-div">
-                            <div className="sm-input-label">
-                                Confirm Password
-                            </div>
-                            <div className="sm-field-error">
-                                {renderErrors && confPassErr.length > 0 && confPassErr}
-                            </div>
-                        </div>
-                        <div className="sm-pseudo-input">
-                            <input
-                                className="sm-input-field"
-                                type="text"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="sm-login-btn-div">
-                    <button
-                        className="sm-login-btn"
-                        type="submit"
-                    >
-                        Sign Up
-                    </button>
-
-                    {/* <button    //TODO: ADD RANDOMIZED DEMO USER SIGNUP
+                        {/* <button    //TODO: ADD RANDOMIZED DEMO USER SIGNUP
                         className="sm-login-btn"
                         type="submit"
                         onClick={demoUserBtnClick}
                     >
                         Demo User Sign Up
                     </button> */}
+                    </div>
                 </div>
-            </div>
-            {/* <ul>
+                {/* <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
@@ -321,7 +335,7 @@ function SignupFormPage() {
         />
       </label>
       <button type="submit">Sign Up</button> */}
-        </form>
+            </form>
         </div>
     );
 }
