@@ -1,0 +1,25 @@
+.gd-about-bg {
+    background-color: #f3f3f3;
+    height: 500px;
+    padding-top: 30px;
+    padding-left: 80px
+}
+
+.gd-about-main {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.gd-about-title {
+    color: rgb(44, 44, 44);
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 30px;
+
+}
+
+.gd-about-body {
+    font-size: 16px;
+    color: rgb(44, 44, 44);
+}
