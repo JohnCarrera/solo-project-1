@@ -1,0 +1,141 @@
+/* .login-modal-main-div {
+    height: 480px;
+    width: 400px;
+    border-radius: 30px;
+    background-color: white;
+    border: none;
+}
+
+.login-modal-logo-main {
+    height: 60px;
+    width: auto;
+} */
+
+.sm-main-page-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sm-title-div {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sm-logo-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.sm-form-main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sm-log-in-title {
+    font-weight: bolder;
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.sm-login-err-div {
+    height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red
+}
+
+.sm-div-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sm-input-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.sm-input-inner-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.sm-pseudo-input {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(211, 211, 211);
+    width: 342px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+}
+
+.sm-pseudo-input:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.sm-pseudo-input:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+.sm-input-label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.sm-input-field {
+    width: 90%;
+    border: none;
+
+}
+
+.sm-input-label-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sm-field-error {
+    color: red
+}
+
+.sm-login-btn-div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.sm-login-btn {
+    margin-top: 15px;
+    height: 40px;
+    width: 342px;
+    border-radius: 10px;
+    border: none;
+    background-color: #f64060;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sm-login-btn:hover {
+    background-color: #ff8198;
+}
+
+
+
+.sm-login-btn:active {
+    transform: scale(0.95);
+}
