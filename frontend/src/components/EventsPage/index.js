@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllEvents } from '../../store/events';
 import SingleEventListItem from '../SingleEventListItem';
-import '../GroupsPage/index.css';
+import '../EventsPage/eventsPage.css';
 
 export default function EventsPage() {
 
@@ -20,9 +20,9 @@ export default function EventsPage() {
 
 
     return (allEvents &&
-        <div className='page-body'>
-            <div className='outer-group-column'>
-                <div className='inner-group-column'>
+        <div className='events-page-body'>
+            <div className='ep-outer-group-column'>
+                <div className='ep-inner-group-column'>
                     {Object.values(allEvents).map(event => (
                         <SingleEventListItem event={event} />
                     ))}

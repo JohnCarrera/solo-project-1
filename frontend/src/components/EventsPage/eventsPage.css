@@ -1,0 +1,18 @@
+
+
+.ep-outer-group-column{
+    display: flex;
+    justify-content: center;
+}
+
+.ep-inner-group-column{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 600px;
+}
+
+.events-page-body{
+    display: flex;
+    justify-content: center;
+}
