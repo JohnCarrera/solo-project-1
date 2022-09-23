@@ -1,0 +1,25 @@
+
+
+.gd-events-outer-group-column{
+    display: flex;
+    justify-content: start;
+}
+
+.gd-events-inner-group-column{
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    width: 600px;
+}
+
+.gd-events-page-body{
+    display: flex;
+    justify-content: flex-start;
+    background-color: #f3f3f3;
+    height: 200%;
+    padding-bottom: 100px;
+    padding-top: 30px;
+    padding-left: 80px;
+    border-bottom: 2px solid lightgray;
+    overflow: hidden;
+}

@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_EVENTS = 'events/LOAD';
+const LOAD_EVENTS_GROUP = 'events/LOAD_BY_GROUP';
 const LOAD_ONE_EVENT = 'events/LOAD_ONE';
 const ADD_EVENT = 'events/ADD';
 const ADD_IMAGE = 'events/ADD_IMAGE';
@@ -50,6 +51,18 @@ export const getSingleEvent = (id) => async dispatch => {
     return null;
 }
 
+export const getEventsByGroupId = (id) => async dispatch => {
+    const res = await csrfFetch(`/api/groups/${id}/events/`);;
+
+    if(res.ok) {
+        const events = await res.json();
+        console.log('eventsbyGroup:', events);
+        dispatch(loadAll(events.Events));
+        return events;
+    }
+    return null;
+}
+
 export const createEvent = (groupId, event) => async dispatch => {
     const res = await csrfFetch(`/api/groups/${groupId}/events`, {
         method: 'POST',
@@ -88,6 +101,7 @@ const initialState = {
 
 export const eventReducer = (state = initialState, action) => {
     switch (action.type) {
+        case LOAD_EVENTS_GROUP:
         case LOAD_EVENTS:
             const allEvents = {};
             action.eventList.reduce((acc, cur) => {

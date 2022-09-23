@@ -20,7 +20,6 @@
     text-decoration-color: currentColor;
 }
 
-
 .active-nav-ele {
     display: flex;
     flex-direction: row;
