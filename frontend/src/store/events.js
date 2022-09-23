@@ -7,6 +7,7 @@ const ADD_EVENT = 'events/ADD';
 const ADD_IMAGE = 'events/ADD_IMAGE';
 const EDIT_EVENT = 'events/EDIT';
 const DELETE_EVENT = 'events/DELETE';
+const CLEAR_STATE = 'events/CLEAR_STATE';
 
 const loadAll = eventList => ({
     type: LOAD_EVENTS,
@@ -25,6 +26,10 @@ const add = event => ({
 
 const del = () => ({
     type: DELETE_EVENT
+});
+
+const clear = () => ({
+   type: CLEAR_STATE
 });
 
 export const getAllEvents = () => async dispatch => {
@@ -118,6 +123,9 @@ export const eventReducer = (state = initialState, action) => {
         case DELETE_EVENT:
             const delState = {...state, singleEvent: {}};
             return delState;
+
+        case CLEAR_STATE:
+            return initialState;
 
         default: return state;
     }

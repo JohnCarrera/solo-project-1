@@ -55,9 +55,9 @@
 }
 
 .gd-event-loc-icon {
-    height: 20px;
+    height: 18px;
     width: auto;
-    margin-right: 14px;
+    margin-right: 10px;
     filter: invert(60%) sepia(0%) saturate(0%) hue-rotate(205deg) brightness(94%) contrast(94%);
 
 }
@@ -92,6 +92,4 @@
 .gd-prev-img-grp-list {
     display: flex;
     justify-content: flex-start;
-
-    /* align-items: center; */
 }
