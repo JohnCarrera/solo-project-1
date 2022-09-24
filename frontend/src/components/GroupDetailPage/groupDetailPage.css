@@ -24,15 +24,8 @@
 
 .gd-preview-image {
     position: absolute;
-    left: -1000%;
-    right: -1000%;
-    top: -1000%;
-    bottom: -1000%;
-    margin: auto;
-    min-height: 100%;
-    max-height: 100%;
-    min-width: 100%;
-    max-width: auto;
+    height: 337px;
+    width: 600px;
     border-radius: 10px;
 
 }

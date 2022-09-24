@@ -1,0 +1,162 @@
+
+.cg-main-page-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cg-title-div {
+    padding-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cg-logo-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.cg-form-main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cg-log-in-title {
+    font-weight: bolder;
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.cg-login-err-div {
+    height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red
+}
+
+.cg-div-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cg-input-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.cg-input-inner-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.cg-pseudo-input {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(211, 211, 211);
+    width: 342px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+}
+
+.cg-pseudo-input-textarea {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(211, 211, 211);
+    width: 342px;
+    height: 180px;
+    border-radius: 10px;
+    margin-top: 1px;
+    padding-top: 4px;
+}
+
+.cg-pseudo-input-textarea:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.cg-pseudo-input-textarea:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+
+.cg-pseudo-input:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.cg-pseudo-input:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+.cg-input-label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cg-input-field {
+    width: 90%;
+    border: none;
+
+}
+
+.cg-input-field-textarea {
+    width: 90%;
+    border: none;
+    resize: none;
+}
+
+.cg-input-label-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cg-select-input {
+    border: none;
+    background-color: white;
+    width: 90%;
+}
+
+.cg-field-error {
+    color: red
+}
+
+.cg-submit-btn-div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cg-submit-btn {
+    margin-top: 15px;
+    height: 40px;
+    width: 342px;
+    border-radius: 10px;
+    border: none;
+    background-color: #f64060;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cg-submit-btn:hover {
+    background-color: #ff8198;
+}
+
+
+
+.cg-submit-btn:active {
+    transform: scale(0.95);
+}
