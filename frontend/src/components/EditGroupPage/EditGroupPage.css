@@ -1,0 +1,162 @@
+
+.eg-main-page-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eg-title-div {
+    padding-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.eg-logo-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.eg-form-main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.eg-log-in-title {
+    font-weight: bolder;
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.eg-login-err-div {
+    height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red
+}
+
+.eg-div-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eg-input-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.eg-input-inner-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.eg-pseudo-input {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(211, 211, 211);
+    width: 342px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+}
+
+.eg-pseudo-input-textarea {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(211, 211, 211);
+    width: 342px;
+    height: 180px;
+    border-radius: 10px;
+    margin-top: 1px;
+    padding-top: 4px;
+}
+
+.eg-pseudo-input-textarea:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.eg-pseudo-input-textarea:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+
+.eg-pseudo-input:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.eg-pseudo-input:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+.eg-input-label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.eg-input-field {
+    width: 90%;
+    border: none;
+
+}
+
+.eg-input-field-textarea {
+    width: 90%;
+    border: none;
+    resize: none;
+}
+
+.eg-input-label-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.eg-select-input {
+    border: none;
+    background-color: white;
+    width: 90%;
+}
+
+.eg-field-error {
+    color: red
+}
+
+.eg-submit-btn-div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.eg-submit-btn {
+    margin-top: 15px;
+    height: 40px;
+    width: 342px;
+    border-radius: 10px;
+    border: none;
+    background-color: #f64060;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.eg-submit-btn:hover {
+    background-color: #ff8198;
+}
+
+
+
+.eg-submit-btn:active {
+    transform: scale(0.95);
+}

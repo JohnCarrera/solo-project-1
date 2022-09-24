@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createGroup, addGroupImage } from '../../store/groups';
 import { useHistory } from 'react-router-dom';
+import './createGroupPage.css';
 
 
 
@@ -15,44 +16,79 @@ export default function CreateGroupPage() {
 
     const [groupName, setGroupName] = useState('');
     const [groupAbout, setGroupAbout] = useState('');
-    const [groupType, setGroupType] = useState('In person');
-    const [groupPrivate, setGroupPrivate] = useState(false);
+    const [groupType, setGroupType] = useState('');
+    const [groupPrivate, setGroupPrivate] = useState('');
     const [groupCity, setGroupCity] = useState('');
     const [groupState, setGroupState] = useState('');
     const [prevImgUrl, setPrevImgUrl] = useState('');
     const [errors, setErrors] = useState([]);
+    const [renderErrors, setRenderErrors] = useState(false);
+    const [backendErrors, setBackendErrors] = useState([]);
+
+    //individual field error states
+    const [nameErr, setNameErr] = useState('');
+    const [descErr, setDescErr] = useState('');
+    const [cityErr, setCityErr] = useState('');
+    const [stateErr, setStateErr] = useState('');
+    const [urlErr, setUrlErr] = useState('');
+    const [groupTypeErr, setGroupTypeErr] = useState('');
+    const [accessErr, setAccessErr] = useState('');
+
+    const formatBackendErrors = (errorObj) => {
+        const errs = [];
+        for (let key in errorObj) {
+            errs.push(errorObj[key]);
+        }
+        return errs;
+    }
+
+    const checkUrl = str => {
+        return /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/.test(str);
+    }
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
+        setBackendErrors([]);
+        setRenderErrors(true);
 
-        const vals = {
-            name: groupName
-            , about: groupAbout
-            , city: groupCity
-            , state: groupState
-            , private: groupPrivate
-            , type: groupType
+        if (
+            !nameErr &&
+            !descErr &&
+            !cityErr &&
+            !stateErr &&
+            !urlErr &&
+            !groupTypeErr &&
+            !accessErr
+        ) {
+
+            const vals = {
+                name: groupName
+                , about: groupAbout
+                , city: groupCity
+                , state: groupState
+                , private: groupPrivate
+                , type: groupType
+            }
+
+            console.log('handlesubmit vals:', vals);
+
+            const newGroup = await dispatch(createGroup(vals))
+
+            const imgBody = {
+                id: newGroup.id,
+                url: prevImgUrl,
+                preview: true
+            }
+
+            if (prevImgUrl.length > 0) {
+                const groupImgRes = dispatch(addGroupImage(newGroup.id, imgBody))
+            }
+            // console.log('newgroup:', newGroup);
+            // console.log('groupImgRes', groupImgRes)
+
+            history.push(`/groups/${newGroup.id}/about`);
         }
-
-        console.log('handlesubmit vals:', vals);
-
-        const newGroup = await dispatch(createGroup(vals))
-
-        const imgBody = {
-            id: newGroup.id,
-            url: prevImgUrl,
-            preview: true
-        }
-
-        if(prevImgUrl.length > 0) {
-            const groupImgRes = dispatch(addGroupImage(newGroup.id, imgBody))
-        }
-        // console.log('newgroup:', newGroup);
-        // console.log('groupImgRes', groupImgRes)
-
-        history.push(`/groups/${newGroup.id}`);
-
     }
 
     useEffect(() => {
@@ -60,116 +96,221 @@ export default function CreateGroupPage() {
         const errs = [];
 
         if (!groupName.length) {
-            errs.push('Group name is required');
-        }
-        if (groupName.length > 60) {
-            errs.push('Group name must be less than 60 Characters');
+            setNameErr('*name is required');
+        } else if (groupName.length && groupName.length > 60) {
+            setNameErr('*must be less than 60 characters');
+        } else {
+            setNameErr('');
         }
         if (!groupAbout.length) {
-            errs.push('Group Description is required');
-        }
-        if (groupAbout.length < 50) {
-            errs.push('Group description must be at least 50 characters');
+            setDescErr('*description is required')
+        } else if (groupAbout.length && groupAbout.length < 50) {
+            setDescErr('*must be at least 50 characters');
+        } else {
+            setDescErr('')
         }
         if (!groupCity.length) {
-            errs.push('City is required');
+            setCityErr('*city is required');
+        } else {
+            setCityErr('');
         }
         if (!groupState.length) {
-            errs.push('State is required');
+            setStateErr('*state is required');
+        } else if (groupState.length > 0 && groupState.length !== 2) {
+            setStateErr('*must be a 2-letter abbreviation');
+        } else {
+            setStateErr('');
         }
-        if (groupState.length > 2) {
-            errs.push('State must be 2 letter abbreviation');
+        if (!prevImgUrl.length){
+            setUrlErr('*image URL is required');
+        } else if (prevImgUrl.length && !checkUrl(prevImgUrl)){
+            setUrlErr('*invalid image URL');
+        } else {
+            setUrlErr('');
+        }
+        if (!groupType.length) {
+            setGroupTypeErr('*group type is required');
+        } else {
+            setGroupTypeErr('');
+        }
+        if (!groupPrivate.length) {
+            setAccessErr('*group access type is required');
+        } else {
+            setAccessErr('');
         }
 
         setErrors(errs);
 
-    }, [groupName, groupAbout, groupCity, groupState]);
+    }, [groupName, groupAbout, groupCity, groupState, prevImgUrl, groupPrivate, groupType]);
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul className='create-group-err-ul'>
-                {errors.map((err, i) => (
-                    <li key={i} className='cg-err-li'>
-                        {err}
-                    </li>
-                ))}
-            </ul>
-            <label className='cg-label'>
-                Group Name
-                <input
-                    type='text'
-                    value={groupName}
-                    onChange={(e) => setGroupName(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                Group Description
-                <textarea
-                    type='text'
-                    value={groupAbout}
-                    onChange={(e) => setGroupAbout(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                City
-                <input
-                    type='text'
-                    value={groupCity}
-                    onChange={(e) => setGroupCity(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                State
-                <input
-                    type='text'
-                    value={groupState}
-                    onChange={(e) => setGroupState(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                Group Image Url
-                <input
-                    type='text'
-                    value={prevImgUrl}
-                    onChange={(e) => setPrevImgUrl(e.target.value)}
-                />
-            </label>
-            <label className='cg-label'>
-                Private?
-                <input
-                    type='checkbox'
-                    checked={groupPrivate === true}
-                    value={true}
-                    onChange={(e) => setGroupPrivate(!groupPrivate)}
-                />
-            </label>
-            <div className='cg-radio-btn-div'>
-                <label className='cg-label'>
-                    In person
-                    <input
-                        type='radio'
-                        value='In person'
-                        checked={groupType === 'In person'}
-                        onChange={(e) => setGroupType(e.target.value)}
-                    />
-                </label>
-                <label className='cg-label'>
-                    Online
-                    <input
-                        type='radio'
-                        value='Online'
-                        checked={groupType === 'Online'}
-                        onChange={(e) => setGroupType(e.target.value)}
-                    />
-                </label>
+        <div className='cg-main-page-div'>
+            <div className='cg-title-div'>
+                Create A Group
             </div>
-            <button
-                className='cg-submit-btn'
-                type='submit'
-                disabled={errors.length}
-            >
-                Create Group
-            </button>
-        </form>
+            <div className="cg-login-err-div">
+                {formatBackendErrors(backendErrors).map((error, idx) => (
+                    <div className="sm-err-msg" key={idx}>{error}</div>
+                ))}
+            </div>
+            <form onSubmit={handleSubmit}>
+                <div className="cg-input-div">
+                    <div className="cg-input-inner-div">
+                        <div className="cg-input-label-div">
+                            <div className='cg-input-label'>
+                                Group Name
+                            </div>
+                            <div className="cg-field-error">
+                                {renderErrors && nameErr.length > 0 && nameErr}
+                            </div>
+                        </div>
+                        <div className="cg-pseudo-input">
+                            <input
+                                className="cg-input-field"
+                                type='text'
+                                value={groupName}
+                                onChange={(e) => setGroupName(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <div className="cg-input-div">
+                        <div className="cg-input-inner-div">
+                            <div className="cg-input-label-div">
+                                <div className='cg-input-label'>
+                                    Group Description
+                                </div>
+                                <div className="cg-field-error">
+                                    {renderErrors && descErr.length > 0 && descErr}
+                                </div>
+                            </div>
+                            <div className="cg-pseudo-input-textarea">
+                                <textarea
+                                    className="cg-input-field-textarea"
+                                    type='text'
+                                    value={groupAbout}
+                                    onChange={(e) => setGroupAbout(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cg-input-div">
+                        <div className="cg-input-inner-div">
+                            <div className="cg-input-label-div">
+                                <div className='cg-input-label'>
+                                    City
+                                </div>
+                                <div className="cg-field-error">
+                                    {renderErrors && cityErr.length > 0 && cityErr}
+                                </div>
+                            </div>
+                            <div className="cg-pseudo-input">
+                                <input
+                                    className="cg-input-field"
+                                    type='text'
+                                    value={groupCity}
+                                    onChange={(e) => setGroupCity(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cg-input-div">
+                        <div className="cg-input-inner-div">
+                            <div className="cg-input-label-div">
+                                <div className='cg-input-label'>
+                                    State
+                                </div>
+                                <div className="cg-field-error">
+                                    {renderErrors && stateErr.length > 0 && stateErr}
+                                </div>
+                            </div>
+                            <div className="cg-pseudo-input">
+                                <input
+                                    className="cg-input-field"
+                                    type='text'
+                                    value={groupState}
+                                    onChange={(e) => setGroupState(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cg-input-div">
+                        <div className="cg-input-inner-div">
+                            <div className="cg-input-label-div">
+                                <div className='cg-input-label'>
+                                    Group Image Url
+                                </div>
+                                <div className="cg-field-error">
+                                    {renderErrors && urlErr.length > 0 && urlErr}
+                                </div>
+                            </div>
+                            <div className="cg-pseudo-input">
+                                <input
+                                    className="cg-input-field"
+                                    type='text'
+                                    value={prevImgUrl}
+                                    onChange={(e) => setPrevImgUrl(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cg-input-div">
+                        <div className="cg-input-inner-div">
+                            <div className="cg-input-label-div">
+                                <div className='cg-input-label'>
+                                    Group Type
+                                </div>
+                                <div className="cg-field-error">
+                                    {renderErrors && groupTypeErr.length > 0 && groupTypeErr}
+                                </div>
+                            </div>
+                            <div className="cg-pseudo-input">
+                                <select
+                                    className='cg-select-input'
+                                    value={groupType}
+                                    onChange={(e) => setGroupType(e.target.value)}
+                                >
+                                    <option value={''}>Select Group Type</option>
+                                    <option value={'In person'}>In person</option>
+                                    <option value={'Online'}>Online</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cg-input-div">
+                        <div className="cg-input-inner-div">
+                            <div className="cg-input-label-div">
+                                <div className='cg-input-label'>
+                                    Group Access
+                                </div>
+                                <div className="cg-field-error">
+                                    {renderErrors && accessErr.length > 0 && accessErr}
+                                </div>
+                            </div>
+                            <div className="cg-pseudo-input">
+                                <select
+                                    className='cg-select-input'
+                                    value={groupPrivate}
+                                    onChange={(e) => setGroupPrivate(e.target.value)}
+                                >
+                                    <option value={''}>Select Group Access</option>
+                                    <option value={false}>Public</option>
+                                    <option value={true}>Private</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div className='cg-submit-btn-div'>
+                    <button
+                        className='cg-submit-btn'
+                        type='submit'
+                        disabled={errors.length}
+                    >
+                        Create Group
+                    </button>
+                </div>
+            </form>
+        </div>
     )
 }

@@ -24,12 +24,12 @@ export default function GroupDetailPage() {
         dispatch(getSingleGroup(groupId));
     }, [dispatch]);
 
-    return (
+    return ( singleGroup.GroupImages &&
         <div className='gd-main-page'>
             <div className='gd-upper'>
                 <div className='gd-img-div'>
                     <img className='gd-preview-image'
-                        src='https://images.pexels.com/photos/36039/baby-twins-brother-and-sister-one-hundred-days.jpg?'
+                        src={singleGroup.GroupImages[0].url ?? 'https://i.imgur.com/PhtTjJO.png'}
                     >
                     </img>
                 </div>

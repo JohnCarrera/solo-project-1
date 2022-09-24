@@ -34,7 +34,6 @@ function SignupFormPage() {
     //if (Object.keys(sessionUser).length) return <Redirect to="/" />;  this is the temp fix
     useEffect(() => {
 
-
         if (email.length && !emailCheck(email)) {
             setEmailErr('*invalid email');
         } else if (!email.length) {
@@ -111,12 +110,13 @@ function SignupFormPage() {
             !lastNameErr &&
             !passErr &&
             !confPassErr
-            )
+            ){
         return dispatch(sessionActions.signup({ email, username, password, firstName, lastName }))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setBackendErrors(data.errors);
             });
+        }
     };
 
     const formatBackendErrors = (errorObj) => {
