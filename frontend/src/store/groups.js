@@ -7,6 +7,7 @@ const ADD_GROUP = 'groups/ADD';
 const ADD_IMAGE = 'groups/ADD_IMAGE'
 const EDIT_GROUP = 'groups/EDIT';
 const DELETE_GROUP = 'groups/DELETE';
+const CLEAR_STATE = 'groups/CLEAR_STATE';
 
 const loadAll = groupList => ({
     type: LOAD_GROUPS,
@@ -36,6 +37,10 @@ const edit = group => ({
 const del = () => ({
     type: DELETE_GROUP,
 })
+
+const clear = () => ({
+   type: CLEAR_STATE
+});
 
 
 
@@ -162,6 +167,9 @@ export const groupReducer = (state = initialState, action) => {
         case DELETE_GROUP:
             const delState = {...state, singleGroup: {}};
             return delState;
+
+        case CLEAR_STATE:
+            return initialState;
 
         default:
             return state;

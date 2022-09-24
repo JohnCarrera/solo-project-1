@@ -14,19 +14,15 @@ export default function SingleEventListItem({ event }) {
             'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
             'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
         ]);
-    const [eventDate, setEventDate] = useState(new Date((event.startDate.substring(0, event.startDate.length - 5))))
+    const [eventDate, setEventDate] = useState(
+        new Date((event.startDate.substring(0, event.startDate.length - 5)))
+        );
     const [eventDay, setEventDay] = useState(daysOfWeek[eventDate.getDay()]);
     const [eventMonth, setEventMonth] = useState(months[eventDate.getMonth()]);
     const [eventDayOfMonth, setEventDayOfMonth] = useState(eventDate.getDate());
     const [eventYear, setEventYear] = useState(eventDate.getFullYear());
     const [eventHours, setEventHours] = useState(eventDate.getHours());
     const [eventMinutes, setEventMinutes] = useState(eventDate.getMinutes());
-
-
-
-    //TODO: ADD MORE EVENT INFO AND REFORMAT LIST ITEM
-
-
 
     return (
         <Link className='gd-link-wrap-event-list'
@@ -40,10 +36,10 @@ export default function SingleEventListItem({ event }) {
                 </div>
                 <div className='gd-event-details'>
                     <div className='gd-event-datetime'>
-                        {eventDay}{' '}{eventMonth}{' '}{eventDayOfMonth}{' '}
-                        {eventYear}{', '}
-                        {eventHours > 12 ? (eventHours - 12) : eventHours}
-                        {':'}{eventMinutes < 10 ? ('0' + eventMinutes) : eventMinutes}
+                        {eventDay}{' '}{eventMonth}{' '}
+                        {eventDayOfMonth}{' '}{eventYear}{', '}
+                        {eventHours > 12 ? (eventHours - 12) : eventHours}{':'}
+                        {eventMinutes < 10 ? ('0' + eventMinutes) : eventMinutes}
                         {' '}{eventHours < 12 ? 'AM' : 'PM'}
                     </div>
                     <div className='gd-event-title'>

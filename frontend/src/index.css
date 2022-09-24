@@ -4,6 +4,10 @@
     font-family: Roboto;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 *:focus {
     outline:none;
 }
