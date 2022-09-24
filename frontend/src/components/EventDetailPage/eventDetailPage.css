@@ -1,0 +1,167 @@
+.ed-main-page-body {
+    display: flex;
+    flex-direction: column;
+    height: 1000px;
+}
+
+.ed-top-info-banner {
+    background-color: white;
+    height: 130px;
+    width: 100%;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    padding-top: 20px;
+    padding-left: 80px;
+    padding-bottom: 20px;
+    overflow: visible;
+}
+
+.ed-info-banner-date {
+    font-size: 16px;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.ed-info-banner-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.ed-info-banner-host-grp {
+    display: flex;
+    flex-direction: column;
+}
+
+.ed-info-banner-hosted-by {
+    margin-bottom: 4px;
+}
+
+.ed-info-banner-host {
+    font-weight: bold;
+}
+
+.ed-page-body {
+    display: flex;
+    flex-direction: row;
+    min-height: 100%;
+    background-color: #f3f3f3;
+    padding-top: 50px;
+}
+
+.ed-left-side-grp {
+    display: flex;
+    flex-direction: column;
+    margin-right: 80px;
+    margin-left: 80px;
+
+}
+
+.ed-main-img {
+    height: 337px;
+    width: 600px;
+    border-radius: 10px;
+}
+
+
+.ed-desc-header {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ed-event-desc {}
+
+.ed-rt-side-grp {}
+
+.ed-group-detail-item {
+    height: 100px;
+    width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ed-group-item-img {
+    height: 75.75px;
+    width: 135px;
+    min-width: 135px;
+    margin-right: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.ed-group-detail-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.ed-group-detail-title {
+    padding-top: 12px;
+    font-weight: bold;
+}
+
+.ed-group-detail-public {
+    color: rgb(161, 161, 161);
+    padding-bottom: 12px
+}
+
+.ed-date-loc-item-grp {}
+
+.ed-rt-item-datetime {}
+
+.ed-rt-item-loc {}
+
+.ed-bottom-info-banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    height: 60px;
+    right: 0px;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    padding-left: 80px;
+    padding-right: 120px;
+    padding-bottom: 20px;
+    position: fixed;
+    left: 0px;
+    bottom: 50px;
+}
+
+.ed-bot-banner-left-grp {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.ed-bot-banner-datetime {
+    padding-top: 20px;
+    font-size: 16px;
+    color: gray;
+    margin-bottom: 10px;
+
+}
+
+.ed-bot-banner-title {
+
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.ed-bot-banner-right-grp {
+    display: flex;
+    align-items: center
+}
+
+.ed-bot-banner-price {
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 20px;
+}
