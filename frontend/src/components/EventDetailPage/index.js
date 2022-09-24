@@ -7,6 +7,7 @@ import { NavLink, Route, useLocation, Link } from 'react-router-dom';
 
 import { deleteEvent } from '../../store/events';
 import { getSingleGroup } from '../../store/groups';
+import clockIcon from '../../img/clock.svg';
 import './eventDetailPage.css';
 
 export default function EventDetailPage() {
@@ -57,11 +58,24 @@ export default function EventDetailPage() {
     const [eventHours, setEventHours] = useState();
     const [eventMinutes, setEventMinutes] = useState();
 
+    const [eventEndDate, setEventEndDate] = useState();
+    const [eventEndDay, setEventEndDay] = useState();
+    const [eventEndMonth, setEventEndMonth] = useState();
+    const [eventEndDayLong, setEventEndDayLong] = useState();
+    const [eventEndMonthLong, setEventEndMonthLong] = useState();
+    const [eventEndDayOfMonth, setEventEndDayOfMonth] = useState();
+    const [eventEndYear, setEventEndYear] = useState();
+    const [eventEndHours, setEventEndHours] = useState();
+    const [eventEndMinutes, setEventEndMinutes] = useState();
+
     useEffect(() => {
 
         if (event.startDate) {
             setEventDate(
                 new Date((event.startDate.substring(0, event.startDate.length - 5)))
+            )
+            setEventEndDate(
+                new Date((event.endDate.substring(0, event.endDate.length - 5)))
             )
         }
 
@@ -77,6 +91,15 @@ export default function EventDetailPage() {
             setEventYear(eventDate.getFullYear())
             setEventHours(eventDate.getHours())
             setEventMinutes(eventDate.getMinutes())
+
+            setEventEndDay(daysOfWeek[eventEndDate.getDay()]);
+            setEventEndDayLong(daysOfWeekLong[eventEndDate.getDay()]);
+            setEventEndMonth(months[eventEndDate.getMonth()]);
+            setEventEndMonthLong(monthsLong[eventEndDate.getMonth()]);
+            setEventEndDayOfMonth(eventEndDate.getDate());
+            setEventEndYear(eventEndDate.getFullYear())
+            setEventEndHours(eventEndDate.getHours())
+            setEventEndMinutes(eventEndDate.getMinutes())
         }
     }, [eventDate])
 
@@ -146,12 +169,30 @@ export default function EventDetailPage() {
                         </div>
                     </div>
                     <div className='ed-date-loc-item-grp'>
+                        <div className='ed-icon-div'>
+                            <img className='ed-clock-icon' src={clockIcon} />
+                        </div>
+                            <div className='ed-datetime-grp-div'>
+                                <div className='ed-start-end'>Start:</div>
                         <div className='ed-rt-item-datetime'>
-
+                            {eventDayLong}{' '}{eventMonthLong}{' '}
+                            {eventDayOfMonth}{', '}{eventYear}{' at '}
+                            {eventHours > 12 ? (eventHours - 12) : eventHours}{':'}
+                            {eventMinutes < 10 ? ('0' + eventMinutes) : eventMinutes}
+                            {' '}{eventHours < 12 ? 'AM' : 'PM'}
                         </div>
-                        <div className='ed-rt-item-loc'>
-
+                        <div className='ed-start-end'>End:</div>
+                        <div className='ed-rt-item-datetime'>
+                            {eventEndDayLong}{' '}{eventEndMonthLong}{' '}
+                            {eventEndDayOfMonth}{', '}{eventEndYear}{' at '}
+                            {eventEndHours > 12 ? (eventEndHours - 12) : eventEndHours}{':'}
+                            {eventEndMinutes < 10 ? ('0' + eventEndMinutes) : eventEndMinutes}
+                            {' '}{eventEndHours < 12 ? 'AM' : 'PM'}
                         </div>
+                        </div>
+                        {/* <div className='ed-rt-item-loc'>
+
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -170,18 +211,20 @@ export default function EventDetailPage() {
                 </div>
                 <div className='ed-bot-banner-right-grp'>
                     <div className='ed-bot-banner-price'>
-                        { event.price > 0 ? '$' + event.price : 'FREE'}
+                        {event.price > 0 ? '$' + event.price : 'FREE'}
+                    </div>
+                    <div className='ed-owner-buttons'>
+                        {
+                            user && group && user.id === group.organizerId &&
+                            <button className='ed-delete-btn' onClick={deleteEventBtn}>
+                                DELETE EVENT
+                            </button>
+                        }
                     </div>
                 </div>
             </div>
 
 
-            {user && group && user.id === group.organizerId &&
-                <div className='ed-owner-buttons'>
-                    <button onClick={deleteEventBtn}>
-                        DELETE EVENT
-                    </button>
-                </div>}
         </div>
     )
 }

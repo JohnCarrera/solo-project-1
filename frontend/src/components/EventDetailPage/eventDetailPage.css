@@ -112,9 +112,49 @@
     padding-bottom: 12px
 }
 
-.ed-date-loc-item-grp {}
+.ed-date-loc-item-grp {
+    margin-top: 30px;
+    height: 206px;
+    width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
-.ed-rt-item-datetime {}
+.ed-icon-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 200px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.ed-clock-icon {
+    height: 40px;
+    width: auto;
+    filter: invert(60%) sepia(0%) saturate(0%) hue-rotate(205deg) brightness(94%) contrast(94%);
+
+}
+
+.ed-datetime-grp-div{
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.ed-start-end {
+    color: rgb(161, 161, 161);
+    font-size: 16px;
+
+}
+.ed-rt-item-datetime {
+    font-size: 16px;
+    height: 100%;
+}
 
 .ed-rt-item-loc {}
 
@@ -150,18 +190,43 @@
 }
 
 .ed-bot-banner-title {
-
     font-weight: bold;
     font-size: 16px;
 }
 
 .ed-bot-banner-right-grp {
     display: flex;
-    align-items: center
+    align-items: center;
+    justify-content: center;
+    column-gap: 200px;
+    padding-top: 20px
+}
+
+.ed-owner-buttons {
+    width: 100px;
+}
+
+.ed-delete-btn {
+    height: 35px;
+    width: 120px;
+    border-radius: 6px;
+    border: none;
+    background-color: #f64060;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ed-delete-btn:hover {
+    background-color: #ff8198;
+}
+
+.ed-delete-btn:active {
+    transform:scale(.95);
 }
 
 .ed-bot-banner-price {
     font-weight: bold;
     font-size: 20px;
-    padding-top: 20px;
 }
