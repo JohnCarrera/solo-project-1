@@ -49,6 +49,7 @@
     padding-top: 50px;
 }
 
+
 .ed-left-side-grp {
     display: flex;
     flex-direction: column;
@@ -75,6 +76,11 @@
 
 .ed-rt-side-grp {}
 
+.ed-group-link-wrap {
+    text-decoration: none;
+    text-decoration-color: currentColor;
+}
+
 .ed-group-detail-item {
     height: 100px;
     width: 400px;
@@ -95,6 +101,7 @@
 }
 
 .ed-group-detail-text {
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

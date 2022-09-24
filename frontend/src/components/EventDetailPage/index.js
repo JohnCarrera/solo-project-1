@@ -146,6 +146,7 @@ export default function EventDetailPage() {
                     </div>
                 </div>
                 <div className='ed-rt-side-grp'>
+                    <Link className='ed-group-link-wrap' to={`/groups/${group.id}`}>
                     <div className='ed-group-detail-item'>
                         <img
                             className='ed-group-item-img'
@@ -168,6 +169,7 @@ export default function EventDetailPage() {
 
                         </div>
                     </div>
+                    </Link>
                     <div className='ed-date-loc-item-grp'>
                         <div className='ed-icon-div'>
                             <img className='ed-clock-icon' src={clockIcon} />
@@ -223,8 +225,6 @@ export default function EventDetailPage() {
                     </div>
                 </div>
             </div>
-
-
         </div>
     )
 }
