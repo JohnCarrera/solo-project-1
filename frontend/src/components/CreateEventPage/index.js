@@ -73,8 +73,8 @@ export default function CreateEventPage() {
     const [eventFree, setEventFree] = useState();
     const [eventEndDate, setEventEndDate] = useState('');
     const [eventEndTime, setEventEndTime] = useState('');
-    const [eventType, setEventType] = useState();
-    // const [prevImgUrl, setPrevImgUrl] = useState('');
+    const [eventType, setEventType] = useState('free');
+    const [prevImgUrl, setPrevImgUrl] = useState('');
     const [renderErrors, setRenderErrors] = useState(false);
     const [backendErrors, setBackendErrors] = useState([]);
     const [errors, setErrors] = useState([]);
@@ -85,6 +85,7 @@ export default function CreateEventPage() {
     const [eventCapErr, setEventCapErr] = useState('');
     const [eventPriceErr, setEventPriceErr] = useState('');
     const [eventDurationErr, setEventDurationErr] = useState('');
+    const [urlErr, setUrlErr] = useState('');
 
     const formatBackendErrors = (errorObj) => {
         const errs = [];
@@ -97,7 +98,6 @@ export default function CreateEventPage() {
     const checkUrl = str => {
         return /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/.test(str);
     }
-
 
     const startDateChng = (e) => {
         setEventStartDate(e.target.value)
@@ -122,7 +122,8 @@ export default function CreateEventPage() {
             !eventDescErr &&
             !eventDurationErr &&
             !eventCapErr &&
-            !eventPriceErr
+            !eventPriceErr &&
+            !urlErr
         ) {
             const vals = {
                 venueId: 1,
@@ -186,6 +187,13 @@ export default function CreateEventPage() {
         } else {
             setEventDurationErr('');
         }
+        if (!prevImgUrl.length){
+            setUrlErr('*image URL is required');
+        } else if (prevImgUrl.length && !checkUrl(prevImgUrl)){
+            setUrlErr('*invalid image URL');
+        } else {
+            setUrlErr('');
+        }
 
         console.log('eventSTartTime:', eventStartTime)
 
@@ -200,7 +208,8 @@ export default function CreateEventPage() {
         eventStartTime,
         eventEndDate,
         eventEndTime,
-        eventType
+        eventType,
+        prevImgUrl
     ]);
 
     return (
@@ -252,6 +261,26 @@ export default function CreateEventPage() {
                                     type='text'
                                     value={eventDesc}
                                     onChange={(e) => setEventDesc(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cg-input-div">
+                        <div className="cg-input-inner-div">
+                            <div className="cg-input-label-div">
+                                <div className='cg-input-label'>
+                                    Group Image Url
+                                </div>
+                                <div className="cg-field-error">
+                                    {renderErrors && urlErr.length > 0 && urlErr}
+                                </div>
+                            </div>
+                            <div className="cg-pseudo-input">
+                                <input
+                                    className="cg-input-field"
+                                    type='text'
+                                    value={prevImgUrl}
+                                    onChange={(e) => setPrevImgUrl(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -358,7 +387,7 @@ export default function CreateEventPage() {
                         </div>
                     </div>
                     <div className='ce-price-cluster-div'>
-                        <div className="ce-input-div-datetime">
+                        <div className="ce-input-div-price">
                             <div className="ce-input-inner-div-datetime">
                                 <div className="ce-input-label-div">
                                     <div className={`ce-input-label`} id={eventType}>
@@ -368,9 +397,9 @@ export default function CreateEventPage() {
                                         {renderErrors && eventPriceErr.length > 0 && eventPriceErr}
                                     </div>
                                 </div>
-                                <div className={`ce-pseudo-input-date`} id={`${eventType}p`}>
+                                <div className={`ce-pseudo-input-price`} id={`${eventType}p`}>
                                     <input
-                                        className={`ce-input-field`} id={eventType}
+                                        className={`ce-input-field-price`} id={eventType}
                                         type="number"
                                         min='0.01'
                                         step='0.01'
@@ -381,7 +410,7 @@ export default function CreateEventPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="ce-input-div-datetime">
+                        <div className="ce-input-div-price">
                             <div className="ce-input-inner-div-datetime">
                                 <div className="ce-input-label-div">
                                     <div className="ce-input-label">

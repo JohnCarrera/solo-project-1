@@ -52,6 +52,28 @@
     width: 100%;
 }
 
+.ce-input-div-price {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 100%;
+}
+
+.ce-pseudo-input-price{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid rgb(211, 211, 211);
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+    background-color: none;
+}
+
 .ce-input-inner-div {
     display: flex;
     flex-direction: column;
@@ -108,6 +130,17 @@
 
 }
 
+.ce-input-field-price::-webkit-outer-spin-button,
+.ce-input-field-price::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.ce-input-field-price {
+    width: 75%;
+    border: none;
+}
+
 .ce-input-field-textarea {
     width: 90%;
     border: none;
@@ -127,15 +160,23 @@
 }
 
 .ce-field-error-datetime{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 50px;
+    color: red;
+    text-align: center;
+
 }
 
 .ce-datetime-field-grp{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     border: 1px solid rgb(211, 211, 211);
+    background-color: #f3f3f3;
     width: 342px;
     height: 200px;
     border-radius: 10px;
@@ -145,6 +186,7 @@
 .ce-pseudo-input-time {
     display: flex;
     justify-content: center;
+    background-color: white;
     border: 1px solid rgb(211, 211, 211);
     width: 130px;
     height: 35px;
@@ -153,12 +195,13 @@
 }
 
 .ce-input-field-time {
-    padding-left: 10px;
+    /* padding-left: 10px; */
     border: none;
     text-align: center;
 }
 
 .ce-pseudo-input-date {
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,6 +228,7 @@
 }
 
 .ce-price-cluster-div {
+    margin-top: 26px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
@@ -200,7 +244,8 @@
 .ce-datetime-cluster-div {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     /* column-gap: 20px; */
     width: 100%;
 }
@@ -217,12 +262,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 16px;
 }
 
 .ce-input-field-date {
-    padding-left: 14px;
+    /* padding-left: 14px; */
     border: none;
     text-align: center;
 }
