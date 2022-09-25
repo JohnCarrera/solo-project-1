@@ -4,65 +4,40 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('EventImages', [
       {
-        id: 101,
-        eventId: 101,
-        url: 'https://imagehost.com/eventimage1',
+        eventId: 1,
+        url: 'https://i.imgur.com/J33DzXc.jpg',
         preview: true
       },
       {
-        id: 102,
-        eventId: 102,
-        url: 'https://imagehost.com/eventimage2',
+        eventId: 2,
+        url: 'https://i.imgur.com/VRy6042.jpg',
         preview: true
       },
       {
-        id: 103,
-        eventId: 103,
-        url: 'https://imagehost.com/eventimage3',
+        eventId: 3,
+        url: 'https://i.imgur.com/HM0hjcV.jpg',
         preview: true
       },
       {
-        id: 104,
-        eventId: 104,
-        url: 'https://imagehost.com/eventimage4',
+        eventId: 4,
+        url: 'https://i.imgur.com/KpSqIsj.jpg',
         preview: true
       },
       {
-        id: 105,
-        eventId: 105,
-        url: 'https://imagehost.com/eventimage5',
+        eventId: 5,
+        url: 'https://i.imgur.com/gadjOM9.jpg',
         preview: true
       },
       {
-        id: 106,
-        eventId: 101,
-        url: 'https://imagehost.com/eventimage11',
+        eventId: 6,
+        url: 'https://i.imgur.com/eskgVPX.jpg',
         preview: true
       },
       {
-        id: 107,
-        eventId: 102,
-        url: 'https://imagehost.com/eventimage22',
+        eventId: 7,
+        url: 'https://i.imgur.com/9oobHrT.jpg',
         preview: true
       },
-      {
-        id: 108,
-        eventId: 103,
-        url: 'https://imagehost.com/eventimage33',
-        preview: true
-      },
-      {
-        id: 109,
-        eventId: 104,
-        url: 'https://imagehost.com/eventimage44',
-        preview: true
-      },
-      {
-        id: 110,
-        eventId: 105,
-        url: 'https://imagehost.com/eventimage55',
-        preview: true
-      }
     ], {});
   },
 

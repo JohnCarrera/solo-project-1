@@ -3,7 +3,7 @@
     display: flex;
     border-top: 4px solid lightgray;
     width: 600px;
-    height: 180px;
+    height: 200px;
 }
 
 .group-list-item:hover {
@@ -27,7 +27,7 @@
 }
 
 .group-citystate{
-    padding-top: 10px;
+    padding-top: 0px;
     display: flex;
     flex-direction: row;
     column-gap: 10px;
@@ -53,7 +53,7 @@
     border-radius: 10%;
 }
 
-.prev-img-grp-list {
+.prev-img-sgrp-list {
     display: flex;
     justify-content: flex-start;
     align-items:flex-start;
@@ -61,13 +61,12 @@
 
 .group-about{
     display: block;
-    padding-top: 12px;
     text-align: justify;
     color: rgb(34, 34, 34);
     margin-right: 20px;
     width: 96%;
     /* border: 1px solid blue; */
-    height: 85px;
+    height: 90px;
     overflow: hidden;
 }
 

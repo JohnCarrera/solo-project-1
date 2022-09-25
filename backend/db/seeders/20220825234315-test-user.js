@@ -5,84 +5,60 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Users', [
       {
-        id: 101,
-        email: 'mike@mikedf.com',
-        username: 'warriorAngel',
-        firstName: 'Mike',
-        lastName: 'Favo',
+        email: 'samsepiol@Bleetz.com',
+        username: 'samsepiol1',
+        firstName: 'Sam',
+        lastName: 'Sepiol',
         hashedPassword: bcrypt.hashSync('password1'),
       },
       {
-        id: 102,
-        email: 'antonio@freewowgolds.com',
-        username: 'arrowdei',
-        firstName: 'Antonio',
-        lastName: 'Cola',
+        email: 'john@anonymous.com',
+        username: 'anon01',
+        firstName: 'John',
+        lastName: 'Doe',
         hashedPassword: bcrypt.hashSync('password2')
       },
       {
-        id: 103,
-        email: 'lorenzo@rocketgame.com',
-        username: 'bubishka',
-        firstName: 'Lorenzo',
-        lastName: 'Carrera',
+        email: 'jack@scene.net',
+        username: 'jackSparrow',
+        firstName: 'Jack',
+        lastName: 'Sparrow',
         hashedPassword: bcrypt.hashSync('password3')
       },
       {
-        id: 104,
-        email: 'angel@bornepd.gov',
-        username: 'angelMcMangel',
-        firstName: 'Angel',
-        lastName: 'Cola',
+        email: 'wauholland@ccc.net',
+        username: 'chaosWau',
+        firstName: 'Wau',
+        lastName: 'Holland',
         hashedPassword: bcrypt.hashSync('password4')
       },
       {
-        id: 105,
-        email: 'beanmcmean@curd.com',
-        username: 'beanMcMean',
-        firstName: 'Bean',
-        lastName: 'Curd',
+        email: 'tank@nebuchadnezzar.crew',
+        username: 'tankop1',
+        firstName: 'Tank',
+        lastName: 'Chong',
         hashedPassword: bcrypt.hashSync('password5')
       },
       {
-        id: 106,
-        email: 'john@carreradesign.com',
-        username: 'badreg',
-        firstName: 'John',
-        lastName: 'Carrera',
+        email: 'julian@wikileaks.com',
+        username: 'jassange',
+        firstName: 'Julian',
+        lastName: 'Assange',
         hashedPassword: bcrypt.hashSync('password6'),
       },
       {
-        id: 107,
-        email: 'drkatrinapsyd@lotusmhg.com',
-        username: 'drkatrinac',
-        firstName: 'Katrina',
-        lastName: 'Carrera',
+        email: 'number5@sc.net',
+        username: 'johnny5',
+        firstName: 'Johnny',
+        lastName: 'Five',
         hashedPassword: bcrypt.hashSync('password7')
       },
       {
-        id: 108,
-        email: 'cheno@moarwetfoodz.com',
-        username: 'chenchen',
-        firstName: 'Cheno',
-        lastName: 'Carrera',
-        hashedPassword: bcrypt.hashSync('password8')
-      },
-      {
-        id: 109,
-        email: 'lunabean@blackcats.org',
-        username: 'chicharron',
-        firstName: 'Luna',
-        lastName: 'Carrera',
-        hashedPassword: bcrypt.hashSync('password9')
-      },
-      {
-        id: 110,
-        email: 'ivykbaby@kfinancial.com',
-        username: 'ivybaby',
-        firstName: 'Ivy',
-        lastName: 'Kess',
-        hashedPassword: bcrypt.hashSync('password10')
+        email: 'john.smith@gmail.com',
+        username: 'johnnysmith',
+        firstName: 'John',
+        lastName: 'Smith',
+        hashedPassword: bcrypt.hashSync('secret password'),
       }
     ], {});
   },

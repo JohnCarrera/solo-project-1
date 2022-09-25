@@ -1,5 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import groupImg from '../../img/handsUp.svg';
+import ticketImg from '../../img/ticket.svg';
+import startGrpImg from '../../img/startGroup.svg';
+import onlineImg from '../../img/online_events.svg';
 import './index.css';
 
 export default function LandingPage() {
@@ -23,7 +27,7 @@ export default function LandingPage() {
                 </div>
                 <div className='right-upper'>
                     <img className='ur-img'
-                        src='https://i.imgur.com/PhtTjJO.png'
+                        src={onlineImg}
                     />
                 </div>
             </div>
@@ -42,7 +46,7 @@ export default function LandingPage() {
                     <div className='lower-group'>
                         <div className='low-img-div'>
                             <img className='lower-img'
-                                src='https://i.imgur.com/quIcBOg.png'
+                                src={groupImg}
                             />
                         </div>
                         <div className='lower-item-title'>
@@ -58,7 +62,7 @@ export default function LandingPage() {
                     <div className='lower-group'>
                         <div className='low-img-div'>
                             <img className='lower-img'
-                                src='https://i.imgur.com/vF7VbWs.png'
+                                src={ticketImg}
                             />
                         </div>
                         <div className='lower-item-title'>
@@ -76,7 +80,7 @@ export default function LandingPage() {
                     <div className='lower-group'>
                         <div className='low-img-div'>
                             <img className='lower-img'
-                                src='https://i.imgur.com/EoT7914.png'
+                                src={startGrpImg}
                             />
                         </div>
                         <div className='lower-item-title'>

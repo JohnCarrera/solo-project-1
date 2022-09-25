@@ -113,7 +113,7 @@ export default function EventDetailPage() {
     }
 
 
-    return (event && group &&
+    return (event && event.EventImages && group && group.GroupImages &&
         <div className='ed-main-page-body'>
             <div className='ed-top-info-banner'>
                 <div className='ed-info-banner-date'>
@@ -138,7 +138,7 @@ export default function EventDetailPage() {
                 <div className='ed-left-side-grp'>
                     <img
                         className='ed-main-img'
-                        src='https://images.pexels.com/photos/36039/baby-twins-brother-and-sister-one-hundred-days.jpg'
+                        src={event.EventImages[0].url}
                     />
                     <div className='ed-desc-header'>Details</div>
                     <div className='ed-event-desc'>
@@ -150,7 +150,7 @@ export default function EventDetailPage() {
                     <div className='ed-group-detail-item'>
                         <img
                             className='ed-group-item-img'
-                            src='https://images.pexels.com/photos/36039/baby-twins-brother-and-sister-one-hundred-days.jpg'
+                            src={group.GroupImages[0].url}
                         />
                         <div className='ed-group-detail-text'>
                             {

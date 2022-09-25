@@ -4,137 +4,96 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Events', [
       {
-        id: 101,
-        venueId: 101,
-        groupId: 101,
-        name: 'Pickers Meet',
-        description: 'First pick of the season!',
-        type: 'In Person',
+        venueId: 1,
+        groupId: 1,
+        name: 'E-Corp DDOS Strategy and Planning',
+        description: 'Select fsociety members, chosen for their ' +
+            'particular expertise, will meet at HQ to plan the next hack',
+        type: 'In person',
         capacity: 5,
-        price: 30.00,
-        startDate: '2022-09-13 07:00:00',
-        endDate: '2022-09-13 15:00:00'
+        price: 0,
+        startDate: '2022-12-13 07:00:00',
+        endDate: '2022-12-13 15:00:00'
       },
       {
-        id: 102,
-        venueId: 101,
-        groupId: 101,
-        name: 'Autumn Apples',
-        description: 'Come out to the orchard!',
-        type: 'In Person',
-        capacity: 6,
-        price: 45.00,
-        startDate: '2022-10-17 14:00:00',
-        endDate: '2022-10-17 17:00:00'
-      },
-      {
-        id: 103,
-        venueId: null,
-        groupId: 102,
-        name: 'Anti-Crime Squad Meet 1',
-        description: 'First meet of september',
+        venueId: 2,
+        groupId: 2,
+        name: 'Strategic Meeting',
+        description: 'Members will plan for the next organizational shift within ' +
+            'Anonymous and audit secrecy and security policies',
         type: 'Online',
-        capacity: 12,
-        price: 0.00,
-        startDate: '2022-09-01 17:30:00',
-        endDate: '2022-09-01 18:30:00'
+        capacity: 100,
+        price: 50.00,
+        startDate: '2022-11-25 10:00:00',
+        endDate: '2022-11-25 18:00:00'
       },
       {
-        id: 104,
-        venueId: 104,
-        groupId: 103,
-        name: 'Play-date for the bebes',
-        description: 'Play date at Tree Tops park!',
-        type: 'In Person',
-        capacity: 4,
-        price: 10.00,
-        startDate: '2022-10-01 12:30:00',
-        endDate: '2022-10-01 15:30:00'
-      },
-      {
-        id: 105,
-        venueId: 104,
-        groupId: 103,
-        name: 'Play-date for the bebes v2',
-        description: 'Play date at riverbend park',
-        type: 'In Person',
-        capacity: 4,
-        price: 10.00,
-        startDate: '2022-10-01 12:30:00',
-        endDate: '2022-10-01 15:30:00'
-      },
-      {
-        id: 106,
-        venueId: null,
-        groupId: 102,
-        name: 'Anti-Crime Squad Meet 1',
-        description: 'First meet of October',
+        venueId: 3,
+        groupId: 3,
+        name: 'Work on WideVine exploit',
+        description: 'Members will meet online to collaborate on the latest exploit ' +
+            'for the popular WideVine streaming media security and DRM software.',
         type: 'Online',
-        capacity: 12,
-        price: 0.00,
-        startDate: '2022-10-01 17:30:00',
-        endDate: '2022-10-01 18:30:00'
+        capacity: 120,
+        price: 1200.00,
+        startDate: '2022-10-01 11:00:00',
+        endDate: '2022-10-01 19:00:00'
       },
       {
-        id: 107,
-        venueId: null,
-        groupId: 104,
-        name: 'Dr K\'s Mom-meet 1',
-        description: 'First meet for the moms!',
-        type: 'Online',
-        capacity: 5,
-        price: 30.00,
-        startDate: '2022-10-03 17:30:00',
-        endDate: '2022-10-03 19:30:00'
+        venueId: 4,
+        groupId: 4 ,
+        name: 'CCC Group Study: Historical Corporate Software Vulnerabilities',
+        description: 'CCC members will gather and enjoy a lecture on the hisory ' +
+            'of corporate hacking and social engineering povided by our own experts. Catering Provided by The Snack Hack',
+        type: 'In person',
+        capacity: 80,
+        price: 53.50,
+        startDate: '2022-10-22 14:00:00',
+        endDate: '2022-10-22 16:00:00'
       },
       {
-        id: 108,
-        venueId: null,
-        groupId: 104,
-        name: 'Dr K\'s Mom-meet 2',
-        description: 'Second meet for the moms!',
-        type: 'Online',
-        capacity: 5,
-        price: 30.00,
-        startDate: '2022-10-13 17:30:00',
-        endDate: '2022-10-13 19:30:00'
+        venueId: 5,
+        groupId: 5,
+        name: 'Intro to Operators: a Beginner Course',
+        description: 'Our very own Dozer will lead us through an all-day course ' +
+            'dedicated to new Operators. The course all the basics as well as ' +
+            'tips & tricks by Tank himself. Lunch will be provided!',
+        type: 'In person',
+        capacity: 7,
+        price: 0,
+        startDate: '2023-01-01 06:00:00',
+        endDate: '2023-01-01 18:00:00'
       },
       {
-        id: 109,
-        venueId: 105,
-        groupId: 105,
-        name: 'Woodworker\'s Guild - Penmaking Workshop',
-        description: 'Come learn to make custom pens! All materials and tools included in fee.',
-        type: 'In Person',
-        capacity: 8,
-        price: 75.00,
-        startDate: '2022-10-10 08:30:00',
-        endDate: '2022-10-10 14:30:00'
+        venueId: 6,
+        groupId: 6,
+        name: 'WikiLeaks: 10-Year Anniversary Symposium On Data Gathering ',
+        description: 'Our own Julian Assange and Kristinn Hrafnsson will lead  ' +
+            'a symposium on data gathering in the digital world. This is a rare ' +
+            'WL event that will be open to the general public. Food trucks will ' +
+            'be available on-site at lunch!',
+        type: 'In person',
+        capacity: 200,
+        price: 150.00,
+        startDate: '2023-03-15 18:00:00',
+        endDate: '2023-03-15 22:00:00'
       },
       {
-        id: 110,
-        venueId: 105,
-        groupId: 105,
-        name: 'Woodworker\'s Guild - Cutting Board 2-Day Workshop',
-        description: 'Come learn to make custom cutting boards! All materials and tools included in fee.',
-        type: 'In Person',
-        capacity: 8,
-        price: 200.00,
-        startDate: '2022-10-24 08:30:00',
-        endDate: '2022-10-25 14:30:00'
+        venueId: 7,
+        groupId: 7,
+        name: 'Engineering Squad Intro to Circuitry',
+        description: 'Johnny 5 will talk about the ins-and outs of circuitry for robotics. ' +
+            'This important skill is highly desired in the world of AI robotics and will surely ' +
+            'boost your standing at your next hometown robotics competition. Price includes refreshments!' +
+            'be available on-site at lunch!',
+        type: 'In person',
+        capacity: 30,
+        price: 150.00,
+        startDate: '2023-03-02 08:00:00',
+        endDate: '2023-03-02 17:00:00'
       },
-      {
-        id: 111,
-        venueId: 105,
-        groupId: 105,
-        name: 'Woodworker\'s Guild - Box Maker\'s 2-Day Workshop',
-        description: 'Come learn to make custom cutting boards! All materials and tools included in fee.',
-        type: 'In Person',
-        capacity: 8,
-        price: 200.00,
-        startDate: '2022-11-24 08:30:00',
-        endDate: '2022-11-25 14:30:00'
-      }
+
+
     ], {});
   },
 
