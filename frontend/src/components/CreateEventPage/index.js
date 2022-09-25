@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createEvent } from '../../store/events';
 import { useHistory, useParams } from 'react-router-dom';
+import { addEventImage } from '../../store/events';
 import './createEventPage.css';
 
 
@@ -50,7 +51,12 @@ export default function CreateEventPage() {
     }
 
     const parseDateObj = (dateInput, timeInput) => {
-        return new Date(dateInput + 'T' + timeInput);
+
+        console.log('pdo-dateinput:', dateInput);
+        console.log('pdo-timeInput:', timeInput);
+        console.log('combined:', dateInput + 'T' + timeInput + ':00');
+
+        return new Date(dateInput + 'T' + timeInput + ':00');
     }
 
 
@@ -73,7 +79,8 @@ export default function CreateEventPage() {
     const [eventFree, setEventFree] = useState();
     const [eventEndDate, setEventEndDate] = useState('');
     const [eventEndTime, setEventEndTime] = useState('');
-    const [eventType, setEventType] = useState('free');
+    const [eventFeeType, setEventFeeType] = useState('free');
+    const [eventType, setEventType] = useState('');
     const [prevImgUrl, setPrevImgUrl] = useState('');
     const [renderErrors, setRenderErrors] = useState(false);
     const [backendErrors, setBackendErrors] = useState([]);
@@ -83,6 +90,7 @@ export default function CreateEventPage() {
     const [eventNameErr, setEventNameErr] = useState('');
     const [eventDescErr, setEventDescErr] = useState('');
     const [eventCapErr, setEventCapErr] = useState('');
+    const [eventTypeErr, setEventTypeErr] = useState('');
     const [eventPriceErr, setEventPriceErr] = useState('');
     const [eventDurationErr, setEventDurationErr] = useState('');
     const [urlErr, setUrlErr] = useState('');
@@ -112,7 +120,7 @@ export default function CreateEventPage() {
 
         let price;
 
-        if (!eventPrice || eventType === 'free') price = 0;
+        if (!eventPrice || eventFeeType === 'free') price = 0;
         else price = parseFloat(eventPrice);
 
         setRenderErrors(true);
@@ -128,40 +136,48 @@ export default function CreateEventPage() {
             const vals = {
                 venueId: 1,
                 name: eventName,
-                //type: eventType,
+                type: eventType,
                 capacity: Number(eventCap),
                 price: price,
                 description: eventDesc,
-                startDate: eventStartDate,
-                endDate: eventEndDate
+                startDate: parseDateObj(eventStartDate, eventStartTime).toISOString(),
+                endDate: parseDateObj(eventEndDate, eventEndTime).toISOString(),
             }
 
             console.log('handlesubmit vals:', vals);
 
             const newEvent = await dispatch(createEvent(groupId, vals))
 
+            const imgBody = {
+                url: prevImgUrl,
+                preview: true
+            }
+
             console.log(newEvent);
+
+            await dispatch(addEventImage(newEvent.id, imgBody));
 
             history.push(`/events/${newEvent.id}`);
         }
     }
+
     useEffect(() => {
 
         const errs = [];
 
-        if (!eventType || eventType === 'free') {
+        if (!eventFeeType || eventFeeType === 'free') {
             setEventFree(true);
             // setEventType('free');
-        } else if (!eventType.length) {
+        } else if (!eventFeeType.length) {
             setEventFree(true);
-        } else if (eventType === 'paid') {
+        } else if (eventFeeType === 'paid') {
             setEventFree(false);
         }
 
         if (!eventName.length) {
             setEventNameErr('*event name is required');
         } else if (eventName.length && eventName.length < 5) {
-            setEventNameErr('*event name must be at least 5 characters');
+            setEventNameErr('*must be at least 5 characters');
         } else {
             setEventNameErr('');
         }
@@ -174,7 +190,7 @@ export default function CreateEventPage() {
         }
         if (eventCap.includes(".") || !Number(eventCap)) {
             setEventCapErr('*event capacity must be an integer');
-        } else if (eventType === 'paid' && (!eventPrice || !parseFloat(eventPrice))) {
+        } else if (eventFeeType === 'paid' && (!eventPrice || !parseFloat(eventPrice))) {
             setEventCapErr('Price is invalid');
         } else {
             setEventCapErr('');
@@ -183,7 +199,7 @@ export default function CreateEventPage() {
             setEventDurationErr('*all date/time fields required')
         } else if (parseDateObj(eventStartDate, eventStartTime).getTime() >
             parseDateObj(eventEndDate, eventEndTime).getTime()) {
-            setEventDurationErr('*end date cannot be in the past')
+            setEventDurationErr('*end date must be after start date')
         } else {
             setEventDurationErr('');
         }
@@ -194,8 +210,14 @@ export default function CreateEventPage() {
         } else {
             setUrlErr('');
         }
+        if (!eventType.length) {
+            setEventTypeErr('*event type is required');
+        } else {
+            setEventTypeErr('');
+        }
 
-        console.log('eventSTartTime:', eventStartTime)
+        console.log(new Date().toISOString());
+
 
 
         setErrors(errs);
@@ -208,8 +230,9 @@ export default function CreateEventPage() {
         eventStartTime,
         eventEndDate,
         eventEndTime,
-        eventType,
-        prevImgUrl
+        eventFeeType,
+        prevImgUrl,
+        eventType
     ]);
 
     return (
@@ -282,6 +305,29 @@ export default function CreateEventPage() {
                                     value={prevImgUrl}
                                     onChange={(e) => setPrevImgUrl(e.target.value)}
                                 />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="ce-input-div">
+                        <div className="ce-input-inner-div">
+                            <div className="ce-input-label-div">
+                                <div className='ce-input-label'>
+                                    Event Type
+                                </div>
+                                <div className="ce-field-error">
+                                    {renderErrors && eventTypeErr.length > 0 && eventTypeErr}
+                                </div>
+                            </div>
+                            <div className="ce-pseudo-input">
+                                <select
+                                    className='ce-select-input'
+                                    value={eventType}
+                                    onChange={(e) => setEventType(e.target.value)}
+                                >
+                                    <option value={''}>Select Event Type</option>
+                                    <option value={'In person'}>In person</option>
+                                    <option value={'Online'}>Online</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -388,18 +434,18 @@ export default function CreateEventPage() {
                     </div>
                     <div className='ce-price-cluster-div'>
                         <div className="ce-input-div-price">
-                            <div className="ce-input-inner-div-datetime">
+                            <div className="ce-input-inner-div-price">
                                 <div className="ce-input-label-div">
-                                    <div className={`ce-input-label`} id={eventType}>
+                                    <div className={`ce-input-label`} id={eventFeeType}>
                                         Event Price
                                     </div>
                                     <div className="ce-field-error">
                                         {renderErrors && eventPriceErr.length > 0 && eventPriceErr}
                                     </div>
                                 </div>
-                                <div className={`ce-pseudo-input-price`} id={`${eventType}p`}>
+                                <div className={`ce-pseudo-input-price`} id={`${eventFeeType}p`}>
                                     <input
-                                        className={`ce-input-field-price`} id={eventType}
+                                        className={`ce-input-field-price`} id={eventFeeType}
                                         type="number"
                                         min='0.01'
                                         step='0.01'
@@ -411,7 +457,7 @@ export default function CreateEventPage() {
                             </div>
                         </div>
                         <div className="ce-input-div-price">
-                            <div className="ce-input-inner-div-datetime">
+                            <div className="ce-input-inner-div-price">
                                 <div className="ce-input-label-div">
                                     <div className="ce-input-label">
                                         Event Type
@@ -420,8 +466,8 @@ export default function CreateEventPage() {
                                 <div className="ce-pseudo-input-free">
                                     <select
                                         className='ce-select-input'
-                                        value={eventType}
-                                        onChange={(e) => setEventType(e.target.value)}
+                                        value={eventFeeType}
+                                        onChange={(e) => setEventFeeType(e.target.value)}
                                     >
                                         <option value={'free'}>Select Fee Type</option>
                                         <option value={'free'}>Free</option>
@@ -436,136 +482,11 @@ export default function CreateEventPage() {
                             className="ce-submit-btn"
                             type="submit"
                         >
-                            Sign Up
+                            Create Event
                         </button>
-
-                        {/* <button    //TODO: ADD RANDOMIZED DEMO USER SIGNUP
-                        className="ce-login-btn"
-                        type="submit"
-                        onClick={demoUserBtnClick}
-                    >
-                        Demo User Sign Up
-                    </button> */}
                     </div>
                 </div>
             </form>
         </div>
-        // <form onSubmit={handleSubmit}>
-        //     <ul className='create-event-err-ul'>
-        //         {errors.map((err, i) => (
-        //             <li key={i} className='cg-err-li'>
-        //                 {err}
-        //             </li>
-        //         ))}
-        //     </ul>
-        //     <label className='cg-label'>
-        //         Event Name
-        //         <input
-        //             type='text'
-        //             value={eventName}
-        //             onChange={(e) => setEventName(e.target.value)}
-        //         />
-        //     </label>
-        //     <label className='cg-label'>
-        //         Event Description
-        //         <textarea
-        //             type='text'
-        //             value={eventDesc}
-        //             onChange={(e) => setEventDesc(e.target.value)}
-        //         />
-        //     </label>
-        //     <label className='cg-label'>
-        //         Event Capacity
-        //         <input
-        //             type='text'
-        //             value={eventCap}
-        //             onChange={(e) => setEventCap(e.target.value)}
-        //         />
-        //     </label>
-        //     <label className='cg-label'>
-        //         Start Date
-        //         <input
-        //             type='datetime-local'
-        //             min={dateTimeTmrw()}
-        //             value={eventStartDate}
-        //             onChange={startDateChng}
-        //         />
-        //     </label>
-        //     {/* <label className='cg-label'>
-        //         Start Time
-        //         <input
-        //             type='time'
-        //             min={dateTimeTmrw()}
-        //             value={eventStartTime}
-        //             onChange={startDateChng}
-        //         />
-        //     </label> */}
-        //     <label className='cg-label'>
-        //         End Date
-        //         <input
-        //             type='datetime-local'
-        //             min={dateTimeTmrw()}
-        //             value={eventEndDate}
-        //             onChange={(e) => setEventEndDate(e.target.value)}
-        //         />
-        //     </label>
-        //     {/* <label className='cg-label'>
-        //         End Time
-        //         <input
-        //             type='time'
-        //             min={dateTimeTmrw()}
-        //             value={eventStartTime}
-        //             onChange={startDateChng}
-        //         />
-        //     </label> */}
-        //     <div className='cg-radio-btn-div'>
-        //         <label className='cg-label'>
-        //             In person
-        //             <input
-        //                 type='radio'
-        //                 value='In person'
-        //                 checked={eventType === 'In person'}
-        //                 onChange={(e) => setEventType(e.target.value)}
-        //             />
-        //         </label>
-        //         <label className='cg-label'>
-        //             Online
-        //             <input
-        //                 type='radio'
-        //                 value='Online'
-        //                 checked={eventType === 'Online'}
-        //                 onChange={(e) => setEventType(e.target.value)}
-        //             />
-        //         </label>
-        //     </div>
-        //     <label className='cg-label'>
-        //         Free Event?
-        //         <input
-        //             type='checkbox'
-        //             checked={eventFree === true}
-        //             value={true}
-        //             onChange={(e) => setEventFree(!eventFree)}
-        //         />
-        //     </label>
-        //     { !eventFree &&
-        //     <label className='cg-label'>
-        //         Price
-        //         <input
-        //             type='number'
-        //             min='0.01'
-        //             step='0.01'
-        //             value={eventPrice}
-        //             onChange={(e) => setEventPrice(e.target.value)}
-        //         />
-        //     </label>
-        //     }
-        //     <button
-        //         className='cg-submit-btn'
-        //         type='submit'
-        //         disabled={errors.length}
-        //     >
-        //         Create Event
-        //     </button>
-        // </form>
     )
 }

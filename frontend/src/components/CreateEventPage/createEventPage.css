@@ -266,6 +266,14 @@
     margin-bottom: 16px;
 }
 
+.ce-input-inner-div-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
 .ce-input-field-date {
     /* padding-left: 14px; */
     border: none;
