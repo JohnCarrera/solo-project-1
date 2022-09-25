@@ -72,7 +72,10 @@
     font-weight: bold;
 }
 
-.ed-event-desc {}
+.ed-event-desc {
+    height: 300px;
+    width: 600px;
+}
 
 .ed-rt-side-grp {}
 

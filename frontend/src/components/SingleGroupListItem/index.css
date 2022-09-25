@@ -1,8 +1,9 @@
 .group-list-item {
-
+    position: relative;
     display: flex;
     border-top: 4px solid lightgray;
-    width: 600px
+    width: 600px;
+    height: 180px;
 }
 
 .group-list-item:hover {
@@ -15,6 +16,7 @@
 }
 
 .group-title{
+    font-size: 16px;
     font-weight: Bold;
     padding-top: 10px;
     color: rgb(34, 34, 34);
@@ -25,7 +27,20 @@
 }
 
 .group-citystate{
-    color: rgb(33, 33, 109)
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+    color: rgb(129, 129, 129);
+    padding-right: 20px;
+}
+
+.gl-pin-icon {
+    height: 20px;
+    width: auto;
+    filter: invert(60%) sepia(0%) saturate(0%) hue-rotate(205deg) brightness(94%) contrast(94%);
+
 }
 
 .group-list-image {
@@ -33,21 +48,29 @@
     margin-bottom: 10px;
     margin-left: 20px;
     margin-right: 10px;
-    height: 150px;
+    height: 87px;
     width: 150px;
     border-radius: 10%;
 }
 
 .prev-img-grp-list {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items:flex-start;
 }
 
 .group-about{
+    display: block;
+    padding-top: 12px;
     text-align: justify;
     color: rgb(34, 34, 34);
+    margin-right: 20px;
+    width: 96%;
+    /* border: 1px solid blue; */
+    height: 85px;
+    overflow: hidden;
 }
+
 
 .group-details {
     display: flex;
