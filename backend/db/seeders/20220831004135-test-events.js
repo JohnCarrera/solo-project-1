@@ -84,8 +84,7 @@ module.exports = {
         name: 'Engineering Squad Intro to Circuitry',
         description: 'Johnny 5 will talk about the ins-and outs of circuitry for robotics. ' +
             'This important skill is highly desired in the world of AI robotics and will surely ' +
-            'boost your standing at your next hometown robotics competition. Price includes refreshments!' +
-            'be available on-site at lunch!',
+            'boost your standing at your next hometown robotics competition. Price includes refreshments!',
         type: 'In person',
         capacity: 30,
         price: 150.00,
