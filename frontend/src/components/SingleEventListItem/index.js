@@ -19,7 +19,7 @@ export default function SingleEventListItem({ event }) {
             <div className='event-list-item'>
                 <div className='prev-img-grp-list'>
                     <img className='event-list-image'
-                        src='https://images.pexels.com/photos/7182668/pexels-photo-7182668.jpeg'
+                        src={event.previewImage}
                     />
                 </div>
                 <div className='el-event-details'>

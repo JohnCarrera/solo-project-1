@@ -15,7 +15,7 @@ export default function SingleGroupListItem({ group }) {
             <div className='group-list-item'>
                 <div className='prev-img-sgrp-list'>
                     <img className='group-list-image'
-                    src='https://images.pexels.com/photos/7182668/pexels-photo-7182668.jpeg'
+                    src={group.previewImage}
                     />
                 </div>
                 <div className='group-details'>
