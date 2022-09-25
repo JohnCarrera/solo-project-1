@@ -4,63 +4,38 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('GroupImages', [
       {
-        id: 101,
-        groupId: 101,
-        url: 'https://imagehost.com/groupimage1',
+        groupId: 1,
+        url: 'https://i.imgur.com/qEG2YPU.jpg',
         preview: true
       },
       {
-        id: 102,
-        groupId: 102,
-        url: 'https://imagehost.com/groupimage2',
+        groupId: 2,
+        url: 'https://i.imgur.com/gSS2n01.jpg',
         preview: true
       },
       {
-        id: 103,
-        groupId: 103,
-        url: 'https://imagehost.com/groupimage3',
+        groupId: 3,
+        url: 'https://i.imgur.com/azSjZHi.jpg',
         preview: true
       },
       {
-        id: 104,
-        groupId: 104,
-        url: 'https://imagehost.com/groupimage4',
+        groupId: 4,
+        url: 'https://i.imgur.com/vHh6W1K.jpg',
         preview: true
       },
       {
-        id: 105,
-        groupId: 105,
-        url: 'https://imagehost.com/groupimage5',
+        groupId: 5,
+        url: 'https://i.imgur.com/JhxcNpx.jpg',
+        preview: true
+      },
+    {
+        groupId: 6,
+        url: 'https://i.imgur.com/AkvxTOa.jpg',
         preview: true
       },
       {
-        id: 106,
-        groupId: 101,
-        url: 'https://imagehost.com/groupimage11',
-        preview: true
-      },
-      {
-        id: 107,
-        groupId: 102,
-        url: 'https://imagehost.com/groupimage22',
-        preview: true
-      },
-      {
-        id: 108,
-        groupId: 103,
-        url: 'https://imagehost.com/groupimage33',
-        preview: true
-      },
-      {
-        id: 109,
-        groupId: 104,
-        url: 'https://imagehost.com/groupimage44',
-        preview: true
-      },
-      {
-        id: 110,
-        groupId: 105,
-        url: 'https://imagehost.com/groupimage55',
+        groupId:7,
+        url: 'https://i.imgur.com/krOe105.jpg',
         preview: true
       }
     ], {});

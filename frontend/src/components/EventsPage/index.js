@@ -28,6 +28,7 @@ export default function EventsPage() {
                     ))}
                 </div>
             </div>
+            <div className='el-bot-pad-div'></div>
         </div>
     )
 }

@@ -15,4 +15,10 @@
 .events-page-body{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+}
+
+.el-bot-pad-div {
+    height: 100px;
+    width: 100%;
 }

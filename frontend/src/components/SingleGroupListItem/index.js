@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import mapPin from '../../img/map-pin.svg';
 import './index.css';
 
 export default function SingleGroupListItem({ group }) {
@@ -12,9 +13,9 @@ export default function SingleGroupListItem({ group }) {
          to={`/groups/${group.id}/about`}
          >
             <div className='group-list-item'>
-                <div className='prev-img-grp-list'>
+                <div className='prev-img-sgrp-list'>
                     <img className='group-list-image'
-                    src='https://images.pexels.com/photos/7182668/pexels-photo-7182668.jpeg'
+                    src={group.previewImage}
                     />
                 </div>
                 <div className='group-details'>
@@ -22,7 +23,12 @@ export default function SingleGroupListItem({ group }) {
                         {group.name}
                     </div>
                     <div className='group-citystate'>
-                        {group.city}, {group.state}
+                        {/* <div className='ed-icon-div'> */}
+                            <img className='gl-pin-icon' src={mapPin} />
+                       {/* / */}
+                        {/* <div> */}
+                            {group.city}, {group.state}
+                        {/* </div> */}
                     </div>
                     <div>
                         <p className='group-about'>{group.about}</p>

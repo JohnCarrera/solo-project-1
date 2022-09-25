@@ -28,6 +28,7 @@ export default function GroupsPage() {
                     ))}
                 </div>
             </div>
+            <div className='gl-bot-pad-div'></div>
         </div>
     )
 }

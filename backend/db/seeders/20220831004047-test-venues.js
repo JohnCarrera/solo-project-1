@@ -4,47 +4,58 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Venues', [
       {
-        id: 101,
-        groupId: 101,
-        address: '2115 SE PSL BLVD',
-        city: 'Port St. Lucie',
-        state: 'FL',
+        groupId: 1,
+        address: 'Abandoned arcade',
+        city: 'Coney Island',
+        state: 'NY',
         lat: 20.22,
         lng: 26.45657
       },
       {
-        id: 102,
-        groupId: 102,
-        address: "500 US HWY 52",
-        city: 'Bourne' ,
-        state: 'MA',
+        groupId: 2,
+        address: "Anonymous online space",
+        city: 'Sacramento' ,
+        state: 'CA',
         lat: 10.26579,
         lng: 46.654
       },
       {
-        id: 103,
-        groupId: 103,
-        address: '2500 US HWY 1',
-        city: 'Stuart' ,
-        state: 'FL',
+        groupId: 3,
+        address: 'Scene HQ',
+        city: 'Kemah' ,
+        state: 'TX',
         lat: 26.6579,
         lng: 25.456987
       },
       {
-        id: 104,
-        groupId: 103,
-        address: "1502 S Indiantown RD",
+        groupId: 4,
+        address: "CCC Web HQ",
         city: 'Jupiter' ,
         state: 'FL',
         lat: 24.564,
         lng: 78.66542
       },
       {
-        id: 105,
-        groupId: 105,
-        address: "18255 Cedar St.",
-        city: 'Steamboat Springs' ,
-        state: 'CO',
+        groupId: 5,
+        address: "The Nebuchadnezzar",
+        city: 'Xion' ,
+        state: 'OR',
+        lat: 541.65497,
+        lng: 854.26576
+      },
+      {
+        groupId: 6,
+        address: "500 Market Street",
+        city: 'Philadelphia' ,
+        state: 'PA',
+        lat: 541.65497,
+        lng: 854.26576
+      },
+      {
+        groupId: 7,
+        address: "Astoria Military Base",
+        city: 'Astoria' ,
+        state: 'OR',
         lat: 541.65497,
         lng: 854.26576
       }

@@ -31,7 +31,7 @@ export default function SingleEventListItem({ event }) {
             <div className='gd-event-list-item'>
                 <div className='gd-prev-img-grp-list'>
                     <img className='gd-event-list-image'
-                        src='https://images.pexels.com/photos/7182668/pexels-photo-7182668.jpeg'
+                        src={event.previewImage}
                     />
                 </div>
                 <div className='gd-event-details'>
@@ -55,9 +55,7 @@ export default function SingleEventListItem({ event }) {
                         <p className='gd-event-about'>{event.description}</p>
                     </div>
                     <div className='gd-event-members-prv'>
-                        {event.numAttending}
-                        {' '}attending -{' '}
-                        {event.Group.private ? 'Private' : 'Public'}
+                    {event.type + ' event hosted by ' + event.Group.name}
                     </div>
                 </div>
             </div>

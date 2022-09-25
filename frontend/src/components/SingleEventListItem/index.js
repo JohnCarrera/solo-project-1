@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import mapPin from '../../img/map-pin.svg';
 import './index.css';
 
 export default function SingleEventListItem({ event }) {
@@ -13,28 +14,31 @@ export default function SingleEventListItem({ event }) {
 
     return (
         <Link className='link-wrap-event-list'
-         to={`/events/${event.id}`}
-         >
+            to={`/events/${event.id}`}
+        >
             <div className='event-list-item'>
                 <div className='prev-img-grp-list'>
                     <img className='event-list-image'
-                    src='https://images.pexels.com/photos/7182668/pexels-photo-7182668.jpeg'
+                        src={event.previewImage}
                     />
                 </div>
-                <div className='event-details'>
+                <div className='el-event-details'>
                     <div className='event-title'>
                         {event.name}
                     </div>
                     <div className='event-citystate'>
-                        {event.Group.city}, {event.Group.state}
+                        {/* <div className='ed-icon-div'> */}
+                            <img className='ed-pin-icon' src={mapPin} />
+                       {/* / */}
+                        {/* <div> */}
+                            {event.Group.city}, {event.Group.state}
+                        {/* </div> */}
                     </div>
-                    <div>
+                    <div className='el-about-div'>
                         <p className='event-about'>{event.description}</p>
                     </div>
                     <div className='event-members-prv'>
-                        {event.numAttending}
-                        {' '}attending -{' '}
-                        {event.Group.private ? 'Private' : 'Public'}
+                        {event.type + ' event hosted by ' + event.Group.name}
                     </div>
                 </div>
             </div>

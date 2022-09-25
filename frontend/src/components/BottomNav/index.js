@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import gitHubImg from '../../img/github-sign.png';
+import liImg from '../../img/linkedin-transparent-17.png';
 import './bottomNav.css';
 
 export default function BottomNav() {
@@ -12,7 +14,7 @@ export default function BottomNav() {
                 <div className='bottom-nav-linked-in-div'>
                     <a href='https://www.linkedin.com/in/john-carrera-778b53231/'>
                         <img
-                            src='https://i.imgur.com/uFg23PI.png'
+                            src={liImg}
                             className='bottom-nav-linked-in'
                         />
                     </a>
@@ -20,7 +22,7 @@ export default function BottomNav() {
                 <div className='bottom-nav-gh-div'>
                     <a href='https://github.com/JohnCarrera'>
                         <img
-                            src='https://i.imgur.com/F2HN97k.png'
+                            src={gitHubImg}
                             className='bottom-nav-github'
                         />
                     </a>
