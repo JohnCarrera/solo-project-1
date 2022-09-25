@@ -97,7 +97,7 @@ export default function EditGroupPage() {
 
             console.log('handlesubmit vals:', vals);
 
-            const newGroup = await dispatch(createGroup(vals))
+            const newGroup = await dispatch(editGroup(groupId, vals))
 
             const imgBody = {
                 id: newGroup.id,
@@ -105,11 +105,10 @@ export default function EditGroupPage() {
                 preview: true
             }
 
+
             if (prevImgUrl.length > 0) {
-                const groupImgRes = dispatch(addGroupImage(newGroup.id, imgBody))
+                const groupImgRes = dispatch(addGroupImage(groupId, imgBody))
             }
-            // console.log('newgroup:', newGroup);
-            // console.log('groupImgRes', groupImgRes)
 
             history.push(`/groups/${newGroup.id}/about`);
         }
@@ -119,49 +118,49 @@ export default function EditGroupPage() {
 
         const errs = [];
 
-            if (groupName && !groupName.length) {
-                setNameErr('*name is required');
-            } else if (groupName && groupName.length && groupName.length > 60) {
-                setNameErr('*must be less than 60 characters');
-            } else {
-                setNameErr('');
-            }
-            if (groupAbout && !groupAbout.length) {
-                setDescErr('*description is required')
-            } else if (groupAbout && groupAbout.length && groupAbout.length < 50) {
-                setDescErr('*must be at least 50 characters');
-            } else {
-                setDescErr('')
-            }
-            if (groupCity && !groupCity.length) {
-                setCityErr('*city is required');
-            } else {
-                setCityErr('');
-            }
-            if (groupState && !groupState.length) {
-                setStateErr('*state is required');
-            } else if (groupState && groupState.length > 0 && groupState.length !== 2) {
-                setStateErr('*must be a 2-letter abbreviation');
-            } else {
-                setStateErr('');
-            }
-            if (prevImgUrl && !prevImgUrl.length) {
-                setUrlErr('*image URL is required');
-            } else if (prevImgUrl && prevImgUrl.length && !checkUrl(prevImgUrl)) {
-                setUrlErr('*invalid image URL');
-            } else {
-                setUrlErr('');
-            }
-            if (groupType && !groupType.length) {
-                setGroupTypeErr('*group type is required');
-            } else {
-                setGroupTypeErr('');
-            }
-            if (typeof group.privage !== 'undefined') {
-                setAccessErr('*group access type is required');
-            } else {
-                setAccessErr('');
-            }
+        if (groupName && !groupName.length) {
+            setNameErr('*name is required');
+        } else if (groupName && groupName.length && groupName.length > 60) {
+            setNameErr('*must be less than 60 characters');
+        } else {
+            setNameErr('');
+        }
+        if (groupAbout && !groupAbout.length) {
+            setDescErr('*description is required')
+        } else if (groupAbout && groupAbout.length && groupAbout.length < 50) {
+            setDescErr('*must be at least 50 characters');
+        } else {
+            setDescErr('')
+        }
+        if (groupCity && !groupCity.length) {
+            setCityErr('*city is required');
+        } else {
+            setCityErr('');
+        }
+        if (groupState && !groupState.length) {
+            setStateErr('*state is required');
+        } else if (groupState && groupState.length > 0 && groupState.length !== 2) {
+            setStateErr('*must be a 2-letter abbreviation');
+        } else {
+            setStateErr('');
+        }
+        if (prevImgUrl && !prevImgUrl.length) {
+            setUrlErr('*image URL is required');
+        } else if (prevImgUrl && prevImgUrl.length && !checkUrl(prevImgUrl)) {
+            setUrlErr('*invalid image URL');
+        } else {
+            setUrlErr('');
+        }
+        if (groupType && !groupType.length) {
+            setGroupTypeErr('*group type is required');
+        } else {
+            setGroupTypeErr('');
+        }
+        if (typeof group.privage !== 'undefined') {
+            setAccessErr('*group access type is required');
+        } else {
+            setAccessErr('');
+        }
 
         setErrors(errs);
 

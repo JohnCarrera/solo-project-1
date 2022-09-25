@@ -28,6 +28,10 @@ const del = () => ({
     type: DELETE_EVENT
 });
 
+const addImage = () => ({
+    type: ADD_IMAGE
+})
+
 const clear = () => ({
    type: CLEAR_STATE
 });
@@ -78,6 +82,22 @@ export const createEvent = (groupId, event) => async dispatch => {
         const event = await res.json();
         console.log('eventcreate:', event);
         dispatch(add(event));
+        return event;
+    }
+    return null;
+}
+
+
+export const addEventImage = (eventId, body) => async dispatch => {
+    const res = await csrfFetch(`/api/events/${eventId}/images`, {
+        method: 'POST',
+        body: JSON.stringify(body)
+    });
+
+    if(res.ok) {
+        const event = await res.json();
+        console.log('eventAddImage:', event);
+        dispatch(addEventImage(body));
         return event;
     }
     return null;

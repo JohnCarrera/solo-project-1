@@ -1,0 +1,364 @@
+
+.ce-main-page-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ce-title-div {
+    padding-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.ce-logo-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.ce-form-main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ce-log-in-title {
+    font-weight: bolder;
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.ce-login-err-div {
+    height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red
+}
+
+.ce-div-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ce-input-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ce-input-div-price {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 100%;
+}
+
+.ce-pseudo-input-price{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid rgb(211, 211, 211);
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+    background-color: none;
+}
+
+.ce-input-inner-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.ce-pseudo-input {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(211, 211, 211);
+    width: 342px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+}
+
+.ce-pseudo-input-textarea {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(211, 211, 211);
+    width: 342px;
+    height: 180px;
+    border-radius: 10px;
+    margin-top: 1px;
+    padding-top: 4px;
+}
+
+.ce-pseudo-input-textarea:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.ce-pseudo-input-textarea:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+
+.ce-pseudo-input:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.ce-pseudo-input:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+.ce-input-label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.ce-input-field {
+    width: 90%;
+    border: none;
+
+}
+
+.ce-input-field-price::-webkit-outer-spin-button,
+.ce-input-field-price::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.ce-input-field-price {
+    width: 75%;
+    border: none;
+}
+
+.ce-input-field-textarea {
+    width: 90%;
+    border: none;
+    resize: none;
+}
+
+.ce-input-label-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ce-select-input {
+    border: none;
+    background-color: white;
+    width: 90%;
+}
+
+.ce-field-error-datetime{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    color: red;
+    text-align: center;
+
+}
+
+.ce-datetime-field-grp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(211, 211, 211);
+    background-color: #f3f3f3;
+    width: 342px;
+    height: 200px;
+    border-radius: 10px;
+    margin-top: 1px;
+}
+
+.ce-pseudo-input-time {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid rgb(211, 211, 211);
+    width: 130px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+}
+
+.ce-input-field-time {
+    /* padding-left: 10px; */
+    border: none;
+    text-align: center;
+}
+
+.ce-pseudo-input-date {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid rgb(211, 211, 211);
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+    background-color: none;
+}
+
+.ce-pseudo-input-free {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid rgb(211, 211, 211);
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+    background-color: none;
+}
+
+.ce-price-cluster-div {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    column-gap: 20px;
+    width: 100%;
+}
+
+.ce-input-free {
+    border: none;
+}
+
+
+.ce-datetime-cluster-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* column-gap: 20px; */
+    width: 100%;
+}
+
+.ce-input-div-datetime {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 100%;
+}
+
+.ce-input-inner-div-datetime {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.ce-input-inner-div-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.ce-input-field-date {
+    /* padding-left: 14px; */
+    border: none;
+    text-align: center;
+}
+
+
+.ce-pseudo-input-time:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.ce-pseudo-input-time:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+
+.ce-pseudo-input-date:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.ce-pseudo-input-date:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+.ce-field-error {
+    color: red
+}
+
+.ce-submit-btn-div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.ce-submit-btn {
+    margin-top: 15px;
+    height: 40px;
+    width: 342px;
+    border-radius: 10px;
+    border: none;
+    background-color: #f64060;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ce-submit-btn:hover {
+    background-color: #ff8198;
+}
+
+
+
+.ce-submit-btn:active {
+    transform: scale(0.95);
+}
+
+.ce-pseudo-input-free:hover {
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.ce-pseudo-input-free:focus-within {
+    border: 1px solid rgb(0, 130, 148);
+}
+
+#free.ce-input-label {
+    color: rgb(211, 211, 211);
+}
+
+#freep:hover {
+    pointer-events: none;
+}
+
+/* #free {
+    color:rgb(211, 211, 211);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid rgb(211, 211, 211);
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 1px;
+    background-color: none;
+} */
