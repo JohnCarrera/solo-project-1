@@ -24,6 +24,7 @@ export default function GroupDetailAbout() {
                     {groupDetail.about}
                 </div>
             </div>
+            <div className='gd-space-div'></div>
         </div>
     )
 }

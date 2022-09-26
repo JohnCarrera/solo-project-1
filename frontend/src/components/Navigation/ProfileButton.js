@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
                 <div className="nav-menu-elements">
                     {user.username}
                     {user.email}
-                    <button className="logout-btn" aonClick={logout}>Log Out</button>
+                    <button className="logout-btn" onClick={logout}>Log Out</button>
                 </div >
             {/* )
         } */}

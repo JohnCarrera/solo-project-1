@@ -228,7 +228,7 @@
 }
 
 .ce-price-cluster-div {
-    margin-top: 26px;
+    margin-top: 16px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
@@ -327,8 +327,17 @@
     background-color: #ff8198;
 }
 
+.ce-price-err-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-
+.ce-field-error-price {
+    height: 10px;
+    color: red;
+    padding-top: 10px;
+}
 .ce-submit-btn:active {
     transform: scale(0.95);
 }
@@ -341,12 +350,16 @@
     border: 1px solid rgb(0, 130, 148);
 }
 
-#free.ce-input-label {
+#freep.ce-input-label {
     color: rgb(211, 211, 211);
 }
 
 #freep:hover {
     pointer-events: none;
+}
+
+.bottom-padding-div {
+    height: 100px;
 }
 
 /* #free {

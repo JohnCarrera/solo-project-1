@@ -30,6 +30,7 @@ export default function EventsPage() {
                     ))}
                 </div>
             </div>
+            <div className='gd-events-space-div'></div>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 .gd-about-bg {
     background-color: #f3f3f3;
-    height: 500px;
+    height: 700px;
     padding-top: 30px;
     padding-left: 80px
 }
@@ -8,6 +8,7 @@
 .gd-about-main {
     display: flex;
     flex-direction: column;
+    /* height: 800px; */
 }
 
 
@@ -20,6 +21,12 @@
 }
 
 .gd-about-body {
+    width: 600px;
+    height: 100%;
     font-size: 16px;
     color: rgb(44, 44, 44);
+    overflow-wrap: break-word;
+}
+.gd-space-div {
+    height: 100px;
 }

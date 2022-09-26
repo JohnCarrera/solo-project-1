@@ -75,6 +75,7 @@
 .ed-event-desc {
     height: 300px;
     width: 600px;
+    overflow-wrap: break-word;
 }
 
 .ed-rt-side-grp {}

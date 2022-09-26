@@ -16,10 +16,14 @@
     display: flex;
     justify-content: flex-start;
     background-color: #f3f3f3;
-    height: 200%;
+    height: 500px;
     padding-bottom: 100px;
     padding-top: 30px;
     padding-left: 80px;
     border-bottom: 2px solid lightgray;
     overflow: hidden;
+}
+
+.gd-event-space-div {
+    height: 100px
 }

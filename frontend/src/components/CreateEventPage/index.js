@@ -79,7 +79,7 @@ export default function CreateEventPage() {
     const [eventFree, setEventFree] = useState();
     const [eventEndDate, setEventEndDate] = useState('');
     const [eventEndTime, setEventEndTime] = useState('');
-    const [eventFeeType, setEventFeeType] = useState('free');
+    const [eventFeeType, setEventFeeType] = useState('none');
     const [eventType, setEventType] = useState('');
     const [prevImgUrl, setPrevImgUrl] = useState('');
     const [renderErrors, setRenderErrors] = useState(false);
@@ -109,9 +109,6 @@ export default function CreateEventPage() {
 
     const startDateChng = (e) => {
         setEventStartDate(e.target.value)
-        console.log(eventPrice)
-
-        //(e) => setEventEnd(e.target)
     }
 
     const handleSubmit = async (e) => {
@@ -165,7 +162,7 @@ export default function CreateEventPage() {
 
         const errs = [];
 
-        if (!eventFeeType || eventFeeType === 'free') {
+        if (eventFeeType  === 'none' || eventFeeType === 'free' ) {
             setEventFree(true);
             // setEventType('free');
         } else if (!eventFeeType.length) {
@@ -190,10 +187,14 @@ export default function CreateEventPage() {
         }
         if (eventCap.includes(".") || !Number(eventCap)) {
             setEventCapErr('*event capacity must be an integer');
-        } else if (eventFeeType === 'paid' && (!eventPrice || !parseFloat(eventPrice))) {
-            setEventCapErr('Price is invalid');
-        } else {
+         } else {
             setEventCapErr('');
+         }
+
+        if (eventFeeType === 'paid' && (!eventPrice || !parseFloat(eventPrice))) {
+            setEventPriceErr('*price is invalid');
+        } else {
+            setEventPriceErr('');
         }
         if (!eventStartTime || !eventEndTime) {
             setEventDurationErr('*all date/time fields required')
@@ -432,18 +433,20 @@ export default function CreateEventPage() {
                             </div>
                         </div>
                     </div>
+                    <div className='ce-price-err-div'>
+                    <div className="ce-field-error-price">
+                                        {renderErrors && eventPriceErr.length > 0 && eventPriceErr}
+                                    </div>
                     <div className='ce-price-cluster-div'>
                         <div className="ce-input-div-price">
                             <div className="ce-input-inner-div-price">
                                 <div className="ce-input-label-div">
-                                    <div className={`ce-input-label`} id={eventFeeType}>
+                                    <div className={`ce-input-label`} id={`${eventFeeType !== 'paid' ? 'free' : 'paid'}p`}>
                                         Event Price
                                     </div>
-                                    <div className="ce-field-error">
-                                        {renderErrors && eventPriceErr.length > 0 && eventPriceErr}
-                                    </div>
+
                                 </div>
-                                <div className={`ce-pseudo-input-price`} id={`${eventFeeType}p`}>
+                                <div className={`ce-pseudo-input-price`} id={`${eventFeeType !== 'paid' ? 'free' : 'paid'}p`}>
                                     <input
                                         className={`ce-input-field-price`} id={eventFeeType}
                                         type="number"
@@ -469,13 +472,14 @@ export default function CreateEventPage() {
                                         value={eventFeeType}
                                         onChange={(e) => setEventFeeType(e.target.value)}
                                     >
-                                        <option value={'free'}>Select Fee Type</option>
+                                        <option value={'none'}>Select Fee Type</option>
                                         <option value={'free'}>Free</option>
                                         <option value={'paid'}>Paid</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <div className="ce-login-btn-div">
                         <button
@@ -487,6 +491,7 @@ export default function CreateEventPage() {
                     </div>
                 </div>
             </form>
+            <div className='bottom-padding-div'></div>
         </div>
     )
 }
