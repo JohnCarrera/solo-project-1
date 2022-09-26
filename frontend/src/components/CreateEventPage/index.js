@@ -24,7 +24,6 @@ export default function CreateEventPage() {
 
     const timeNow = (date = new Date()) => {
         const time = `${padNum(date.getHours())}:${padNum(date.getMinutes())}`;
-        console.log(time);
         return time;
     }
 
@@ -41,21 +40,13 @@ export default function CreateEventPage() {
     }
 
     const minEndDate = (date, time) => {
-        console.log('inputs:', date, time)
         const dateObj = new Date(date + 'T' + time);
 
-        console.log('dateTmrw', dateTmrw());
 
         const minEnd = dateTimePlusMin(dateObj, 30);
-        console.log('minEnd: ', minEnd.toLocaleString())
     }
 
     const parseDateObj = (dateInput, timeInput) => {
-
-        console.log('pdo-dateinput:', dateInput);
-        console.log('pdo-timeInput:', timeInput);
-        console.log('combined:', dateInput + 'T' + timeInput + ':00');
-
         return new Date(dateInput + 'T' + timeInput + ':00');
     }
 
@@ -141,7 +132,7 @@ export default function CreateEventPage() {
                 endDate: parseDateObj(eventEndDate, eventEndTime).toISOString(),
             }
 
-            console.log('handlesubmit vals:', vals);
+            // console.log('handlesubmit vals:', vals);
 
             const newEvent = await dispatch(createEvent(groupId, vals))
 
@@ -150,7 +141,7 @@ export default function CreateEventPage() {
                 preview: true
             }
 
-            console.log(newEvent);
+            // console.log(newEvent);
 
             await dispatch(addEventImage(newEvent.id, imgBody));
 
@@ -218,10 +209,6 @@ export default function CreateEventPage() {
         } else {
             setEventTypeErr('');
         }
-
-        console.log(new Date().toISOString());
-
-
 
         setErrors(errs);
     }, [

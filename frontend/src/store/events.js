@@ -41,7 +41,7 @@ export const getAllEvents = () => async dispatch => {
 
     if(res.ok) {
         const events = await res.json();
-        console.log('events:', events);
+        // console.log('events:', events);
         dispatch(loadAll(events.Events));
         return events.Events;
     }
@@ -53,7 +53,7 @@ export const getSingleEvent = (id) => async dispatch => {
 
     if(res.ok) {
         const event = await res.json();
-        console.log('event:', event);
+        // console.log('event:', event);
         dispatch(loadOne(event));
         return event;
     }
@@ -65,7 +65,7 @@ export const getEventsByGroupId = (id) => async dispatch => {
 
     if(res.ok) {
         const events = await res.json();
-        console.log('eventsbyGroup:', events);
+        // console.log('eventsbyGroup:', events);
         dispatch(loadAll(events.Events));
         return events;
     }
@@ -80,7 +80,7 @@ export const createEvent = (groupId, event) => async dispatch => {
 
     if(res.ok) {
         const event = await res.json();
-        console.log('eventcreate:', event);
+        // console.log('eventcreate:', event);
         dispatch(add(event));
         return event;
     }
@@ -96,7 +96,7 @@ export const addEventImage = (eventId, body) => async dispatch => {
 
     if(res.ok) {
         const event = await res.json();
-        console.log('eventAddImage:', event);
+        // console.log('eventAddImage:', event);
         dispatch(addEventImage(body));
         return event;
     }
@@ -110,7 +110,7 @@ export const deleteEvent = (id) => async dispatch => {
 
     if(res.ok) {
         const delRes = await res.json();
-        console.log('delEvent in Thunk: ', delRes);
+        // console.log('delEvent in Thunk: ', delRes);
         dispatch(del());
         return delRes;
     }

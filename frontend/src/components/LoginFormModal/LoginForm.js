@@ -79,6 +79,7 @@ function LoginForm() {
                             <input
                                 className="lm-input-field"
                                 type="text"
+                                maxLength={20}
                                 value={credential}
                                 onChange={(e) => setCredential(e.target.value)}
                             />

@@ -49,7 +49,7 @@ export const getAllGroups = () => async dispatch => {
 
     if (res.ok) {
         const groups = await res.json();
-        console.log('groups in thunk:', groups);
+        // console.log('groups in thunk:', groups);
         dispatch(loadAll(groups));
         return groups;
     }
@@ -60,7 +60,7 @@ export const getSingleGroup = (id) => async dispatch => {
 
     if (res.ok) {
         const group = await res.json();
-        console.log('single group in thunk', group);
+        // console.log('single group in thunk', group);
         dispatch(loadOne(group));
         return group;
     }
@@ -74,7 +74,7 @@ export const createGroup = (groupDetails) => async dispatch => {
 
     if (res.ok) {
         const newGroup = await res.json();
-        console.log('group create thunk response:', newGroup);
+        // console.log('group create thunk response:', newGroup);
         dispatch(add(newGroup));
         return newGroup;
     }
@@ -88,14 +88,14 @@ export const editGroup = (id, group) => async dispatch => {
 
     if(res.ok){
         const group = await res.json();
-        console.log('group update thunk res:', group);
+        // console.log('group update thunk res:', group);
         dispatch(edit(group));
         return group;
     }
 }
 
 export const addGroupImage = (id, image) => async dispatch => {
-    console.log('image arg in thunk', image )
+    // console.log('image arg in thunk', image )
     const res = await csrfFetch(`/api/groups/${id}/images`, {
         method: 'POST',
         body: JSON.stringify(image)
@@ -103,7 +103,7 @@ export const addGroupImage = (id, image) => async dispatch => {
 
     if(res.ok){
         const imgRes = await res.json();
-        console.log('add image thunk:', imgRes);
+        // console.log('add image thunk:', imgRes);
         dispatch(addImage(imgRes));
         return imgRes;
     }
@@ -116,7 +116,7 @@ export const deleteGroup = (id) => async dispatch => {
 
     if(res.ok){
         const delRes = await res.json();
-        console.log('delRes in Thunk: ', delRes);
+        // console.log('delRes in Thunk: ', delRes);
         dispatch(del());
     }
 }

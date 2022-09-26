@@ -7,7 +7,7 @@ import '../EventsPage/eventsPage.css';
 
 export default function EventsPage() {
 
-    console.log('loading events page')
+    // console.log('loading events page')
     const allEvents = useSelector(state => {
         return state.events.allEvents
     });

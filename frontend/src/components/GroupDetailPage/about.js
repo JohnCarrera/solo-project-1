@@ -12,7 +12,7 @@ export default function GroupDetailAbout() {
     const { groupId, path } = params;
     const groupDetail = useSelector(state => state.groups.singleGroup);
 
-    console.log('about component: ', groupDetail.about)
+    // console.log('about component: ', groupDetail.about)
 
     return (
         <div className='gd-about-bg'>

@@ -7,7 +7,7 @@ import './index.css';
 
 export default function GroupsPage() {
 
-    console.log('loading groups page')
+    // console.log('loading groups page')
     const allGroups = useSelector(state => {
         return state.groups.allGroups
     });
