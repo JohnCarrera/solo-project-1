@@ -2,7 +2,7 @@
 
 leet-up is a website clone inspired by Meetup. leet-up is a place for individuals in the software engineering and technology space to organize or join groups and work with like minded individuals via scheduled events. The prime directive of leet-up is to foster an environment where members can level up their skills in coding, data, algos, or even individual technologies and disciplines. Members can create groups or join them, and each group is responsible for organizing and managing events centered around the core virtues of leet-up. We strive for a professional environment but we also encourage events centered around networking, team-building and fun! leet-up supports both in-person and online events.  
 
-live site: l33t-up.herokuapp.com
+live site: https://l33t-up.herokuapp.com
 
 
 ## Wiki Links
