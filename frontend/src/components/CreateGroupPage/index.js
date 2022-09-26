@@ -187,6 +187,7 @@ export default function CreateGroupPage() {
                                 <textarea
                                     className="cg-input-field-textarea"
                                     type='text'
+                                    maxLength={250}
                                     value={groupAbout}
                                     onChange={(e) => setGroupAbout(e.target.value)}
                                 />
@@ -311,6 +312,7 @@ export default function CreateGroupPage() {
                     </button>
                 </div>
             </form>
+            <div className='cg-padding-div'></div>
         </div>
     )
 }

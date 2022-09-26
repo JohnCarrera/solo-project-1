@@ -155,8 +155,31 @@
     background-color: #ff8198;
 }
 
-
-
 .eg-submit-btn:active {
+    transform: scale(0.95);
+}
+
+.edit-grp-padding-div {
+    height: 100px;
+}
+
+.eg-delete-btn {
+    margin-top: 25px;
+    height: 20px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    background-color: #99001c;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.eg-delete-btn:hover {
+    background-color: #751a2b;
+}
+
+.eg-delete-btn:active {
     transform: scale(0.95);
 }

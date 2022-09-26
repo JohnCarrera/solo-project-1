@@ -160,3 +160,7 @@
 .cg-submit-btn:active {
     transform: scale(0.95);
 }
+
+.cg-padding-div {
+    height:100px;
+}

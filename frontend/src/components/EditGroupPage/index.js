@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom';
 import { editGroup, getSingleGroup, deleteGroup, createGroup, addGroupImage } from '../../store/groups';
+import './editGroupPage.css';
 
 
 
@@ -68,6 +69,14 @@ export default function EditGroupPage() {
 
     const checkUrl = str => {
         return /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/.test(str);
+    }
+
+    const deleteGroupBtnClick = (e) => {
+        e.preventDefault()
+
+        dispatch(deleteGroup(groupId));
+
+        history.push(`/browse/groups`)
     }
 
     const handleSubmit = async (e) => {
@@ -168,9 +177,18 @@ export default function EditGroupPage() {
 
     return (
         <div className='cg-main-page-div'>
-            <div className='cg-title-div'>
-                Create A Group
+            <div className='eg-title-div'>
+                Edit Group
             </div>
+            <div className='eg-submit-btn-div'>
+                    <button
+                        className='eg-delete-btn'
+                        type='submit'
+                        onClick={deleteGroupBtnClick}
+                    >
+                        Delete Group
+                    </button>
+                </div>
             <div className="cg-login-err-div">
                 {formatBackendErrors(backendErrors).map((error, idx) => (
                     <div className="sm-err-msg" key={idx}>{error}</div>
@@ -210,6 +228,7 @@ export default function EditGroupPage() {
                                 <textarea
                                     className="cg-input-field-textarea"
                                     type='text'
+                                    maxLength={250}
                                     value={groupAbout}
                                     onChange={(e) => setGroupAbout(e.target.value)}
                                 />
@@ -334,6 +353,7 @@ export default function EditGroupPage() {
                     </button>
                 </div>
             </form>
+            <div className='edit-grp-padding-div'></div>
         </div>
     )
 }

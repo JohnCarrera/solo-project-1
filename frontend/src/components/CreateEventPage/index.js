@@ -187,6 +187,8 @@ export default function CreateEventPage() {
         }
         if (eventCap.includes(".") || !Number(eventCap)) {
             setEventCapErr('*event capacity must be an integer');
+        } else if(eventCap < 2){
+            setEventCapErr('*minimum capacity: 2');
          } else {
             setEventCapErr('');
          }
@@ -284,6 +286,7 @@ export default function CreateEventPage() {
                                     className="ce-input-field-textarea"
                                     type='text'
                                     value={eventDesc}
+                                    maxLength={250}
                                     onChange={(e) => setEventDesc(e.target.value)}
                                 />
                             </div>
