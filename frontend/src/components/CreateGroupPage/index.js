@@ -34,6 +34,10 @@ export default function CreateGroupPage() {
     const [groupTypeErr, setGroupTypeErr] = useState('');
     const [accessErr, setAccessErr] = useState('');
 
+    if(!user){
+        history.push('/');
+    }
+
     const formatBackendErrors = (errorObj) => {
         const errs = [];
         for (let key in errorObj) {

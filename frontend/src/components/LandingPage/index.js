@@ -1,15 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import groupImg from '../../img/handsUp.svg';
 import ticketImg from '../../img/ticket.svg';
 import startGrpImg from '../../img/startGroup.svg';
 import onlineImg from '../../img/online_events.svg';
+import redBlob from '../../img/red-blob.svg';
+import yellowBlob from '../../img/yellow-blob.svg';
+import greenBlob from '../../img/green-blob.svg';
 import './index.css';
 
+
 export default function LandingPage() {
+    let user = useSelector((state) => state.session.user);
 
     return (
         <div className='main-body'>
+            <div className='blob-div'>
+                <img className='green-blob' src={greenBlob}/>
+                {/* <img className='red-blob' src={redBlob}/> */}
+                {/* <img className='yellow-blob' src={yellowBlob}/> */}
+            </div>
             <div className='landing-upper'>
                 <div className='left-upper'>
                     <div className='cele'>
@@ -94,6 +106,7 @@ export default function LandingPage() {
                     </div>
                 </Link>
             </div>
+            {!user &&
             <div className='join-landing-btn-div'>
                 <Link to='/signup'>
                     <button className='join-landing-btn'>
@@ -101,6 +114,7 @@ export default function LandingPage() {
                     </button>
                 </Link>
             </div>
+}
         </div>
     )
 }

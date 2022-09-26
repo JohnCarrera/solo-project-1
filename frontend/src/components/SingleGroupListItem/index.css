@@ -68,6 +68,7 @@
     /* border: 1px solid blue; */
     height: 90px;
     overflow: hidden;
+    word-break:break-all;
 }
 
 

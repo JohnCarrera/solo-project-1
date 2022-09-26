@@ -29,7 +29,7 @@ export default function GroupDetailPage() {
             <div className='gd-upper'>
                 <div className='gd-img-div'>
                     <img className='gd-preview-image'
-                        src={singleGroup.GroupImages[0].url ?? 'https://i.imgur.com/PhtTjJO.png'}
+                        src={singleGroup?.GroupImages[0]?.url}
                     >
                     </img>
                 </div>
