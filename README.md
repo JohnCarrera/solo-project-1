@@ -27,3 +27,65 @@ live site: https://l33t-up.herokuapp.com
 
 
 
+
+
+
+# Road Map
+
+- Edit events page
+- Membership features
+- Venue features
+- Event attendance
+
+
+
+
+# Getting Started 
+  
+ 1. Download and unzip 
+ 2. Use the command ```npm start``` in both frontend and backend folders to run both servers
+ 3. Browser should automatically open at localhost:3000 to landing page
+
+
+# Features
+
+## Landing Page
+
+Users start here.
+
+![ksnip_20220925-232847](https://user-images.githubusercontent.com/105324675/192190378-fe8f18e6-a98f-449d-8149-bd757bff7fcd.png)
+
+## Login Modal
+
+The login button greets users with a snazzy modal.
+![ksnip_20220925-232847(2)](https://user-images.githubusercontent.com/105324675/192190412-f1cbc4f1-9fda-4dd4-830a-a91447370a60.png)
+
+
+## Sign Up Page
+
+
+If not already registered, users can sign up with a new account
+![ksnip_20220925-232847(3)](https://user-images.githubusercontent.com/105324675/192190423-2b6a3efb-70e2-43b9-aa63-b67a9c31db33.png)
+
+
+## Create A Group or Event
+
+
+Users can create groups and events!
+
+![ksnip_20220925-232848](https://user-images.githubusercontent.com/105324675/192190450-a548354f-652f-48aa-ba11-2889baeea1ba.png)
+
+
+## View Groups and Events
+
+
+Browse Groups and Events
+![ksnip_20220925-232848(2)](https://user-images.githubusercontent.com/105324675/192190490-d1eb792d-66c9-4c17-9c53-3f44ea40c638.png)
+
+
+ 
+## View Group/Event Details
+
+Check the details of a group or event in the details page.
+![ksnip_20220925-232848(3)](https://user-images.githubusercontent.com/105324675/192190511-c3e891ac-0093-4933-bcf1-728b6266b75a.png)
+
