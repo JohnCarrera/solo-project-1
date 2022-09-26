@@ -146,7 +146,7 @@ export default function EventDetailPage() {
                     </div>
                 </div>
                 <div className='ed-rt-side-grp'>
-                    <Link className='ed-group-link-wrap' to={`/groups/${group.id}`}>
+                    <Link className='ed-group-link-wrap' to={`/groups/${group.id}/about`}>
                     <div className='ed-group-detail-item'>
                         <img
                             className='ed-group-item-img'

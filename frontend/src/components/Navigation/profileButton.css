@@ -1,3 +1,118 @@
 .nav-profile-button {
+    position: fixed;
+    right : 20px;
+    top : 4px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* column-gap: 12px; */
+    width: 80px;
+    height: 40px;
+    border: 2px solid lightgray;
+    border-radius: 30px;
+    padding-left: 5px;
+    transition: all ease-out 0.5s;
+    /* transform-origin: center top; */
+    background-color: white;
+}
 
+.profile-btn-grp {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: all ease-in 0.5s;
+    /* border: 1px solid red; */
+}
+
+.nav-menu-elements {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px;
+    padding-left: 5px;
+    padding-bottom: 20px;
+    transition: all ease-in 0.2s ease-out 0s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+#closed.nav-profile-button:hover {
+    border: 2px solid gray;
+    width: 200px;
+    /* justify-content: space-between; */
+    transition: all ease-in-out .5s ;
+    transition-delay: 0.25s;
+    column-gap: 80px;
+    /* transition: ease-in-out; */
+}
+/* .nav-profile-button:hover {
+    border: 2px solid gray;
+    width: 200px;
+} */
+
+#open.nav-profile-button {
+    border: 2px solid gray;
+    justify-content: space-between;
+    width: 200px;
+    align-items: flex-start;
+    padding-top: 4px;
+    padding-left: 4px;
+    height: 120px;
+    transition-duration: .5s;
+    transition: ease-in-out .5s;
+}
+
+#open.nav-profile-button > .nav-menu-elements {
+    visibility: visible;
+    opacity: 1;
+    align-self: center;
+    /* transition: visibility 0s linear 500ms opacity 500ms; */
+    transition-duration: 0.25s;
+    transition-delay: 0.5s;
+    transition-property: visibility opacity;
+    /* transition :ease-out; */
+}
+
+.logout-btn {
+    height: 20px;
+    width: 100px;
+    border-radius: 4px;
+    border: none;
+    background-color: #f64060;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #ff8198;
+}
+
+
+.profile-arrow-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    height: 20px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    width: auto;
+    filter: invert(50%) sepia(0%) saturate(1%) hue-rotate(84deg) brightness(101%) contrast(89%);
+}
+
+.profile-button-div {
+
+}
+.profile-button-pic {
+    position: relative;
+    top: 2px;
+    left: 0px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(0, 130, 148);
+    border: 2px solid #808080;
 }
