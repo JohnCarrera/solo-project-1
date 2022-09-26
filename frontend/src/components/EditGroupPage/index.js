@@ -104,7 +104,7 @@ export default function EditGroupPage() {
                 , type: groupType
             }
 
-            console.log('handlesubmit vals:', vals);
+            // console.log('handlesubmit vals:', vals);
 
             const newGroup = await dispatch(editGroup(groupId, vals))
 
